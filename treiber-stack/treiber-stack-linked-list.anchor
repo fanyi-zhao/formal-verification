@@ -1,0 +1,63 @@
+
+/*
+tid	the thread identifier of the accessing thread.
+isRead()	whether the access is a read.
+newValue	the value being written, if the access is a write.
+holds(o)	whether the lock for the object denoted by the expression o is held.
+isLocal(o)	whether o is accessible by only the current thread.
+ */
+class Node {
+    int item moves_as isLocal(this) || isRead() ? B : E;
+    Node next moves_as isLocal(this) || isRead() ? B : E;
+    
+    public Node(int item) {
+        this.item = item;
+    }
+}
+
+class TreiberStack {
+    volatile Node head moves_as N;
+    
+    modifies this;
+    ensures this.head != null;
+    ensures this.head.next == old(this.head);
+    ensures this.head.item == item;
+    public void push(int item) {
+        // Node newHead = new Node(item);
+        // Node oldHead = this.head;
+        // yield;
+        // newHead.next = oldHead;
+        // while (!cas(this, head, oldHead, newHead))
+        //     // A loop invariant holds before and after the loop
+        //     invariant newHead.next == oldHead;
+        // {
+        //     oldHead = this.head;
+        //     yield;
+        //     newHead.next = oldHead;
+        // }
+
+        while (true) {
+            Node newHead = new Node(item);
+            Node oldHead = this.head;
+            yield;
+            newHead.next = oldHead;
+            if (cas(this, head, oldHead, newHead)) {
+                return;
+            }
+        }
+    }
+
+    modifies this;
+    ensures old(this.head.next) == this.head;
+    ensures $result == old(this.head.item);
+    public int pop() {
+        while (true) {
+            Node oldHead = this.head;
+            yield;
+            Node newHead = oldHead.next;
+            if (cas(this, head, oldHead, newHead)) {
+                return oldHead.item;
+            }
+        }
+    }
+}

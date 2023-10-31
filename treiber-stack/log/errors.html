@@ -1,0 +1,70 @@
+<html><body><pre>
+(1)      
+(2)      /*
+(3)      tid	the thread identifier of the accessing thread.
+(4)      isRead()	whether the access is a read.
+(5)      newValue	the value being written, if the access is a write.
+(6)      holds(o)	whether the lock for the object denoted by the expression o is held.
+(7)      isLocal(o)	whether o is accessible by only the current thread.
+(8)       */
+(9)      class Node {
+(10)         int item moves_as isLocal(this) || isRead() ? B : E;
+(11)         Node next moves_as isLocal(this) || isRead() ? B : E;
+(12)         
+(13)         public Node(int item) {
+(14)             this.item = item;
+(15)         }
+(16)     }
+(17)     
+(18)     class TreiberStack {
+(19)         volatile Node head moves_as N;
+(20)         
+(21)         modifies this;
+(22)         ensures this.head != null;
+(23)         ensures this.head.next == old(this.head);
+(24)         ensures this.head.item == item;
+(25)         public void push(int item) {
+(26)             // Node newHead = new Node(item);
+(27)             // Node oldHead = this.head;
+(28)             // yield;
+(29)             // newHead.next = oldHead;
+(30)             // while (!cas(this, head, oldHead, newHead))
+(31)             //     // A loop invariant holds before and after the loop
+(32)             //     invariant newHead.next == oldHead;
+(33)             // {
+(34)             //     oldHead = this.head;
+(35)             //     yield;
+(36)             //     newHead.next = oldHead;
+(37)             // }
+(38)     
+(39)             while (true) {
+(40)                 Node newHead = new Node(item);
+(41)                 Node oldHead = this.head;
+(42)                 yield;
+(43)                 newHead.next = oldHead;
+(44)                 if (cas(this, head, oldHead, newHead)) {
+(45)                     return;
+(46)                 }
+(47)             }
+(48)         }
+(49)     
+(50)         modifies this;
+(51)         ensures old(this.head.next) == this.head;
+(52)         ensures $result == old(this.head.item);
+(53)         public int pop() {
+(54)             while (true) {
+(55)                 Node oldHead = this.head;
+(56)                 yield;
+(57)                 Node newHead = oldHead.next;
+(58)                 if (cas(this, head, oldHead, newHead)) {
+(59)                     return oldHead.item;
+(60)                 }
+(61)             }
+(62)         }
+(63)     }
+
+
+
+1 Errors
+
+</pre></body></html>
