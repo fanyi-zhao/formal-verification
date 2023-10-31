@@ -1,0 +1,162 @@
+
+	
+	
+	class Cow {
+	  array Array = int[isLocal(this, tid)
+	   ? isLocal(this, tid) ? B : E
+	   : isRead ? B : E]
+	  
+	   [Cow.Array{this}] elems isLocal(this, tid)
+	   ? isLocal(this, tid) ? B : E
+	   : isRead ? B : E
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  invariant  this.elems != [Cow.Array{this}].null;
+	  invariant  forall int i ::0 <= i && i < this.elems.length ==> this.elems[i] == i;
+	  
+	  
+	  {
+	    
+	  }
+	  void init() {
+	    [Cow.Array{this}] elems;
+	    elems = new [Cow.Array{this}](16);
+	    int i;
+	    i = 0;
+	    while (i < 16)  
+	      invariant forall int k ::0 <= k && k < i ==> elems[k] == k;
+	      invariant isLocal(elems, tid);
+	      {
+	      elems[i] := i;
+	      i = i + 1;
+	    }
+	    this.elems := elems;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int get(int i) {
+	    [Cow.Array{this}] elems;
+	    elems := this.elems;
+	    int result;
+	    result := elems[i];
+	    {
+	       return result;
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	}
+	class Main {
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  public void f() {
+	    {
+	      // return;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  public void main() {
+	    Cow c;
+	    c = new Cow();
+	    {
+	      inlined c.init();
+	      exit$170: {
+	        Cow this$170;
+	        this$170 = c;
+	        {
+	          [Cow.Array{this$170}] elems$170;
+	          elems$170 = new [Cow.Array{this$170}](16);
+	          int i$170;
+	          i$170 = 0;
+	          while (i$170 < 16)  
+	            invariant forall int k$170 ::0 <= k$170 && k$170 < i$170 ==> elems$170[k$170] == k$170;
+	            invariant isLocal(elems$170, tid);
+	            {
+	            elems$170[i$170] := i$170;
+	            i$170 = i$170 + 1;
+	          }
+	          this$170.elems := elems$170;
+	          {
+	            break exit$170;
+	          }
+	        }
+	      }
+	      inlined return;
+	    }
+	    int y;
+	    {
+	      inlined y = c.get(5);
+	      exit$171: {
+	        int i$171;
+	        Cow this$171;
+	        i$171 = 5;
+	        this$171 = c;
+	        {
+	          [Cow.Array{this$171}] elems$171;
+	          elems$171 := this$171.elems;
+	          int result$171;
+	          result$171 := elems$171[i$171];
+	          {
+	            {
+	              y = result$171;
+	              break exit$171;
+	            }
+	          }
+	          {
+	            {
+	              y = -1;
+	              break exit$171;
+	            }
+	          }
+	        }
+	      }
+	      inlined return;
+	    }
+	    assert y == 5;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	}
+

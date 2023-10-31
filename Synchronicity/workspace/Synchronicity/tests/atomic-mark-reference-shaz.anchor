@@ -1,0 +1,78 @@
+
+class Node { }
+
+class Ref {
+    Node reference    moves_as isLocal(this) ? thread_local : readonly;
+    boolean mark         moves_as isLocal(this) ? thread_local : readonly;
+    Node(Node reference, boolean mark) {
+        this.reference = reference;
+        this.mark = mark;
+    }
+}
+
+class AtomicMarkableReference {
+
+    noABA volatile Ref pair  moves_as isLocal(this) ? isRead() ? B : (isLocal(newValue) ? B : E)
+            : isRead() ? N :  (isLocal(newValue) ? N : E)
+    yields_as newValue == this.pair
+                           || (!isLocal(newValue) && !isShared(newValue) && (newValue != null));
+
+    invariant this.pair != null;
+
+    public Node getReference() {
+        return this.pair.reference;
+    }
+
+    public boolean isMarked() {
+        return this.pair.mark;
+    }
+
+    public boolean compareAndSet(Node      expectedReference,
+                       Node       newReference,
+                       boolean expectedMark,
+                       boolean newMark) {
+
+        Ref current = this.pair;
+        return
+                expectedReference == current.reference &&
+                        expectedMark == current.mark &&
+                        cas(this, pair, current, new Ref(newReference, newMark));
+    }
+
+}
+
+
+
+/*
+
+
+class Node { }
+
+class Ref {
+    final Node reference;
+    final boolean mark;
+    init(Node reference, boolean mark) {
+        this.reference = reference;
+        this.mark = mark;
+    }
+}
+
+class AtomicMarkableReference {
+
+    volatile Ref pair;
+
+    public boolean compareAndSet(Node expectedReference,
+                       Node newReference,
+                       boolean expectedMark,
+                       boolean newMark) {
+
+        Ref current = this.pair;
+        return expectedReference == current.reference &&
+                        expectedMark == current.mark &&
+                        cas(this, pair, current, new Ref(newReference, newMark));
+    }
+
+}
+
+
+ */

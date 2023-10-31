@@ -1,0 +1,14 @@
+class Node {
+    int item  moves_as isLocal(this) ? B : (isRead() ? B : E);
+    Node next moves_as isLocal(this) ? B : (isRead() ? B : E);
+
+    invariant this.next != null  ==>  this.item <= this.next.item;
+
+    requires next != null ==> item <= next.item;
+    public Node(int item, Node next) {
+        this.item = item;
+        this.next = next;
+        assert this.next != null  ==>  this.item <= this.next.item;
+    }
+}
+

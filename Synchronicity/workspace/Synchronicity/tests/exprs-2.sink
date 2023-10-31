@@ -1,0 +1,15 @@
+
+class Cow {
+
+    array T = int[whenever]
+
+    public void f() {
+        [T] c;
+        boolean z = c[0] == 2; if (z) {
+
+        }
+    }
+
+}
+
+///: (8.21): Can only access array elements directly within specs

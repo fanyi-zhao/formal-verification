@@ -1,0 +1,1156 @@
+
+	
+	
+	class VarState {
+	  array VarState_VC = int[isLocal(athis, tid)
+	   ? B
+	   : this.read != -1
+	     ? this._lock == tid ? B : E
+	     : isRead
+	       ? this._lock == tid || tid == index ? B : E
+	       : this._lock == tid && tid == index ? B : E]
+	  
+	   int read this.read != -1
+	   ? this._lock == tid
+	     ? isRead ? B : N
+	     : isRead ? N : E
+	   : isRead ? R : E
+	  
+	   int write this._lock == tid
+	   ? isRead ? B : N
+	   : isRead ? N : E
+	  
+	   [VarState.VarState_VC{this}] readVC this.read != -1
+	   ? this._lock == tid ? B : E
+	   : this._lock == tid
+	     ? isRead ? B : N
+	     : isRead ? N : E
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  invariant  p1 ==> isShared(this) ==> this.readVC != [VarState.VarState_VC{this}].null;
+	  
+	  
+	  {
+	    
+	  }
+	  int get(int i) {
+	    [VarState.VarState_VC{this}] readVC;
+	    readVC := this.readVC;
+	    if (i < readVC.length) {
+	      int t;
+	      t := readVC[i];
+	      {
+	         return t;
+	      }
+	    } else {
+	      {
+	         return 0;
+	      }
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  void ensureCapacity(int n) {
+	    [VarState.VarState_VC{this}] readVC;
+	    readVC := this.readVC;
+	    if (n > readVC.length) {
+	      [VarState.VarState_VC{this}] newVC;
+	      newVC = new [VarState.VarState_VC{this}](n);
+	      int i;
+	      i = 0;
+	      while (i < n)   {
+	        int temp;
+	        temp := readVC[i];
+	        newVC[i] := temp;
+	        i = i + 1;
+	      }
+	      this.readVC := newVC;
+	    } else {
+	      
+	    }
+	    {
+	      // return;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  void set(int index,int value) {
+	    this.ensureCapacity(index + 1)
+	    [VarState.VarState_VC{this}] readVC;
+	    readVC := this.readVC;
+	    readVC[index] := value;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int size() {
+	    [VarState.VarState_VC{this}] readVC;
+	    readVC := this.readVC;
+	    int t;
+	    t = readVC.length;
+	    {
+	       return t;
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int max(int v1,int v2) {
+	    if (v1 < v2) {
+	      {
+	         return v2;
+	      }
+	    } else {
+	      {
+	         return v1;
+	      }
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int TID(int e) {
+	    int t;
+	    t = e % 256;
+	    {
+	       return t;
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  boolean LEQ(int e1,int e2) {
+	    int v1;
+	    v1 = this.TID(e1)
+	    int v2;
+	    v2 = this.TID(e2)
+	    boolean t;
+	    t = v1 == v2 && e1 < e2;
+	    {
+	       return t;
+	    }
+	    {
+	      // return false;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  boolean leq(ThreadState st) {
+	    int l1;
+	    l1 = this.size()
+	    int l2;
+	    l2 = st.size()
+	    int n;
+	    n = this.max(l1,l2)
+	    int i;
+	    i = 0;
+	    while (i < n)   {
+	      int v1;
+	      v1 = this.get(i)
+	      int v2;
+	      v2 = st.get(i)
+	      boolean l;
+	      l = this.LEQ(v1,v2)
+	      if (!l) {
+	        {
+	           return false;
+	        }
+	      } else {
+	        
+	      }
+	    }
+	    {
+	       return true;
+	    }
+	    {
+	      // return false;
+	    }
+	  }
+	  
+	}
+	class ThreadState {
+	  array ThreadState_VC = int[tid == this.t ? B : E]
+	  
+	   Tid t isRead ? B : E
+	  
+	   [ThreadState.ThreadState_VC{this}] stV tid == this.t ? B : E
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  invariant  p2 ==> forall int _i ::this.stV[_i] >= 0;
+	  
+	  
+	  {
+	    
+	  }
+	  int TID(int e) {
+	    int t;
+	    t = e % 256;
+	    {
+	       return t;
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  boolean LEQ(int e1,int e2) {
+	    int v1;
+	    v1 = this.TID(e1)
+	    int v2;
+	    v2 = this.TID(e2)
+	    boolean t;
+	    t = v1 == v2 && e1 < e2;
+	    {
+	       return t;
+	    }
+	    {
+	      // return false;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int get(int i) {
+	    [ThreadState.ThreadState_VC{this}] stV;
+	    stV := this.stV;
+	    if (i < stV.length) {
+	      int t;
+	      t := stV[i];
+	      {
+	         return t;
+	      }
+	    } else {
+	      {
+	         return 0;
+	      }
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  int size() {
+	    [ThreadState.ThreadState_VC{this}] stV;
+	    stV := this.stV;
+	    int t;
+	    t = stV.length;
+	    {
+	       return t;
+	    }
+	    {
+	      // return -1;
+	    }
+	  }
+	  
+	  
+	  requires tid == this.t;
+	  {
+	    
+	  }
+	  public boolean write(VarState sx) {
+	    int t;
+	    t := this.t;
+	    int e;
+	    {
+	      inlined e = this.get(t);
+	      exit$172: {
+	        int i$172;
+	        ThreadState this$172;
+	        i$172 = t;
+	        this$172 = this;
+	        {
+	          [ThreadState.ThreadState_VC{this$172}] stV$172;
+	          stV$172 := this$172.stV;
+	          if (i$172 < stV$172.length) {
+	            int t$172;
+	            t$172 := stV$172[i$172];
+	            {
+	              {
+	                e = t$172;
+	                break exit$172;
+	              }
+	            }
+	          } else {
+	            {
+	              {
+	                e = 0;
+	                break exit$172;
+	              }
+	            }
+	          }
+	          {
+	            {
+	              e = -1;
+	              break exit$172;
+	            }
+	          }
+	        }
+	      }
+	      inlined return;
+	    }
+	    int w;
+	    w := sx.write;
+	    if (w == e) {
+	      {
+	         return true;
+	      }
+	    } else {
+	      
+	    }
+	    yield;
+	    {
+	      acquire(sx);
+	      {
+	        int ww;
+	        {
+	          inlined ww = this.get(w);
+	          exit$173: {
+	            int i$173;
+	            ThreadState this$173;
+	            i$173 = w;
+	            this$173 = this;
+	            {
+	              [ThreadState.ThreadState_VC{this$173}] stV$173;
+	              stV$173 := this$173.stV;
+	              if (i$173 < stV$173.length) {
+	                int t$173;
+	                t$173 := stV$173[i$173];
+	                {
+	                  {
+	                    ww = t$173;
+	                    break exit$173;
+	                  }
+	                }
+	              } else {
+	                {
+	                  {
+	                    ww = 0;
+	                    break exit$173;
+	                  }
+	                }
+	              }
+	              {
+	                {
+	                  ww = -1;
+	                  break exit$173;
+	                }
+	              }
+	            }
+	          }
+	          inlined return;
+	        }
+	        if (w > ww) {
+	          {
+	            release(sx);
+	             return false;
+	          }
+	        } else {
+	          
+	        }
+	        int r;
+	        r := sx.read;
+	        if (r != -1) {
+	          int rr;
+	          {
+	            inlined rr = this.get(r);
+	            exit$174: {
+	              int i$174;
+	              ThreadState this$174;
+	              i$174 = r;
+	              this$174 = this;
+	              {
+	                [ThreadState.ThreadState_VC{this$174}] stV$174;
+	                stV$174 := this$174.stV;
+	                if (i$174 < stV$174.length) {
+	                  int t$174;
+	                  t$174 := stV$174[i$174];
+	                  {
+	                    {
+	                      rr = t$174;
+	                      break exit$174;
+	                    }
+	                  }
+	                } else {
+	                  {
+	                    {
+	                      rr = 0;
+	                      break exit$174;
+	                    }
+	                  }
+	                }
+	                {
+	                  {
+	                    rr = -1;
+	                    break exit$174;
+	                  }
+	                }
+	              }
+	            }
+	            inlined return;
+	          }
+	          if (r > rr) {
+	            {
+	              release(sx);
+	               return false;
+	            }
+	          } else {
+	            
+	          }
+	          sx.write := e;
+	        } else {
+	          boolean isLess;
+	          {
+	            inlined isLess = sx.leq(this);
+	            exit$175: {
+	              ThreadState st$175;
+	              VarState this$175;
+	              st$175 = this;
+	              this$175 = sx;
+	              {
+	                int l1$175;
+	                {
+	                  inlined l1$175 = this$175.size();
+	                  exit$176: {
+	                    VarState this$176;
+	                    this$176 = this$175;
+	                    {
+	                      [VarState.VarState_VC{this$176}] readVC$176;
+	                      readVC$176 := this$176.readVC;
+	                      int t$176;
+	                      t$176 = readVC$176.length;
+	                      {
+	                        {
+	                          l1$175 = t$176;
+	                          break exit$176;
+	                        }
+	                      }
+	                      {
+	                        {
+	                          l1$175 = -1;
+	                          break exit$176;
+	                        }
+	                      }
+	                    }
+	                  }
+	                  inlined return;
+	                }
+	                int l2$175;
+	                {
+	                  inlined l2$175 = st$175.size();
+	                  exit$177: {
+	                    ThreadState this$177;
+	                    this$177 = st$175;
+	                    {
+	                      [ThreadState.ThreadState_VC{this$177}] stV$177;
+	                      stV$177 := this$177.stV;
+	                      int t$177;
+	                      t$177 = stV$177.length;
+	                      {
+	                        {
+	                          l2$175 = t$177;
+	                          break exit$177;
+	                        }
+	                      }
+	                      {
+	                        {
+	                          l2$175 = -1;
+	                          break exit$177;
+	                        }
+	                      }
+	                    }
+	                  }
+	                  inlined return;
+	                }
+	                int n$175;
+	                {
+	                  inlined n$175 = this$175.max(l1$175,l2$175);
+	                  exit$178: {
+	                    int v1$178;
+	                    int v2$178;
+	                    VarState this$178;
+	                    v1$178 = l1$175;
+	                    v2$178 = l2$175;
+	                    this$178 = this$175;
+	                    {
+	                      if (v1$178 < v2$178) {
+	                        {
+	                          {
+	                            n$175 = v2$178;
+	                            break exit$178;
+	                          }
+	                        }
+	                      } else {
+	                        {
+	                          {
+	                            n$175 = v1$178;
+	                            break exit$178;
+	                          }
+	                        }
+	                      }
+	                      {
+	                        {
+	                          n$175 = -1;
+	                          break exit$178;
+	                        }
+	                      }
+	                    }
+	                  }
+	                  inlined return;
+	                }
+	                int i$175;
+	                i$175 = 0;
+	                while (i$175 < n$175)   {
+	                  int v1$175;
+	                  {
+	                    inlined v1$175 = this$175.get(i$175);
+	                    exit$179: {
+	                      int i$179;
+	                      VarState this$179;
+	                      i$179 = i$175;
+	                      this$179 = this$175;
+	                      {
+	                        [VarState.VarState_VC{this$179}] readVC$179;
+	                        readVC$179 := this$179.readVC;
+	                        if (i$179 < readVC$179.length) {
+	                          int t$179;
+	                          t$179 := readVC$179[i$179];
+	                          {
+	                            {
+	                              v1$175 = t$179;
+	                              break exit$179;
+	                            }
+	                          }
+	                        } else {
+	                          {
+	                            {
+	                              v1$175 = 0;
+	                              break exit$179;
+	                            }
+	                          }
+	                        }
+	                        {
+	                          {
+	                            v1$175 = -1;
+	                            break exit$179;
+	                          }
+	                        }
+	                      }
+	                    }
+	                    inlined return;
+	                  }
+	                  int v2$175;
+	                  {
+	                    inlined v2$175 = st$175.get(i$175);
+	                    exit$180: {
+	                      int i$180;
+	                      ThreadState this$180;
+	                      i$180 = i$175;
+	                      this$180 = st$175;
+	                      {
+	                        [ThreadState.ThreadState_VC{this$180}] stV$180;
+	                        stV$180 := this$180.stV;
+	                        if (i$180 < stV$180.length) {
+	                          int t$180;
+	                          t$180 := stV$180[i$180];
+	                          {
+	                            {
+	                              v2$175 = t$180;
+	                              break exit$180;
+	                            }
+	                          }
+	                        } else {
+	                          {
+	                            {
+	                              v2$175 = 0;
+	                              break exit$180;
+	                            }
+	                          }
+	                        }
+	                        {
+	                          {
+	                            v2$175 = -1;
+	                            break exit$180;
+	                          }
+	                        }
+	                      }
+	                    }
+	                    inlined return;
+	                  }
+	                  boolean l$175;
+	                  {
+	                    inlined l$175 = this$175.LEQ(v1$175,v2$175);
+	                    exit$181: {
+	                      int e1$181;
+	                      int e2$181;
+	                      VarState this$181;
+	                      e1$181 = v1$175;
+	                      e2$181 = v2$175;
+	                      this$181 = this$175;
+	                      {
+	                        int v1$181;
+	                        {
+	                          inlined v1$181 = this$181.TID(e1$181);
+	                          exit$182: {
+	                            int e$182;
+	                            VarState this$182;
+	                            e$182 = e1$181;
+	                            this$182 = this$181;
+	                            {
+	                              int t$182;
+	                              t$182 = e$182 % 256;
+	                              {
+	                                {
+	                                  v1$181 = t$182;
+	                                  break exit$182;
+	                                }
+	                              }
+	                              {
+	                                {
+	                                  v1$181 = -1;
+	                                  break exit$182;
+	                                }
+	                              }
+	                            }
+	                          }
+	                          inlined return;
+	                        }
+	                        int v2$181;
+	                        {
+	                          inlined v2$181 = this$181.TID(e2$181);
+	                          exit$183: {
+	                            int e$183;
+	                            VarState this$183;
+	                            e$183 = e2$181;
+	                            this$183 = this$181;
+	                            {
+	                              int t$183;
+	                              t$183 = e$183 % 256;
+	                              {
+	                                {
+	                                  v2$181 = t$183;
+	                                  break exit$183;
+	                                }
+	                              }
+	                              {
+	                                {
+	                                  v2$181 = -1;
+	                                  break exit$183;
+	                                }
+	                              }
+	                            }
+	                          }
+	                          inlined return;
+	                        }
+	                        boolean t$181;
+	                        t$181 = v1$181 == v2$181 && e1$181 < e2$181;
+	                        {
+	                          {
+	                            l$175 = t$181;
+	                            break exit$181;
+	                          }
+	                        }
+	                        {
+	                          {
+	                            l$175 = false;
+	                            break exit$181;
+	                          }
+	                        }
+	                      }
+	                    }
+	                    inlined return;
+	                  }
+	                  if (!l$175) {
+	                    {
+	                      {
+	                        isLess = false;
+	                        break exit$175;
+	                      }
+	                    }
+	                  } else {
+	                    
+	                  }
+	                }
+	                {
+	                  {
+	                    isLess = true;
+	                    break exit$175;
+	                  }
+	                }
+	                {
+	                  {
+	                    isLess = false;
+	                    break exit$175;
+	                  }
+	                }
+	              }
+	            }
+	            inlined return;
+	          }
+	          if (!isLess) {
+	            {
+	              release(sx);
+	               return false;
+	            }
+	          } else {
+	            
+	          }
+	          sx.write := e;
+	        }
+	      }
+	      release(sx);
+	    }
+	    {
+	       return true;
+	    }
+	    {
+	      // return false;
+	    }
+	  }
+	  
+	  
+	  requires tid == this.t;
+	  {
+	    
+	  }
+	  public boolean read(VarState sx) {
+	    int t;
+	    t := this.t;
+	    int e;
+	    {
+	      inlined e = this.get(t);
+	      exit$184: {
+	        int i$184;
+	        ThreadState this$184;
+	        i$184 = t;
+	        this$184 = this;
+	        {
+	          [ThreadState.ThreadState_VC{this$184}] stV$184;
+	          stV$184 := this$184.stV;
+	          if (i$184 < stV$184.length) {
+	            int t$184;
+	            t$184 := stV$184[i$184];
+	            {
+	              {
+	                e = t$184;
+	                break exit$184;
+	              }
+	            }
+	          } else {
+	            {
+	              {
+	                e = 0;
+	                break exit$184;
+	              }
+	            }
+	          }
+	          {
+	            {
+	              e = -1;
+	              break exit$184;
+	            }
+	          }
+	        }
+	      }
+	      inlined return;
+	    }
+	    int r;
+	    r := sx.read;
+	    if (r == e) {
+	      {
+	         return true;
+	      }
+	    } else {
+	      if (r == -1) {
+	        int readVCt;
+	        {
+	          inlined readVCt = sx.get(t);
+	          exit$185: {
+	            int i$185;
+	            VarState this$185;
+	            i$185 = t;
+	            this$185 = sx;
+	            {
+	              [VarState.VarState_VC{this$185}] readVC$185;
+	              readVC$185 := this$185.readVC;
+	              if (i$185 < readVC$185.length) {
+	                int t$185;
+	                t$185 := readVC$185[i$185];
+	                {
+	                  {
+	                    readVCt = t$185;
+	                    break exit$185;
+	                  }
+	                }
+	              } else {
+	                {
+	                  {
+	                    readVCt = 0;
+	                    break exit$185;
+	                  }
+	                }
+	              }
+	              {
+	                {
+	                  readVCt = -1;
+	                  break exit$185;
+	                }
+	              }
+	            }
+	          }
+	          inlined return;
+	        }
+	        if (readVCt == e) {
+	          {
+	             return true;
+	          }
+	        } else {
+	          
+	        }
+	      } else {
+	        
+	      }
+	    }
+	    yield;
+	    {
+	      acquire(sx);
+	      {
+	        int w;
+	        w := sx.write;
+	        int ww;
+	        {
+	          inlined ww = this.get(w);
+	          exit$186: {
+	            int i$186;
+	            ThreadState this$186;
+	            i$186 = w;
+	            this$186 = this;
+	            {
+	              [ThreadState.ThreadState_VC{this$186}] stV$186;
+	              stV$186 := this$186.stV;
+	              if (i$186 < stV$186.length) {
+	                int t$186;
+	                t$186 := stV$186[i$186];
+	                {
+	                  {
+	                    ww = t$186;
+	                    break exit$186;
+	                  }
+	                }
+	              } else {
+	                {
+	                  {
+	                    ww = 0;
+	                    break exit$186;
+	                  }
+	                }
+	              }
+	              {
+	                {
+	                  ww = -1;
+	                  break exit$186;
+	                }
+	              }
+	            }
+	          }
+	          inlined return;
+	        }
+	        if (w > ww) {
+	          {
+	            release(sx);
+	             return false;
+	          }
+	        } else {
+	          
+	        }
+	        r := sx.read;
+	        if (r != -1) {
+	          int rr;
+	          {
+	            inlined rr = this.get(r);
+	            exit$187: {
+	              int i$187;
+	              ThreadState this$187;
+	              i$187 = r;
+	              this$187 = this;
+	              {
+	                [ThreadState.ThreadState_VC{this$187}] stV$187;
+	                stV$187 := this$187.stV;
+	                if (i$187 < stV$187.length) {
+	                  int t$187;
+	                  t$187 := stV$187[i$187];
+	                  {
+	                    {
+	                      rr = t$187;
+	                      break exit$187;
+	                    }
+	                  }
+	                } else {
+	                  {
+	                    {
+	                      rr = 0;
+	                      break exit$187;
+	                    }
+	                  }
+	                }
+	                {
+	                  {
+	                    rr = -1;
+	                    break exit$187;
+	                  }
+	                }
+	              }
+	            }
+	            inlined return;
+	          }
+	          if (r > rr) {
+	            sx.read := e;
+	          } else {
+	            {
+	              inlined sx.set(r,r);
+	              exit$188: {
+	                int index$188;
+	                int value$188;
+	                VarState this$188;
+	                index$188 = r;
+	                value$188 = r;
+	                this$188 = sx;
+	                {
+	                  {
+	                    inlined this$188.ensureCapacity(index$188 + 1);
+	                    exit$189: {
+	                      int n$189;
+	                      VarState this$189;
+	                      n$189 = index$188 + 1;
+	                      this$189 = this$188;
+	                      {
+	                        [VarState.VarState_VC{this$189}] readVC$189;
+	                        readVC$189 := this$189.readVC;
+	                        if (n$189 > readVC$189.length) {
+	                          [VarState.VarState_VC{this$189}] newVC$189;
+	                          newVC$189 = new [VarState.VarState_VC{this$189}](n$189);
+	                          int i$189;
+	                          i$189 = 0;
+	                          while (i$189 < n$189)   {
+	                            int temp$189;
+	                            temp$189 := readVC$189[i$189];
+	                            newVC$189[i$189] := temp$189;
+	                            i$189 = i$189 + 1;
+	                          }
+	                          this$189.readVC := newVC$189;
+	                        } else {
+	                          
+	                        }
+	                        {
+	                          break exit$189;
+	                        }
+	                      }
+	                    }
+	                    inlined return;
+	                  }
+	                  [VarState.VarState_VC{this$188}] readVC$188;
+	                  readVC$188 := this$188.readVC;
+	                  readVC$188[index$188] := value$188;
+	                  {
+	                    break exit$188;
+	                  }
+	                }
+	              }
+	              inlined return;
+	            }
+	            {
+	              inlined sx.set(t,e);
+	              exit$190: {
+	                int index$190;
+	                int value$190;
+	                VarState this$190;
+	                index$190 = t;
+	                value$190 = e;
+	                this$190 = sx;
+	                {
+	                  {
+	                    inlined this$190.ensureCapacity(index$190 + 1);
+	                    exit$191: {
+	                      int n$191;
+	                      VarState this$191;
+	                      n$191 = index$190 + 1;
+	                      this$191 = this$190;
+	                      {
+	                        [VarState.VarState_VC{this$191}] readVC$191;
+	                        readVC$191 := this$191.readVC;
+	                        if (n$191 > readVC$191.length) {
+	                          [VarState.VarState_VC{this$191}] newVC$191;
+	                          newVC$191 = new [VarState.VarState_VC{this$191}](n$191);
+	                          int i$191;
+	                          i$191 = 0;
+	                          while (i$191 < n$191)   {
+	                            int temp$191;
+	                            temp$191 := readVC$191[i$191];
+	                            newVC$191[i$191] := temp$191;
+	                            i$191 = i$191 + 1;
+	                          }
+	                          this$191.readVC := newVC$191;
+	                        } else {
+	                          
+	                        }
+	                        {
+	                          break exit$191;
+	                        }
+	                      }
+	                    }
+	                    inlined return;
+	                  }
+	                  [VarState.VarState_VC{this$190}] readVC$190;
+	                  readVC$190 := this$190.readVC;
+	                  readVC$190[index$190] := value$190;
+	                  {
+	                    break exit$190;
+	                  }
+	                }
+	              }
+	              inlined return;
+	            }
+	            sx.read := -1;
+	          }
+	        } else {
+	          {
+	            inlined sx.set(t,e);
+	            exit$192: {
+	              int index$192;
+	              int value$192;
+	              VarState this$192;
+	              index$192 = t;
+	              value$192 = e;
+	              this$192 = sx;
+	              {
+	                {
+	                  inlined this$192.ensureCapacity(index$192 + 1);
+	                  exit$193: {
+	                    int n$193;
+	                    VarState this$193;
+	                    n$193 = index$192 + 1;
+	                    this$193 = this$192;
+	                    {
+	                      [VarState.VarState_VC{this$193}] readVC$193;
+	                      readVC$193 := this$193.readVC;
+	                      if (n$193 > readVC$193.length) {
+	                        [VarState.VarState_VC{this$193}] newVC$193;
+	                        newVC$193 = new [VarState.VarState_VC{this$193}](n$193);
+	                        int i$193;
+	                        i$193 = 0;
+	                        while (i$193 < n$193)   {
+	                          int temp$193;
+	                          temp$193 := readVC$193[i$193];
+	                          newVC$193[i$193] := temp$193;
+	                          i$193 = i$193 + 1;
+	                        }
+	                        this$193.readVC := newVC$193;
+	                      } else {
+	                        
+	                      }
+	                      {
+	                        break exit$193;
+	                      }
+	                    }
+	                  }
+	                  inlined return;
+	                }
+	                [VarState.VarState_VC{this$192}] readVC$192;
+	                readVC$192 := this$192.readVC;
+	                readVC$192[index$192] := value$192;
+	                {
+	                  break exit$192;
+	                }
+	              }
+	            }
+	            inlined return;
+	          }
+	        }
+	      }
+	      release(sx);
+	    }
+	    {
+	       return true;
+	    }
+	    {
+	      // return false;
+	    }
+	  }
+	  
+	}
+	boolean p1;
+	boolean p2;
+

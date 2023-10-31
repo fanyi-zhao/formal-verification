@@ -1,0 +1,10 @@
+class BadDiscipline {
+
+    volatile int value moves_as N
+                yields_as false;
+
+
+}
+
+///: (4.27): yields_as clause for BadDiscipline.value is not reflexive
+///: (4.27): yields_as clause for BadDiscipline.value is not valid

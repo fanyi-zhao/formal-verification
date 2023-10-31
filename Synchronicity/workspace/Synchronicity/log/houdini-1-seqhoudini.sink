@@ -1,0 +1,107 @@
+
+	
+	
+	class Inc {
+	   int x N
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  invariant  p2 ==> this.x == 0;
+	  
+	  
+	  {
+	    
+	  }
+	  public void inc() {
+	    this.x := 0;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	}
+	class Inc2 {
+	   int x N
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  invariant  this.x != 0;
+	  invariant  this.x == 0;
+	  
+	  
+	  {
+	    
+	  }
+	  public void inc2() {
+	    this.x := 0;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	}
+	class Main {
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  public void main() {
+	    Inc i;
+	    i = new Inc();
+	    i.x := 0;
+	    yield;
+	    {
+	      inlined i.inc();
+	      exit$169: {
+	        Inc this$169;
+	        this$169 = i;
+	        {
+	          this$169.x := 0;
+	          {
+	            break exit$169;
+	          }
+	        }
+	      }
+	      inlined return;
+	    }
+	    {
+	      // return;
+	    }
+	  }
+	  
+	}
+	boolean p2;
+

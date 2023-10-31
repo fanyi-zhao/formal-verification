@@ -1,0 +1,11 @@
+
+
+class Or {
+    boolean f() {
+        boolean a;
+        boolean b;
+        boolean c;
+        boolean w = a || (b && c);
+        return false;
+    }
+}

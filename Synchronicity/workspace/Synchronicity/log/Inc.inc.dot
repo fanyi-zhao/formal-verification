@@ -1,0 +1,10 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|15.26:enter_3270: \n}"];
+B1[label="{Block 1|16.6:assert d == Cow.null; \n}"];
+B2[label="{Block 2|15.26:// return; \n}"];
+B3[label="{Block 3|15.26:exit_3270: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+}

@@ -1,0 +1,19 @@
+class SeqExample {
+
+    ghost Seq<int> seq;
+
+    public void functions() {
+        this.seq = SeqEmpty<int>();
+        this.seq = SeqUnit(4);
+        this.seq = SeqConcat(this.seq, this.seq);
+        assert SeqNth(this.seq, 0) == 4;
+        assert SeqLen(this.seq) == 2;
+    }
+
+    public void operators() {
+        this.seq = [ 4 ];
+        this.seq = this.seq ++ this.seq;
+        assert this.seq[0] == 4;
+        assert this.seq.length == 2;
+    }
+}

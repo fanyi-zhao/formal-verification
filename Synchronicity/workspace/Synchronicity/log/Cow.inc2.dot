@@ -1,0 +1,10 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|14.22:enter_3290: \n}"];
+B1[label="{Block 1|15.9:this.x := 0; \n}"];
+B2[label="{Block 2|14.22:// return; \n}"];
+B3[label="{Block 3|14.22:exit_3290: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+}

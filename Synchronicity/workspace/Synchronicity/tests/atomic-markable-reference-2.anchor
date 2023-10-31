@@ -1,0 +1,87 @@
+
+class V { }
+
+class Pair {
+    V reference    moves_as isLocal(this) ? thread_local : readonly;
+    boolean mark      moves_as isLocal(this) ? thread_local : readonly;
+    Pair(V reference, boolean mark) {
+        this.reference = reference;
+        this.mark = mark;
+    }
+}
+
+class AtomicMarkableReference {
+
+    noABA volatile Pair pair  moves_as isLocal(this) ? thread_local :
+              isRead() ? N
+                       : isLocal(newValue) ? N : E
+          yields_as this.pair != newValue ==> !isShared(newValue);
+
+    invariant this.pair != null;
+
+    Pair pairOf(V initialRef, boolean initialMark) {
+      Pair p = new Pair(initialRef, initialMark);
+      return p;
+    }
+
+    AtomicMarkableReference(V initialRef, boolean initialMark) {
+        this.pair = this.pairOf(initialRef, initialMark);
+    }
+
+    V getReference() {
+        return this.pair.reference;
+    }
+
+    boolean isMarked() {
+        return this.pair.mark;
+    }
+
+    Pair get() {
+        return this.pair;
+    }
+
+    boolean compareAndSet(V       expectedReference,
+                                 V       newReference,
+                                 boolean expectedMark,
+                                 boolean newMark) {
+        Pair current = this.pair;
+        return
+            expectedReference == current.reference &&
+            expectedMark == current.mark &&
+            this.casPair(current, this.pairOf(newReference, newMark));
+    }
+
+    void set(V newReference, boolean newMark) {
+        this.pair = this.pairOf(newReference, newMark);
+    }
+
+    boolean attemptMark(V expectedReference, boolean newMark) {
+        Pair current = this.pair;
+        return
+            expectedReference == current.reference &&
+            this.casPair(current, this.pairOf(expectedReference, newMark));
+    }
+
+    boolean casPair(Pair cmp, Pair val) {
+        return cas(this, pair, cmp, val);
+    }
+}
+
+class Main {
+
+    requires x != null;
+    public void f(AtomicMarkableReference x) {
+      V d = new V();
+      Pair result = x.get();
+      yield;
+      Pair result2 = x.get();
+      yield;
+      boolean b = x.compareAndSet(result.reference, null, result.mark, true);
+      if (b) {
+        // assert result.reference == result2.reference;
+        // assert result.mark == result2.mark;
+      } else {
+        //assert result.reference == result2.reference;  // should fail
+      }
+    }
+}

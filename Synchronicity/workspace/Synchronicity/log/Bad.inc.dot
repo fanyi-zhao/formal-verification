@@ -1,0 +1,18 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|5.21:enter_408: \n}"];
+B1[label="{Block 1|6.3:int tmp1; \n}"];
+B2[label="{Block 2|6.3:int tmp2; \n}"];
+B3[label="{Block 3|6.3:tmp2 := this.y; \n}"];
+B4[label="{Block 4|6.3:tmp1 = tmp2 + 1; \n}"];
+B5[label="{Block 5|6.3:this.y := tmp1; \n}"];
+B6[label="{Block 6|5.21:// return; \n}"];
+B7[label="{Block 7|5.21:exit_408: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+}

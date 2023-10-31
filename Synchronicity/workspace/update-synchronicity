@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "## Pulling"
+cd ~/Synchronicity
+git pull
+
+echo "## Building anchor"
+cd ~/Synchronicity/workspace/Synchronicity
+make
+
+echo "## Building server"
+cd ~/Synchronicity/web/
+make
+
+echo "## Restarting Server"
+sudo systemctl restart anchor
+
+echo "## Complete"
+exit 0

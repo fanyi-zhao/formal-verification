@@ -1,0 +1,14 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|20.21:enter_713: \n}"];
+B1[label="{Block 1|21.7:acquire(this); \n}"];
+B2[label="{Block 2|22.7:release(this); \n}"];
+B3[label="{Block 3|23.7:commit; \n}"];
+B4[label="{Block 4|20.21:// return; \n}"];
+B5[label="{Block 5|20.21:exit_713: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+}

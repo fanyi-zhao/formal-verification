@@ -1,0 +1,35 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|41.22:enter_3869: \n}"];
+B1[label="{Block 1|42.9:Cow a; \n}"];
+B2[label="{Block 2|42.9:a := this.a; \n}"];
+B3[label="{Block 3|43.9:Cow b; \n}"];
+B4[label="{Block 4|43.9:b := this.b; \n}"];
+B5[label="{Block 5|44.22:acquire(a); \n}"];
+B6[label="{Block 6|45.13:while (true)   \n}"];
+B7[label="{Block 7|45.13:goto loopHead_906,loopExit_906 \n}"];
+B8[label="{Block 8|45.13:loopHead_906: \n}"];
+B9[label="{Block 9|46.30:acquire(b); \n}"];
+B10[label="{Block 10|48.17:release(b); \n}"];
+B11[label="{Block 11|45.13:loopExit_906: \n}"];
+B12[label="{Block 12|45.13:while (true)   \n}"];
+B13[label="{Block 13|50.9:release(a); \n}"];
+B14[label="{Block 14|41.22:// return; \n}"];
+B15[label="{Block 15|41.22:exit_3869: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B7 -> B11;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+B11 -> B12;
+B12 -> B13;
+B13 -> B14;
+B14 -> B15;
+}

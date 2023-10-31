@@ -1,0 +1,39 @@
+class Node {
+	int item moves_as (isRead() || isLocal(this)) ? B : E;
+	Node next moves_as (isRead() || isLocal(this)) ? B : E;
+
+	Node(int item, Node next) {
+		this.item = item;
+		this.next = next;
+	}
+}
+
+class LockBasedStack {
+	Node head moves_as holds(this) ? B : E;
+
+	modifies this;
+	ensures this.head.item == item;
+	ensures this.head.next == old(this.head.next);
+	public int push(int item) {
+		acquire(this);
+		Node node = new Node(item, this.head);
+		this.head = node;
+		release(this);
+	}
+
+	modifies this;
+	ensures $result == old(this.head.item);
+	ensures this.head == old(this.head.next);
+	public int pop() {
+		acquire(this);
+		while (this.head == null) {
+			release(this);
+			acquire(this);
+		}
+
+		int value = this.head.item;
+		this.head = this.head.next;
+		release(this);
+		return value;
+	}
+}

@@ -1,0 +1,15 @@
+
+
+class Vector {
+
+    // CONCRETE VARS:
+
+    array T = int[moves_as index == tid ? B : E];
+    [T] elems moves_as readonly;
+
+    public void f() {
+        this.elems[0] = 3;
+    }
+}
+
+///:  (11.9): Reduction failure

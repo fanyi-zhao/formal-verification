@@ -1,0 +1,26 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|45.33:enter_131: \n}"];
+B1[label="{Block 1|46.9:int x; \n}"];
+B2[label="{Block 2|46.17:x = 0; \n}"];
+B3[label="{Block 3|47.9:int y; \n}"];
+B4[label="{Block 4|47.17:y = 1; \n}"];
+B5[label="{Block 5|48.9:a\[tid\] := x; \n}"];
+B6[label="{Block 6|49.9:b\[tid\] := y; \n}"];
+B7[label="{Block 7|50.9:int z; \n}"];
+B8[label="{Block 8|50.9:z := a\[tid\]; \n}"];
+B9[label="{Block 9|51.9:assert z == x; \n}"];
+B10[label="{Block 10|45.33:// return; \n}"];
+B11[label="{Block 11|45.33:exit_131: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+}

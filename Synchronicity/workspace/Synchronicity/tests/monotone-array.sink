@@ -1,0 +1,82 @@
+///: ignore
+
+class SX {
+
+    // monotone false -> true.
+    boolean b  (!this.b) ? write_guarded_by this : (R # E);
+
+    // just use "a" as a one element array...
+    int[(!this.b)
+                  ? guarded_by this
+                  : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+       a
+       (!this.b) ? guarded_by this : write_guarded_by this;
+
+    void notSharedYetWrite() {
+        boolean temp := this.b;
+        if (!temp) {
+            yield;
+            synchronized(this) {
+                int[(!this.b)
+                                  ? guarded_by this
+                                  : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+                       a := this.a;
+                a[tid] := 3;
+            }
+        }
+    }
+
+    void shared() {
+        boolean temp := this.b;
+        if (temp) {
+            synchronized(this) {
+                int[(!this.b)
+                                  ? guarded_by this
+                                  : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+                       a := this.a;
+                a[tid] := 3;
+            }
+        }
+    }
+        void sharedBad() {
+            boolean temp := this.b;
+            if (temp) {
+                synchronized(this) {
+                    int[(!this.b)
+                                      ? guarded_by this
+                                      : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+                           a := this.a;
+                    a[0] := 3;
+                }
+            }
+        }
+
+        void sharedRead1() {
+            boolean temp := this.b;
+            if (temp) {
+                synchronized(this) {
+                    int[(!this.b)
+                                      ? guarded_by this
+                                      : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+                           a := this.a;
+                    int y := a[0];
+                }
+            }
+        }
+
+        void sharedRead2() {
+            boolean temp := this.b;
+            if (temp) {
+                    int[(!this.b)
+                      ? guarded_by this
+                      : (((holds(this) || tid == index) ? B:E) # ((holds(this) && tid == index) ? B:E))]
+                    a := this.a;
+                    if (tid < a.length) {
+                        int y := a[tid];
+                     }
+            }
+        }
+}
+
+///: (45.13): Reduction failure
+///: (68.13): Reduction failure

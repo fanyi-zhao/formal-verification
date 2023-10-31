@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+# export ANCHOR_HOME=`pwd`/../Synchronicity/
+# export PATH=${ANCHOR_HOME}/commands:${PATH}:${ANCHOR_HOME}/boogie/Binaries/
+
+# scala -J-Xmx512m -J-Xss40m -classpath ${ANCHOR_HOME}/bin anchor.tool.AnchorServer \
+#        -noWarn \
+#        -quiet \
+#        -snapshots \
+#        -verify=MethodSpecs \
+#        -B=-proverOpt:O:memory_max_size=400 \
+#        $*
+
+# verify options: All MethodSpecs Sequential SyncSpec PNP Sanity Houdini SeqHoudini Consistent
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=MethodSpecs $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sequential $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SyncSpec $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=PNP $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sanity $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Houdini $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SeqHoudini $* || exit
+/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Consistent $* || exit

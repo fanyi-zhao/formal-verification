@@ -1,0 +1,8 @@
+///: ignore
+
+class A {
+    volatile boolean x moves_as isLocal(this) >>> B;
+    volatile boolean y moves_as isLocal(this) >>> isRead() >>> B;
+    volatile boolean z moves_as isLocal(this) ? isRead() >>> B : L;
+    // parser error volatile boolean zz moves_as isLocal(this) >>> isRead() ? B : L;
+}

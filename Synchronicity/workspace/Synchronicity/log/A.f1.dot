@@ -1,0 +1,26 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|7.20:enter_4017: \n}"];
+B1[label="{Block 1|9.19:acquire(this); \n}"];
+B2[label="{Block 2|11.7:this.x := 3; \n}"];
+B3[label="{Block 3|13.5:release(this); \n}"];
+B4[label="{Block 4|15.5:yield; \n}"];
+B5[label="{Block 5|16.18:acquire(this); \n}"];
+B6[label="{Block 6|17.7:int this_x; \n}"];
+B7[label="{Block 7|17.7:this_x := this.x; \n}"];
+B8[label="{Block 8|18.7:assert this_x == 3; \n}"];
+B9[label="{Block 9|19.5:release(this); \n}"];
+B10[label="{Block 10|7.20:// return; \n}"];
+B11[label="{Block 11|7.20:exit_4017: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+}

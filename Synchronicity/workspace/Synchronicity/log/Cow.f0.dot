@@ -1,0 +1,38 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|23.22:enter_2125: \n}"];
+B1[label="{Block 1|24.9:\[Cow.T\{this\}\] a; \n}"];
+B2[label="{Block 2|24.9:a := this.a; \n}"];
+B3[label="{Block 3|25.9:inlined this.set(0,0); \n}"];
+B4[label="{Block 4|25.9:int index$201; \n}"];
+B5[label="{Block 5|25.9:int value$201; \n}"];
+B6[label="{Block 6|25.9:Cow this$201; \n}"];
+B7[label="{Block 7|25.9:index$201 = 0; \n}"];
+B8[label="{Block 8|25.9:value$201 = 0; \n}"];
+B9[label="{Block 9|25.9:this$201 = this; \n}"];
+B10[label="{Block 10|15.9:\[Cow.T\{this$201\}\] a$201; \n}"];
+B11[label="{Block 11|15.9:a$201 := this$201.a; \n}"];
+B12[label="{Block 12|16.9:a$201\[index$201\] := value$201; \n}"];
+B13[label="{Block 13|14.36:goto exit$201 \n}"];
+B14[label="{Block 14|25.9:exit$201: \n}"];
+B15[label="{Block 15|25.9:inlined return; \n}"];
+B16[label="{Block 16|23.22:// return; \n}"];
+B17[label="{Block 17|23.22:exit_2125: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+B11 -> B12;
+B12 -> B13;
+B13 -> B14;
+B14 -> B15;
+B15 -> B16;
+B16 -> B17;
+}

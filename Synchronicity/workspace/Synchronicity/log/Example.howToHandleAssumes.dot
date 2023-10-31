@@ -1,0 +1,36 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|15.37:enter_991: \n}"];
+B1[label="{Block 1|16.5:int oldValue; \n}"];
+B2[label="{Block 2|17.18:acquire(this); \n}"];
+B3[label="{Block 3|18.7:oldValue := this.value; \n}"];
+B4[label="{Block 4|19.7:int tmp4; \n}"];
+B5[label="{Block 5|19.7:tmp4 = oldValue + 1; \n}"];
+B6[label="{Block 6|19.7:this.value := tmp4; \n}"];
+B7[label="{Block 7|20.5:release(this); \n}"];
+B8[label="{Block 8|22.18:acquire(this); \n}"];
+B9[label="{Block 9|23.7:boolean tmp5; \n}"];
+B10[label="{Block 10|23.7:int tmp6; \n}"];
+B11[label="{Block 11|23.7:tmp6 := this.value; \n}"];
+B12[label="{Block 12|23.7:tmp5 = tmp6 \> oldValue; \n}"];
+B13[label="{Block 13|23.7:assert tmp5 /* == this.value \> oldValue */; \n}"];
+B14[label="{Block 14|24.5:release(this); \n}"];
+B15[label="{Block 15|15.37:// return; \n}"];
+B16[label="{Block 16|15.37:exit_991: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+B11 -> B12;
+B12 -> B13;
+B13 -> B14;
+B14 -> B15;
+B15 -> B16;
+}

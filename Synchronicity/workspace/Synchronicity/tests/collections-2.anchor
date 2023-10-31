@@ -1,0 +1,14 @@
+
+
+class Cow {
+    void f() {
+        Set<int> s;
+        Set<boolean> s2;
+        s = SetEmpty<int>();
+        s2 = SetEmpty<boolean>();
+        s = SetUnion(s, s);
+        s = SetUnion(s, s2);
+    }
+}
+
+///: (10.25): Unification failure: Set<#T> != Set<boolean>: Map(#T -> int)

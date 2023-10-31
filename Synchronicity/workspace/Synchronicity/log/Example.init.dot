@@ -1,0 +1,26 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|14.20:enter_3674: \n}"];
+B1[label="{Block 1|12.3:assume this.owner == Tid.null; \n}"];
+B2[label="{Block 2|12.3:assume this.flag == false; \n}"];
+B3[label="{Block 3|12.3:assume this.data == 0; \n}"];
+B4[label="{Block 4|15.6:int tmp1; \n}"];
+B5[label="{Block 5|15.6:tmp1 = 3; \n}"];
+B6[label="{Block 6|15.6:this.data := tmp1; \n}"];
+B7[label="{Block 7|16.6:boolean tmp2; \n}"];
+B8[label="{Block 8|16.6:tmp2 = true; \n}"];
+B9[label="{Block 9|16.6:this.flag := tmp2; \n}"];
+B10[label="{Block 10|14.20:// return; \n}"];
+B11[label="{Block 11|14.20:exit_3674: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+B9 -> B10;
+B10 -> B11;
+}

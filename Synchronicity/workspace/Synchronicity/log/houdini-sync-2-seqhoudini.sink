@@ -1,0 +1,75 @@
+
+	
+	
+	class Inc {
+	   int x isLocal(this, tid)
+	   ? E
+	   : isRead
+	     ? this._lock == tid ? B : N
+	     : this._lock == tid ? N : E
+	  
+	   int y isLocal(this, tid)
+	   ? E
+	   : isRead
+	     ? this._lock == tid ? E : E
+	     : this._lock == tid ? E : E
+	  
+	   Tid _lock isLocal(this, tid)
+	   ? isRead
+	     ? B
+	     : newValue == tid || newValue == Tid.null ? B : E
+	   : isRead
+	     ? this._lock == tid ? R : E
+	     : this._lock == Tid.null && newValue == tid
+	       ? R
+	       : this._lock == tid && newValue == Tid.null ? L : E ! 
+	    yields_as this._lock == tid == (newValue == tid);
+	  
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  public void inc() {
+	    {
+	      acquire(this);
+	      {
+	        this.x := 0;
+	        int t;
+	        t := this.x;
+	      }
+	      release(this);
+	    }
+	    yield;
+	    int t;
+	    t := this.x;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	  
+	  
+	  {
+	    
+	  }
+	  public void inc2() {
+	    {
+	      acquire(this);
+	      {
+	        this.y := 0;
+	        this.x := 0;
+	      }
+	      release(this);
+	    }
+	    yield;
+	    int t;
+	    t := this.x;
+	    {
+	      // return;
+	    }
+	  }
+	  
+	}
+

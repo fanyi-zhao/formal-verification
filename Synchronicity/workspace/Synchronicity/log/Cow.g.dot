@@ -1,0 +1,22 @@
+digraph G {
+   node [shape=record];
+B0[label="{Block 0|14.19:enter_2177: \n}"];
+B1[label="{Block 1|15.5:int a; \n}"];
+B2[label="{Block 2|15.13:a = 10; \n}"];
+B3[label="{Block 3|16.5:int b; \n}"];
+B4[label="{Block 4|16.13:b = 5; \n}"];
+B5[label="{Block 5|17.5:invariant a \> b; \n}"];
+B6[label="{Block 6|18.9:a = 0; \n}"];
+B7[label="{Block 7|19.9:b = -5; \n}"];
+B8[label="{Block 8|14.19:// return; \n}"];
+B9[label="{Block 9|14.19:exit_2177: \n}"];
+B0 -> B1;
+B1 -> B2;
+B2 -> B3;
+B3 -> B4;
+B4 -> B5;
+B5 -> B6;
+B6 -> B7;
+B7 -> B8;
+B8 -> B9;
+}

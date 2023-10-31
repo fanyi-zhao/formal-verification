@@ -1,0 +1,14 @@
+
+class Cow {
+
+    int c whenever;
+
+    void f() {
+        boolean z = this.c == 2; if (z) {
+
+        }
+    }
+
+}
+
+///: (7.21): Can only access fields directly within specs

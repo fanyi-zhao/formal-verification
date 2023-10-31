@@ -1,0 +1,14 @@
+
+
+class Cow {
+    void f() {
+        Set<int> s;
+        Set<boolean> s2;
+        s = SetEmpty<int>();
+        s2 = SetEmpty<boolean>();
+        s = SetUnion(s, s);
+        s2 = SetUnion(s, s);
+    }
+}
+
+///: (10.14): Bad types for assignment. (Expected: Set<boolean>, but got Set<int>)
