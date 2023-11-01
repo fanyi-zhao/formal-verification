@@ -13,11 +13,11 @@
 #        $*
 
 # verify options: All MethodSpecs Sequential SyncSpec PNP Sanity Houdini SeqHoudini Consistent
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=MethodSpecs $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sequential $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SyncSpec $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=PNP $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sanity $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Houdini $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SeqHoudini $* || exit
-/home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Consistent $* || exit
+/workspaces/formal-verification/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=MethodSpecs $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sequential $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SyncSpec $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=PNP $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Sanity $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Houdini $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=SeqHoudini $* || exit
+# /home/fzhao12/Synchronicity/workspace/Synchronicity/commands/anchor -noWarn -quiet -snapshots -verify=Consistent $* || exit

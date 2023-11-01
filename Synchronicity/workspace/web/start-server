@@ -4,15 +4,15 @@ echo "## Pulling"
 git pull
 
 echo "## Building anchor"
-cd ~/Synchronicity/workspace/Synchronicity || exit
+cd /workspaces/formal-verification/Synchronicity/workspace/Synchronicity || exit
 make
 
 echo "## Building server"
-cd ~/Synchronicity/workspace/web/ || exit
+cd /workspaces/formal-verification/Synchronicity/workspace/web/ || exit
 make
 
 echo "## Starting Server"
-cd ~/Synchronicity/workspace/web/ || exit
+cd /workspaces/formal-verification/Synchronicity/workspace/web/ || exit
 sudo /usr/bin/python3 -u server.py -t 80
 
 exit 0
