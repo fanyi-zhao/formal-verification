@@ -1268,31 +1268,17 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next21875: [Node]Node;                                                                    
  var TreiberStack._state21875: [TreiberStack]State;                                                 
  var item21875: int;                                                                                
- var Node._lock21876_post: [Node]Tid;                                                               
- var Node._state21876_post: [Node]State;                                                            
- var TreiberStack._state21876_post: [TreiberStack]State;                                            
- var this21876_post: Node;                                                                          
  var $pc21875: Phase;                                                                               
- var TreiberStack.head_nextThread21876_post: [TreiberStack]Tid;                                     
  var path21875: int;                                                                                
- var TreiberStack.head_nextValue21876_post: [TreiberStack]Node;                                     
  var TreiberStack.head_nextValue21876: [TreiberStack]Node;                                          
  var TreiberStack._lock21876: [TreiberStack]Tid;                                                    
  var TreiberStack._lock21875: [TreiberStack]Tid;                                                    
- var TreiberStack._lock21876_post: [TreiberStack]Tid;                                               
  var tid21876: Tid;                                                                                 
  var TreiberStack._state21876: [TreiberStack]State;                                                 
  var Node.item21875: [Node]int;                                                                     
- var item21876_post: int;                                                                           
  var TreiberStack.head_nextThread21876: [TreiberStack]Tid;                                          
- var $recorded.state21876_post: int;                                                                
- var TreiberStack.head21876_post: [TreiberStack]Node;                                               
- var $pc21876_post: Phase;                                                                          
- var tid21876_post: Tid;                                                                            
  var $pc21876: Phase;                                                                               
  var Node._lock21876: [Node]Tid;                                                                    
- var Node.next21876_post: [Node]Node;                                                               
- var Node.item21876_post: [Node]int;                                                                
  var item21876: int;                                                                                
  var mover21875: Mover;                                                                             
  var TreiberStack.head21875: [TreiberStack]Node;                                                    
@@ -1306,32 +1292,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next21876: [Node]Node;                                                                    
  var TreiberStack.head_nextValue21875: [TreiberStack]Node;                                          
                                                                                                     
- var $spec$Node._state: [Node]State;                                                                
- var $spec$Node.item: [Node]int;                                                                    
- var $spec$Node.next: [Node]Node;                                                                   
- var $spec$Node._lock: [Node]Tid;                                                                   
- var $spec$TreiberStack._state: [TreiberStack]State;                                                
- var $spec$TreiberStack.head: [TreiberStack]Node;                                                   
- var $spec$TreiberStack._lock: [TreiberStack]Tid;                                                   
- var $spec$TreiberStack.head_nextThread: [TreiberStack]Tid;                                         
- var $spec$TreiberStack.head_nextValue: [TreiberStack]Node;                                         
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
  var $pc : Phase;                                                                                   
-                                                                                                    
- $spec$Node._state := Node._state;                                                                  
- $spec$Node.item := Node.item;                                                                      
- $spec$Node.next := Node.next;                                                                      
- $spec$Node._lock := Node._lock;                                                                    
- $spec$TreiberStack._state := TreiberStack._state;                                                  
- $spec$TreiberStack.head := TreiberStack.head;                                                      
- $spec$TreiberStack._lock := TreiberStack._lock;                                                    
- $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                                
- $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                  
-                                                                                                    
-                                                                                                    
  $pc := PreCommit;                                                                                  
                                                                                                     
  assert true && leq(m#moverPath(ReadEval.Node.next(tid: Tid,this: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue)),_R);       // (13.5): Can only have right-mover memory accesses in requires clause
@@ -1367,8 +1328,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
  assume Node._state21876 == Node._state && Node.item21876 == Node.item && Node.next21876 == Node.next && Node._lock21876 == Node._lock && TreiberStack._state21876 == TreiberStack._state && TreiberStack.head21876 == TreiberStack.head && TreiberStack._lock21876 == TreiberStack._lock && TreiberStack.head_nextThread21876 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21876 == TreiberStack.head_nextValue && item21876 == item && this21876 == this && tid21876 == tid;
  assume $recorded.state21876 == 1;                                                                  
- assume Node._state21876_post == Node._state && Node.item21876_post == Node.item && Node.next21876_post == Node.next && Node._lock21876_post == Node._lock && TreiberStack._state21876_post == TreiberStack._state && TreiberStack.head21876_post == TreiberStack.head && TreiberStack._lock21876_post == TreiberStack._lock && TreiberStack.head_nextThread21876_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue21876_post == TreiberStack.head_nextValue && item21876_post == item && this21876_post == this && tid21876_post == tid;
- assume $recorded.state21876_post == 1;                                                             
  return;                                                                                            
 }                                                                                                   
                                                                                                     
@@ -1534,40 +1493,6 @@ function {:inline} WriteEval.TreiberStack.head_nextValue(tid: Tid,this : Treiber
 /////                                                                                               
                                                                                                     
                                                                                                     
-function {:inline} $spec$.TreiberStack.push.IsValidTransition.isSkip(tid:Tid,this : TreiberStack,item : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node): bool {
- (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> isShared(Node._state[$this])))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.item$old[$this] == Node.item[$this]))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.next$old[$this] == Node.next[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> isShared(TreiberStack._state[$this])))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head$old[$this] == TreiberStack.head[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextThread$old[$this] == TreiberStack.head_nextThread[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextValue$old[$this] == TreiberStack.head_nextValue[$this]))
-}                                                                                                   
-                                                                                                    
-function {:inline} $spec$.TreiberStack.push.IsValidTransition.0(tid:Tid,this : TreiberStack,item : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node): bool {
- ((TreiberStack.head[this]!=Node.null))                                                             
-&& ((Node.next[TreiberStack.head[this]]==TreiberStack.head$old[this]))                              
-&& ((Node.item[TreiberStack.head[this]]==item))                                                     
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> isShared(Node._state[$this])))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.item$old[$this] == Node.item[$this]))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.next$old[$this] == Node.next[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> isShared(TreiberStack._state[$this])))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head$old[$this] == TreiberStack.head[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextThread$old[$this] == TreiberStack.head_nextThread[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextValue$old[$this] == TreiberStack.head_nextValue[$this]))
-}                                                                                                   
-                                                                                                    
-procedure TreiberStack.push.specTransition($spec$pc.0$ : bool,$spec$pc.1$ : bool, tid:Tid,this : TreiberStack,item : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node) returns ($spec$pc.0$$new : bool, $spec$pc.1$$new : bool);
- ensures (var skips,a0 :=                                                                           
-  $spec$.TreiberStack.push.IsValidTransition.isSkip(tid:Tid,this : TreiberStack,item : int, Node._state$old,Node.item$old,Node.next$old,Node._lock$old,TreiberStack._state$old,TreiberStack.head$old,TreiberStack._lock$old,TreiberStack.head_nextThread$old,TreiberStack.head_nextValue$old,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue)
-,                                                                                                   
-  $spec$.TreiberStack.push.IsValidTransition.0(tid:Tid,this : TreiberStack,item : int, Node._state$old,Node.item$old,Node.next$old,Node._lock$old,TreiberStack._state$old,TreiberStack.head$old,TreiberStack._lock$old,TreiberStack.head_nextThread$old,TreiberStack.head_nextValue$old,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue)
-  ;                                                                                                 
- ($spec$pc.0$$new == (($spec$pc.0$ && skips)))                                                      
-&& ($spec$pc.1$$new == (($spec$pc.1$ && skips) || ($spec$pc.0$ && a0)))                             
-);                                                                                                  
-                                                                                                    
-                                                                                                    
 procedure  TreiberStack.push(tid:Tid, this : TreiberStack, item : int)                              
 modifies Node._state;                                                                               
 modifies Node.item;                                                                                 
@@ -1593,7 +1518,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var tmp222085: bool;                                                                               
  var $pc22092: Phase;                                                                               
  var TreiberStack._lock22022: [TreiberStack]Tid;                                                    
- var $spec$pc.0$22085: bool;                                                                        
  var path22088: int;                                                                                
  var this22130: TreiberStack;                                                                       
  var tid22155: Tid;                                                                                 
@@ -1604,15 +1528,12 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var oldHead22085: Node;                                                                            
  var newHead22013: Node;                                                                            
  var this22025: TreiberStack;                                                                       
- var $spec$pc.1$22118: bool;                                                                        
  var TreiberStack.head_nextValue22155: [TreiberStack]Node;                                          
  var TreiberStack.head_nextValue22118: [TreiberStack]Node;                                          
  var TreiberStack.head_nextThread22025: [TreiberStack]Tid;                                          
  var tid22118: Tid;                                                                                 
  var TreiberStack._state22085: [TreiberStack]State;                                                 
- var $spec$pc.0$22018: bool;                                                                        
  var TreiberStack.head22130: [TreiberStack]Node;                                                    
- var $spec$pc.0$21969: bool;                                                                        
  var _C_t: Tid;                                                                                     
  var item22092: int;                                                                                
  var moverPath22092: MoverPath;                                                                     
@@ -1627,23 +1548,19 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var item21942: int;                                                                                
  var TreiberStack.head_nextThread22092: [TreiberStack]Tid;                                          
  var TreiberStack.head22022_post: [TreiberStack]Node;                                               
- var $spec$pc.1$21963: bool;                                                                        
  var newHead22018: Node;                                                                            
  var $recorded.state22022_post: int;                                                                
  var _R_t22013: Mover;                                                                              
  var TreiberStack._state22147: [TreiberStack]State;                                                 
- var TreiberStack._lock22155_post: [TreiberStack]Tid;                                               
  var $pc22154: Phase;                                                                               
  var ctmp358222130: bool;                                                                           
  var $recorded.state22118: int;                                                                     
  var Node.item22013: [Node]int;                                                                     
  var $pc21975: Phase;                                                                               
  var TreiberStack.head_nextThread22115: [TreiberStack]Tid;                                          
- var $spec$pc.1$22085: bool;                                                                        
  var this22088: TreiberStack;                                                                       
  var mover22092: Mover;                                                                             
  var tmpValue22092: Node;                                                                           
- var $spec$pc.0$22088: bool;                                                                        
  var mover22115: Mover;                                                                             
  var tmpValue: Node;                                                                                
  var Node.next22115: [Node]Node;                                                                    
@@ -1658,21 +1575,15 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var oldHead22130: Node;                                                                            
  var Node._lock22118: [Node]Tid;                                                                    
  var TreiberStack.head_nextThread22022_post: [TreiberStack]Tid;                                     
- var TreiberStack.head_nextValue22147_post: [TreiberStack]Node;                                     
  var this22022: TreiberStack;                                                                       
  var path22025: int;                                                                                
  var TreiberStack.head_nextThread22118: [TreiberStack]Tid;                                          
- var $spec$pc.1$22018: bool;                                                                        
  var TreiberStack._lock22147: [TreiberStack]Tid;                                                    
  var newHead22118: Node;                                                                            
- var $spec$pc.0$22154: bool;                                                                        
  var Node._state21942: [Node]State;                                                                 
  var path22115: int;                                                                                
  var _m22092: Mover;                                                                                
- var $spec$pc.1$22147_post: bool;                                                                   
- var $spec$pc.1$21969: bool;                                                                        
  var item22088: int;                                                                                
- var $spec$pc.0$21963: bool;                                                                        
  var TreiberStack.head_nextThread22154_bottom: [TreiberStack]Tid;                                   
  var tid22137: Tid;                                                                                 
  var TreiberStack.head_nextThread22088: [TreiberStack]Tid;                                          
@@ -1684,21 +1595,17 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._lock22022: [Node]Tid;                                                                    
  var item21969: int;                                                                                
  var _m22130: Mover;                                                                                
- var newHead22147_post: Node;                                                                       
  var newHead: Node;                                                                                 
- var $spec$pc.0$$loopHead22154: bool;                                                               
  var mover21963: Mover;                                                                             
  var Node._state21963: [Node]State;                                                                 
  var ctmp358222115: bool;                                                                           
  var TreiberStack._lock21975: [TreiberStack]Tid;                                                    
  var tmp1: bool;                                                                                    
  var Node.item22118: [Node]int;                                                                     
- var $spec$pc.1$22147: bool;                                                                        
  var _currentValue22118: Node;                                                                      
  var TreiberStack._lock21969: [TreiberStack]Tid;                                                    
  var TreiberStack.head22022: [TreiberStack]Node;                                                    
  var Node.next22022_post: [Node]Node;                                                               
- var $spec$pc.1$22115: bool;                                                                        
  var TreiberStack.head_nextThread21942: [TreiberStack]Tid;                                          
  var this21975: TreiberStack;                                                                       
  var TreiberStack._lock22022_post: [TreiberStack]Tid;                                               
@@ -1706,7 +1613,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var ctmp3582: bool;                                                                                
  var Node._state22118: [Node]State;                                                                 
  var mover22130: Mover;                                                                             
- var oldHead22147_post: Node;                                                                       
  var Node.item22154_bottom: [Node]int;                                                              
  var tmpValue22085: Node;                                                                           
  var TreiberStack._lock22130: [TreiberStack]Tid;                                                    
@@ -1715,7 +1621,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var item22154: int;                                                                                
  var newHead22130: Node;                                                                            
  var $recorded.state22155: int;                                                                     
- var $spec$pc.1$22155_post: bool;                                                                   
  var tid22022: Tid;                                                                                 
  var Node._state22154: [Node]State;                                                                 
  var TreiberStack.head_nextThread22022: [TreiberStack]Tid;                                          
@@ -1728,13 +1633,10 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var item21975: int;                                                                                
  var item22130: int;                                                                                
  var item$1: int;                                                                                   
- var Node._lock22155_post: [Node]Tid;                                                               
- var $spec$pc.0$22155_post: bool;                                                                   
  var TreiberStack.head22155: [TreiberStack]Node;                                                    
  var oldHead22025: Node;                                                                            
  var $pc22115: Phase;                                                                               
  var oldHead21963: Node;                                                                            
- var $spec$pc.1$22022: bool;                                                                        
  var Node._lock22115: [Node]Tid;                                                                    
  var tid22088: Tid;                                                                                 
  var moverPath22085: MoverPath;                                                                     
@@ -1744,7 +1646,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.item22130: [Node]int;                                                                     
  var tmp122022_post: bool;                                                                          
  var Node._lock22147: [Node]Tid;                                                                    
- var $spec$pc.1$22137: bool;                                                                        
  var TreiberStack.head22137: [TreiberStack]Node;                                                    
  var Node.item22092: [Node]int;                                                                     
  var Node._state22137: [Node]State;                                                                 
@@ -1752,7 +1653,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var this22118: TreiberStack;                                                                       
  var this22154_bottom: TreiberStack;                                                                
  var path22118: int;                                                                                
- var TreiberStack._state22147_post: [TreiberStack]State;                                            
  var _casable22018: bool;                                                                           
  var tmp122013: bool;                                                                               
  var tmp121969: bool;                                                                               
@@ -1765,7 +1665,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._state22115: [Node]State;                                                                 
  var Node._state22092: [Node]State;                                                                 
  var tmp122137: bool;                                                                               
- var TreiberStack.head_nextThread22155_post: [TreiberStack]Tid;                                     
  var _C_t22013: Tid;                                                                                
  var this21969: TreiberStack;                                                                       
  var TreiberStack._state22013: [TreiberStack]State;                                                 
@@ -1774,11 +1673,8 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var _currentValue22130: Node;                                                                      
  var tid22022_post: Tid;                                                                            
  var Node.next21942: [Node]Node;                                                                    
- var $spec$pc.0$22022: bool;                                                                        
  var _currentValue22115: Node;                                                                      
  var newHead21942: Node;                                                                            
- var $spec$pc.0$22092: bool;                                                                        
- var $spec$pc.0$22118: bool;                                                                        
  var Node._lock21975: [Node]Tid;                                                                    
  var moverPath22115: MoverPath;                                                                     
  var moverPath22130: MoverPath;                                                                     
@@ -1787,9 +1683,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head22088: [TreiberStack]Node;                                                    
  var tid21975: Tid;                                                                                 
  var Node._lock21969: [Node]Tid;                                                                    
- var Node._state22155_post: [Node]State;                                                            
  var TreiberStack._state22022: [TreiberStack]State;                                                 
- var Node.next22147_post: [Node]Node;                                                               
  var $recorded.state22013: int;                                                                     
  var TreiberStack.head22154: [TreiberStack]Node;                                                    
  var TreiberStack._state21963: [TreiberStack]State;                                                 
@@ -1801,19 +1695,15 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var newHead22137: Node;                                                                            
  var Node._lock22018: [Node]Tid;                                                                    
  var Node._lock22154: [Node]Tid;                                                                    
- var item22147_post: int;                                                                           
  var TreiberStack._state21975: [TreiberStack]State;                                                 
  var Node.item22022_post: [Node]int;                                                                
- var TreiberStack.head22155_post: [TreiberStack]Node;                                               
  var $recorded.state22025: int;                                                                     
  var moverPath21975: MoverPath;                                                                     
  var $recorded.state21942: int;                                                                     
  var Node._lock22085: [Node]Tid;                                                                    
- var item22155_post: int;                                                                           
  var moverPath22137: MoverPath;                                                                     
  var _currentValue21975: Node;                                                                      
  var tid21942: Tid;                                                                                 
- var this22155_post: TreiberStack;                                                                  
  var $pc22147: Phase;                                                                               
  var newHead22022_post: Node;                                                                       
  var _C_t21963: Tid;                                                                                
@@ -1832,10 +1722,8 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var this22137: TreiberStack;                                                                       
  var $recorded.state22137: int;                                                                     
  var item22137: int;                                                                                
- var Node.item22155_post: [Node]int;                                                                
  var $pc22088: Phase;                                                                               
  var $recorded.state22085: int;                                                                     
- var this22147_post: TreiberStack;                                                                  
  var tid22092: Tid;                                                                                 
  var newHead21975: Node;                                                                            
  var TreiberStack.head22018: [TreiberStack]Node;                                                    
@@ -1850,19 +1738,15 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head22118: [TreiberStack]Node;                                                    
  var TreiberStack._lock22154_bottom: [TreiberStack]Tid;                                             
  var TreiberStack.head_nextThread22137: [TreiberStack]Tid;                                          
- var $spec$pc.1$22013: bool;                                                                        
  var Node.item22088: [Node]int;                                                                     
- var $spec$pc.0$21975: bool;                                                                        
  var TreiberStack.head21969: [TreiberStack]Node;                                                    
  var Node._lock21963: [Node]Tid;                                                                    
  var Node.next22088: [Node]Node;                                                                    
  var mover22013: Mover;                                                                             
  var Node.next22013: [Node]Node;                                                                    
- var TreiberStack.head_nextValue22155_post: [TreiberStack]Node;                                     
  var this$121942: Node;                                                                             
  var $pc22118: Phase;                                                                               
  var TreiberStack._lock21942: [TreiberStack]Tid;                                                    
- var $spec$pc.1$22154_bottom: bool;                                                                 
  var newHead21963: Node;                                                                            
  var TreiberStack.head_nextThread21963: [TreiberStack]Tid;                                          
  var TreiberStack.head22025: [TreiberStack]Node;                                                    
@@ -1879,7 +1763,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $pc22130: Phase;                                                                               
  var tmpTid22085: Tid;                                                                              
  var TreiberStack._lock22025: [TreiberStack]Tid;                                                    
- var $spec$pc.1$22022_post: bool;                                                                   
  var tmp222088: bool;                                                                               
  var TreiberStack.head22013: [TreiberStack]Node;                                                    
  var Node._lock21942: [Node]Tid;                                                                    
@@ -1902,7 +1785,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._state22154_bottom: [Node]State;                                                          
  var TreiberStack.head_nextValue22115: [TreiberStack]Node;                                          
  var TreiberStack.head_nextValue22154: [TreiberStack]Node;                                          
- var $spec$pc.1$21975: bool;                                                                        
  var TreiberStack.head_nextValue21942: [TreiberStack]Node;                                          
  var TreiberStack._state22154_bottom: [TreiberStack]State;                                          
  var TreiberStack.head_nextValue22013: [TreiberStack]Node;                                          
@@ -1914,30 +1796,22 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var path22013: int;                                                                                
  var this22092: TreiberStack;                                                                       
  var oldHead22137: Node;                                                                            
- var $spec$pc.1$22088: bool;                                                                        
  var _C_t22018: Tid;                                                                                
  var _m: Mover;                                                                                     
  var Node.next22018: [Node]Node;                                                                    
  var newHead22147: Node;                                                                            
  var TreiberStack.head22115: [TreiberStack]Node;                                                    
  var Node._state21969: [Node]State;                                                                 
- var $spec$pc.0$22147_post: bool;                                                                   
  var Node.next21969: [Node]Node;                                                                    
  var newHead22085: Node;                                                                            
- var TreiberStack._state22155_post: [TreiberStack]State;                                            
  var item22115: int;                                                                                
- var $spec$pc.1$21942: bool;                                                                        
- var $spec$pc.0$22147: bool;                                                                        
  var _R_t22018: Mover;                                                                              
  var $recorded.state22022: int;                                                                     
- var $spec$pc.0$21942: bool;                                                                        
  var this22085: TreiberStack;                                                                       
  var TreiberStack.head_nextValue22088: [TreiberStack]Node;                                          
  var TreiberStack.head_nextValue22085: [TreiberStack]Node;                                          
- var $spec$pc.0$22130: bool;                                                                        
  var TreiberStack._state22022_post: [TreiberStack]State;                                            
  var TreiberStack.head_nextValue22130: [TreiberStack]Node;                                          
- var tid22147_post: Tid;                                                                            
  var Node.item21969: [Node]int;                                                                     
  var TreiberStack.head_nextThread22013: [TreiberStack]Tid;                                          
  var tmp222092: bool;                                                                               
@@ -1948,7 +1822,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $recorded.state21963: int;                                                                     
  var oldHead22018: Node;                                                                            
  var oldHead22118: Node;                                                                            
- var $spec$pc.1$$loopHead22154: bool;                                                               
  var tid21963: Tid;                                                                                 
  var oldHead21969: Node;                                                                            
  var TreiberStack.head22147: [TreiberStack]Node;                                                    
@@ -1956,7 +1829,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var ctmp358222088: bool;                                                                           
  var Node._state22025: [Node]State;                                                                 
  var Node._lock22088: [Node]Tid;                                                                    
- var Node.next22155_post: [Node]Node;                                                               
  var $pc22022_post: Phase;                                                                          
  var Node.next22085: [Node]Node;                                                                    
  var $pc22022: Phase;                                                                               
@@ -1968,13 +1840,10 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var oldHead22115: Node;                                                                            
  var Node.item21942: [Node]int;                                                                     
  var Node.item22022: [Node]int;                                                                     
- var Node._state22147_post: [Node]State;                                                            
  var item22022_post: int;                                                                           
- var $recorded.state22147_post: int;                                                                
  var TreiberStack.head_nextThread22018: [TreiberStack]Tid;                                          
  var Node._state22018: [Node]State;                                                                 
  var Node.item22147: [Node]int;                                                                     
- var tid22155_post: Tid;                                                                            
  var Node.next22154: [Node]Node;                                                                    
  var Node.next21975: [Node]Node;                                                                    
  var TreiberStack.head22154_bottom: [TreiberStack]Node;                                             
@@ -1982,15 +1851,12 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._lock22155: [Node]Tid;                                                                    
  var path22137: int;                                                                                
  var tmp122130: bool;                                                                               
- var $spec$pc.0$22137: bool;                                                                        
  var this22022_post: TreiberStack;                                                                  
  var tmp122118: bool;                                                                               
- var tmp122147_post: bool;                                                                          
  var TreiberStack.head_nextValue22147: [TreiberStack]Node;                                          
  var mover22025: Mover;                                                                             
  var this22154: TreiberStack;                                                                       
  var mover21969: Mover;                                                                             
- var TreiberStack._lock22147_post: [TreiberStack]Tid;                                               
  var $pc22018: Phase;                                                                               
  var tmp122085: bool;                                                                               
  var tmpTid: Tid;                                                                                   
@@ -1998,7 +1864,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var this22155: TreiberStack;                                                                       
  var item22022: int;                                                                                
  var TreiberStack._lock22118: [TreiberStack]Tid;                                                    
- var $spec$pc.0$22025: bool;                                                                        
  var path21975: int;                                                                                
  var item21963: int;                                                                                
  var TreiberStack._lock22088: [TreiberStack]Tid;                                                    
@@ -2013,7 +1878,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack._state22154: [TreiberStack]State;                                                 
  var TreiberStack.head_nextThread22085: [TreiberStack]Tid;                                          
  var TreiberStack.head_nextValue22092: [TreiberStack]Node;                                          
- var $spec$pc.1$22155: bool;                                                                        
  var $recorded.state22092: int;                                                                     
  var tmpTid22092: Tid;                                                                              
  var TreiberStack.head21942: [TreiberStack]Node;                                                    
@@ -2021,24 +1885,19 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var tid22147: Tid;                                                                                 
  var Node._lock22022_post: [Node]Tid;                                                               
  var TreiberStack._state22088: [TreiberStack]State;                                                 
- var TreiberStack.head22147_post: [TreiberStack]Node;                                               
  var tmp122115: bool;                                                                               
  var moverPath22118: MoverPath;                                                                     
  var $pc22025: Phase;                                                                               
  var tid22115: Tid;                                                                                 
  var TreiberStack.head_nextThread22147: [TreiberStack]Tid;                                          
- var $recorded.state22155_post: int;                                                                
  var phase22154: Phase;                                                                             
  var tid21969: Tid;                                                                                 
- var $spec$pc.1$22154: bool;                                                                        
  var Node.next22022: [Node]Node;                                                                    
  var Node._state22147: [Node]State;                                                                 
  var oldHead22088: Node;                                                                            
  var TreiberStack.head_nextValue21969: [TreiberStack]Node;                                          
  var _currentValue22137: Node;                                                                      
- var $spec$pc.1$22025: bool;                                                                        
  var tid22130: Tid;                                                                                 
- var TreiberStack.head_nextThread22147_post: [TreiberStack]Tid;                                     
  var path21963: int;                                                                                
  var $pc22155: Phase;                                                                               
  var $recorded.state22147: int;                                                                     
@@ -2046,19 +1905,12 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head_nextThread22155: [TreiberStack]Tid;                                          
  var mover22085: Mover;                                                                             
  var moverPath22025: MoverPath;                                                                     
- var Node.item22147_post: [Node]int;                                                                
- var $spec$pc.0$22013: bool;                                                                        
- var $pc22147_post: Phase;                                                                          
  var newHead22088: Node;                                                                            
  var Node.item22025: [Node]int;                                                                     
  var Node.item22154: [Node]int;                                                                     
  var TreiberStack._lock22137: [TreiberStack]Tid;                                                    
  var tmp122025: bool;                                                                               
  var tmp121975: bool;                                                                               
- var $spec$pc.0$22154_bottom: bool;                                                                 
- var $spec$pc.0$22115: bool;                                                                        
- var $pc22155_post: Phase;                                                                          
- var $spec$pc.0$22155: bool;                                                                        
  var item22155: int;                                                                                
  var newHead22092: Node;                                                                            
  var $pc22137: Phase;                                                                               
@@ -2068,13 +1920,11 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.item22085: [Node]int;                                                                     
  var TreiberStack.head_nextValue22154_bottom: [TreiberStack]Node;                                   
  var TreiberStack._lock22013: [TreiberStack]Tid;                                                    
- var $spec$pc.0$22022_post: bool;                                                                   
  var $pc21963: Phase;                                                                               
  var tmp122022: bool;                                                                               
  var path22092: int;                                                                                
  var Node.item22137: [Node]int;                                                                     
  var ctmp358222137: bool;                                                                           
- var Node._lock22147_post: [Node]Tid;                                                               
  var TreiberStack.head_nextValue22018: [TreiberStack]Node;                                          
  var TreiberStack._lock22115: [TreiberStack]Tid;                                                    
  var _currentValue22013: Node;                                                                      
@@ -2085,10 +1935,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var tmp222137: bool;                                                                               
  var Node._state22088: [Node]State;                                                                 
  var Node.next22118: [Node]Node;                                                                    
- var $spec$pc.1$22092: bool;                                                                        
- var $spec$pc.1$22130: bool;                                                                        
  var $pc21942: Phase;                                                                               
- var tmp222147_post: bool;                                                                          
  var Node._state22085: [Node]State;                                                                 
  var TreiberStack.head_nextValue22025: [TreiberStack]Node;                                          
  var Node.next22092: [Node]Node;                                                                    
@@ -2101,53 +1948,16 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head_nextThread22130: [TreiberStack]Tid;                                          
  var TreiberStack._state22018: [TreiberStack]State;                                                 
                                                                                                     
- var $spec$Node._state: [Node]State;                                                                
- var $spec$Node.item: [Node]int;                                                                    
- var $spec$Node.next: [Node]Node;                                                                   
- var $spec$Node._lock: [Node]Tid;                                                                   
- var $spec$TreiberStack._state: [TreiberStack]State;                                                
- var $spec$TreiberStack.head: [TreiberStack]Node;                                                   
- var $spec$TreiberStack._lock: [TreiberStack]Tid;                                                   
- var $spec$TreiberStack.head_nextThread: [TreiberStack]Tid;                                         
- var $spec$TreiberStack.head_nextValue: [TreiberStack]Node;                                         
- var $spec$pc.0$ : bool; var $spec$pc.1$ : bool;                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
  var $pc : Phase;                                                                                   
-                                                                                                    
- $spec$Node._state := Node._state;                                                                  
- $spec$Node.item := Node.item;                                                                      
- $spec$Node.next := Node.next;                                                                      
- $spec$Node._lock := Node._lock;                                                                    
- $spec$TreiberStack._state := TreiberStack._state;                                                  
- $spec$TreiberStack.head := TreiberStack.head;                                                      
- $spec$TreiberStack._lock := TreiberStack._lock;                                                    
- $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                                
- $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                  
- $spec$pc.0$ := true; $spec$pc.1$ := false;                                                         
-                                                                                                    
  $pc := PreCommit;                                                                                  
                                                                                                     
                                                                                                     
- assume Node._state22154 == Node._state && Node.item22154 == Node.item && Node.next22154 == Node.next && Node._lock22154 == Node._lock && TreiberStack._state22154 == TreiberStack._state && TreiberStack.head22154 == TreiberStack.head && TreiberStack._lock22154 == TreiberStack._lock && TreiberStack.head_nextThread22154 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22154 == TreiberStack.head_nextValue && item22154 == item && this22154 == this && tid22154 == tid && $spec$pc.0$22154 == $spec$pc.0$ && $spec$pc.1$22154 == $spec$pc.1$;
+ assume Node._state22154 == Node._state && Node.item22154 == Node.item && Node.next22154 == Node.next && Node._lock22154 == Node._lock && TreiberStack._state22154 == TreiberStack._state && TreiberStack.head22154 == TreiberStack.head && TreiberStack._lock22154 == TreiberStack._lock && TreiberStack.head_nextThread22154 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22154 == TreiberStack.head_nextValue && item22154 == item && this22154 == this && tid22154 == tid;
  assume $recorded.state22154 == 1;                                                                  
                                                                                                     
  // 39.9: while (true)   {                                                                          
                                                                                                     
  phase22154 := $pc;                                                                                 
- $spec$Node._state := Node._state;                                                                  
- $spec$Node.item := Node.item;                                                                      
- $spec$Node.next := Node.next;                                                                      
- $spec$Node._lock := Node._lock;                                                                    
- $spec$TreiberStack._state := TreiberStack._state;                                                  
- $spec$TreiberStack.head := TreiberStack.head;                                                      
- $spec$TreiberStack._lock := TreiberStack._lock;                                                    
- $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                                
- $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                  
- $spec$pc.0$$loopHead22154 := $spec$pc.0$;                                                          
- $spec$pc.1$$loopHead22154 := $spec$pc.1$;                                                          
- assert $spec$pc.0$ || $spec$pc.1$;                                                                        // (39.9): Cannot construct possible Spec States for loop head.
  while (true)                                                                                       
                                                                                                     
   invariant ValidTid(tid);                                                                                 // (21.5): Bad tid
@@ -2159,16 +1969,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   invariant (forall _this : TreiberStack :: Invariant.Y_TreiberStack.head(tid : Tid, _this, TreiberStack.head[_this] ,Node._state22154,Node.item22154,Node.next22154,Node._lock22154,TreiberStack._state22154,TreiberStack.head22154,TreiberStack._lock22154,TreiberStack.head_nextThread22154,TreiberStack.head_nextValue22154));       // (39.9): Loop does not preserve yields_as annotation for field head
   invariant phase22154 == $pc;                                                                             // (39.9): Phase must be invariant at loop head
   invariant $pc == PreCommit;                                                                              // (39.9): Potentially infinite loop cannot be in post-commit phase.
-  invariant $spec$Node._state == Node._state;                                                       
-  invariant $spec$Node.item == Node.item;                                                           
-  invariant $spec$Node.next == Node.next;                                                           
-  invariant $spec$Node._lock == Node._lock;                                                         
-  invariant $spec$TreiberStack._state == TreiberStack._state;                                       
-  invariant $spec$TreiberStack.head == TreiberStack.head;                                           
-  invariant $spec$TreiberStack._lock == TreiberStack._lock;                                         
-  invariant $spec$TreiberStack.head_nextThread == TreiberStack.head_nextThread;                     
-  invariant $spec$TreiberStack.head_nextValue == TreiberStack.head_nextValue;                       
-  invariant $spec$pc.0$;                                                                            
  {                                                                                                  
                                                                                                     
   // 39.16: boolean tmp1;                                                                           
@@ -2192,7 +1992,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
   havoc newHead;                                                                                    
   assume newHead != Node.null && isFresh(Node._state[newHead]);                                     
-  assume isFresh($spec$Node._state[newHead]);                                                       
   Node._state[newHead] := LOCAL(tid);                                                               
   assume Node.item[newHead]  == 0;                                                                  
   assume Node.next[newHead]  == Node.null;                                                          
@@ -2229,7 +2028,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath21942 := WriteEval.Node.item(tid: Tid,this$1: Node,item$1: int,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover21942 := m#moverPath(moverPath21942);                                                        
   path21942 := p#moverPath(moverPath21942);                                                         
-  assume Node._state21942 == Node._state && Node.item21942 == Node.item && Node.next21942 == Node.next && Node._lock21942 == Node._lock && TreiberStack._state21942 == TreiberStack._state && TreiberStack.head21942 == TreiberStack.head && TreiberStack._lock21942 == TreiberStack._lock && TreiberStack.head_nextThread21942 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21942 == TreiberStack.head_nextValue && this$121942 == this$1 && item$121942 == item$1 && newHead21942 == newHead && tmp121942 == tmp1 && item21942 == item && this21942 == this && tid21942 == tid && $pc21942 == $pc && $spec$pc.0$21942 == $spec$pc.0$ && $spec$pc.1$21942 == $spec$pc.1$;
+  assume Node._state21942 == Node._state && Node.item21942 == Node.item && Node.next21942 == Node.next && Node._lock21942 == Node._lock && TreiberStack._state21942 == TreiberStack._state && TreiberStack.head21942 == TreiberStack.head && TreiberStack._lock21942 == TreiberStack._lock && TreiberStack.head_nextThread21942 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21942 == TreiberStack.head_nextValue && this$121942 == this$1 && item$121942 == item$1 && newHead21942 == newHead && tmp121942 == tmp1 && item21942 == item && this21942 == this && tid21942 == tid && $pc21942 == $pc;
   assume $recorded.state21942 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this$1 != Node.null;                                                                      
@@ -2258,7 +2057,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath21963 := ReadEval.TreiberStack.head_nextThread(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover21963 := m#moverPath(moverPath21963);                                                        
   path21963 := p#moverPath(moverPath21963);                                                         
-  assume Node._state21963 == Node._state && Node.item21963 == Node.item && Node.next21963 == Node.next && Node._lock21963 == Node._lock && TreiberStack._state21963 == TreiberStack._state && TreiberStack.head21963 == TreiberStack.head && TreiberStack._lock21963 == TreiberStack._lock && TreiberStack.head_nextThread21963 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21963 == TreiberStack.head_nextValue && _C_t21963 == _C_t && oldHead21963 == oldHead && newHead21963 == newHead && tmp121963 == tmp1 && item21963 == item && this21963 == this && tid21963 == tid && $pc21963 == $pc && $spec$pc.0$21963 == $spec$pc.0$ && $spec$pc.1$21963 == $spec$pc.1$;
+  assume Node._state21963 == Node._state && Node.item21963 == Node.item && Node.next21963 == Node.next && Node._lock21963 == Node._lock && TreiberStack._state21963 == TreiberStack._state && TreiberStack.head21963 == TreiberStack.head && TreiberStack._lock21963 == TreiberStack._lock && TreiberStack.head_nextThread21963 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21963 == TreiberStack.head_nextValue && _C_t21963 == _C_t && oldHead21963 == oldHead && newHead21963 == newHead && tmp121963 == tmp1 && item21963 == item && this21963 == this && tid21963 == tid && $pc21963 == $pc;
   assume $recorded.state21963 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -2279,7 +2078,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath21969 := ReadEval.TreiberStack.head_nextValue(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover21969 := m#moverPath(moverPath21969);                                                        
   path21969 := p#moverPath(moverPath21969);                                                         
-  assume Node._state21969 == Node._state && Node.item21969 == Node.item && Node.next21969 == Node.next && Node._lock21969 == Node._lock && TreiberStack._state21969 == TreiberStack._state && TreiberStack.head21969 == TreiberStack.head && TreiberStack._lock21969 == TreiberStack._lock && TreiberStack.head_nextThread21969 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21969 == TreiberStack.head_nextValue && _C_v21969 == _C_v && _C_t21969 == _C_t && oldHead21969 == oldHead && newHead21969 == newHead && tmp121969 == tmp1 && item21969 == item && this21969 == this && tid21969 == tid && $pc21969 == $pc && $spec$pc.0$21969 == $spec$pc.0$ && $spec$pc.1$21969 == $spec$pc.1$;
+  assume Node._state21969 == Node._state && Node.item21969 == Node.item && Node.next21969 == Node.next && Node._lock21969 == Node._lock && TreiberStack._state21969 == TreiberStack._state && TreiberStack.head21969 == TreiberStack.head && TreiberStack._lock21969 == TreiberStack._lock && TreiberStack.head_nextThread21969 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21969 == TreiberStack.head_nextValue && _C_v21969 == _C_v && _C_t21969 == _C_t && oldHead21969 == oldHead && newHead21969 == newHead && tmp121969 == tmp1 && item21969 == item && this21969 == this && tid21969 == tid && $pc21969 == $pc;
   assume $recorded.state21969 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -2300,7 +2099,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath21975 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover21975 := m#moverPath(moverPath21975);                                                        
   path21975 := p#moverPath(moverPath21975);                                                         
-  assume Node._state21975 == Node._state && Node.item21975 == Node.item && Node.next21975 == Node.next && Node._lock21975 == Node._lock && TreiberStack._state21975 == TreiberStack._state && TreiberStack.head21975 == TreiberStack.head && TreiberStack._lock21975 == TreiberStack._lock && TreiberStack.head_nextThread21975 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21975 == TreiberStack.head_nextValue && _currentValue21975 == _currentValue && _C_v21975 == _C_v && _C_t21975 == _C_t && oldHead21975 == oldHead && newHead21975 == newHead && tmp121975 == tmp1 && item21975 == item && this21975 == this && tid21975 == tid && $pc21975 == $pc && $spec$pc.0$21975 == $spec$pc.0$ && $spec$pc.1$21975 == $spec$pc.1$;
+  assume Node._state21975 == Node._state && Node.item21975 == Node.item && Node.next21975 == Node.next && Node._lock21975 == Node._lock && TreiberStack._state21975 == TreiberStack._state && TreiberStack.head21975 == TreiberStack.head && TreiberStack._lock21975 == TreiberStack._lock && TreiberStack.head_nextThread21975 == TreiberStack.head_nextThread && TreiberStack.head_nextValue21975 == TreiberStack.head_nextValue && _currentValue21975 == _currentValue && _C_v21975 == _C_v && _C_t21975 == _C_t && oldHead21975 == oldHead && newHead21975 == newHead && tmp121975 == tmp1 && item21975 == item && this21975 == this && tid21975 == tid && $pc21975 == $pc;
   assume $recorded.state21975 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -2334,7 +2133,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
    moverPath22013 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
    mover22013 := m#moverPath(moverPath22013);                                                       
    path22013 := p#moverPath(moverPath22013);                                                        
-   assume Node._state22013 == Node._state && Node.item22013 == Node.item && Node.next22013 == Node.next && Node._lock22013 == Node._lock && TreiberStack._state22013 == TreiberStack._state && TreiberStack.head22013 == TreiberStack.head && TreiberStack._lock22013 == TreiberStack._lock && TreiberStack.head_nextThread22013 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22013 == TreiberStack.head_nextValue && _casable22013 == _casable && _R_t22013 == _R_t && _currentValue22013 == _currentValue && _C_v22013 == _C_v && _C_t22013 == _C_t && oldHead22013 == oldHead && newHead22013 == newHead && tmp122013 == tmp1 && item22013 == item && this22013 == this && tid22013 == tid && $pc22013 == $pc && $spec$pc.0$22013 == $spec$pc.0$ && $spec$pc.1$22013 == $spec$pc.1$;
+   assume Node._state22013 == Node._state && Node.item22013 == Node.item && Node.next22013 == Node.next && Node._lock22013 == Node._lock && TreiberStack._state22013 == TreiberStack._state && TreiberStack.head22013 == TreiberStack.head && TreiberStack._lock22013 == TreiberStack._lock && TreiberStack.head_nextThread22013 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22013 == TreiberStack.head_nextValue && _casable22013 == _casable && _R_t22013 == _R_t && _currentValue22013 == _currentValue && _C_v22013 == _C_v && _C_t22013 == _C_t && oldHead22013 == oldHead && newHead22013 == newHead && tmp122013 == tmp1 && item22013 == item && this22013 == this && tid22013 == tid && $pc22013 == $pc;
    assume $recorded.state22013 == 1;                                                                
    if ($pc == PreCommit) {                                                                          
     assume this != TreiberStack.null;                                                               
@@ -2354,7 +2153,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
    moverPath22018 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
    mover22018 := m#moverPath(moverPath22018);                                                       
    path22018 := p#moverPath(moverPath22018);                                                        
-   assume Node._state22018 == Node._state && Node.item22018 == Node.item && Node.next22018 == Node.next && Node._lock22018 == Node._lock && TreiberStack._state22018 == TreiberStack._state && TreiberStack.head22018 == TreiberStack.head && TreiberStack._lock22018 == TreiberStack._lock && TreiberStack.head_nextThread22018 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22018 == TreiberStack.head_nextValue && _casable22018 == _casable && _R_t22018 == _R_t && _currentValue22018 == _currentValue && _C_v22018 == _C_v && _C_t22018 == _C_t && oldHead22018 == oldHead && newHead22018 == newHead && tmp122018 == tmp1 && item22018 == item && this22018 == this && tid22018 == tid && $pc22018 == $pc && $spec$pc.0$22018 == $spec$pc.0$ && $spec$pc.1$22018 == $spec$pc.1$;
+   assume Node._state22018 == Node._state && Node.item22018 == Node.item && Node.next22018 == Node.next && Node._lock22018 == Node._lock && TreiberStack._state22018 == TreiberStack._state && TreiberStack.head22018 == TreiberStack.head && TreiberStack._lock22018 == TreiberStack._lock && TreiberStack.head_nextThread22018 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22018 == TreiberStack.head_nextValue && _casable22018 == _casable && _R_t22018 == _R_t && _currentValue22018 == _currentValue && _C_v22018 == _C_v && _C_t22018 == _C_t && oldHead22018 == oldHead && newHead22018 == newHead && tmp122018 == tmp1 && item22018 == item && this22018 == this && tid22018 == tid && $pc22018 == $pc;
    assume $recorded.state22018 == 1;                                                                
    if ($pc == PreCommit) {                                                                          
     assume this != TreiberStack.null;                                                               
@@ -2369,17 +2168,12 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
   // 42.13: yield;                                                                                  
                                                                                                     
-  assume Node._state22022 == Node._state && Node.item22022 == Node.item && Node.next22022 == Node.next && Node._lock22022 == Node._lock && TreiberStack._state22022 == TreiberStack._state && TreiberStack.head22022 == TreiberStack.head && TreiberStack._lock22022 == TreiberStack._lock && TreiberStack.head_nextThread22022 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22022 == TreiberStack.head_nextValue && oldHead22022 == oldHead && newHead22022 == newHead && tmp122022 == tmp1 && item22022 == item && this22022 == this && tid22022 == tid && $spec$pc.0$22022 == $spec$pc.0$ && $spec$pc.1$22022 == $spec$pc.1$;
+  assume Node._state22022 == Node._state && Node.item22022 == Node.item && Node.next22022 == Node.next && Node._lock22022 == Node._lock && TreiberStack._state22022 == TreiberStack._state && TreiberStack.head22022 == TreiberStack.head && TreiberStack._lock22022 == TreiberStack._lock && TreiberStack.head_nextThread22022 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22022 == TreiberStack.head_nextValue && oldHead22022 == oldHead && newHead22022 == newHead && tmp122022 == tmp1 && item22022 == item && this22022 == this && tid22022 == tid;
   assume $recorded.state22022 == 1;                                                                 
-                                                                                                    
-  call $spec$pc.0$, $spec$pc.1$ :=                                                                  
-  TreiberStack.push.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,item, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   call Yield(tid);                                                                                  
-  $spec$Node._state := Node._state;$spec$Node.item := Node.item;$spec$Node.next := Node.next;$spec$Node._lock := Node._lock;$spec$TreiberStack._state := TreiberStack._state;$spec$TreiberStack.head := TreiberStack.head;$spec$TreiberStack._lock := TreiberStack._lock;$spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;$spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;
   $pc := PreCommit;                                                                                 
-  assume Node._state22022_post == Node._state && Node.item22022_post == Node.item && Node.next22022_post == Node.next && Node._lock22022_post == Node._lock && TreiberStack._state22022_post == TreiberStack._state && TreiberStack.head22022_post == TreiberStack.head && TreiberStack._lock22022_post == TreiberStack._lock && TreiberStack.head_nextThread22022_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22022_post == TreiberStack.head_nextValue && oldHead22022_post == oldHead && newHead22022_post == newHead && tmp122022_post == tmp1 && item22022_post == item && this22022_post == this && tid22022_post == tid && $spec$pc.0$22022_post == $spec$pc.0$ && $spec$pc.1$22022_post == $spec$pc.1$;
+  assume Node._state22022_post == Node._state && Node.item22022_post == Node.item && Node.next22022_post == Node.next && Node._lock22022_post == Node._lock && TreiberStack._state22022_post == TreiberStack._state && TreiberStack.head22022_post == TreiberStack.head && TreiberStack._lock22022_post == TreiberStack._lock && TreiberStack.head_nextThread22022_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22022_post == TreiberStack.head_nextValue && oldHead22022_post == oldHead && newHead22022_post == newHead && tmp122022_post == tmp1 && item22022_post == item && this22022_post == this && tid22022_post == tid;
   assume $recorded.state22022_post == 1;                                                            
-  assert $spec$pc.0$ || $spec$pc.1$;                                                                       // (42.13): Atomic block is not pure and does not conform to spec
                                                                                                     
                                                                                                     
   // 43.13: newHead.next := oldHead;                                                                
@@ -2388,7 +2182,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath22025 := WriteEval.Node.next(tid: Tid,newHead: Node,oldHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover22025 := m#moverPath(moverPath22025);                                                        
   path22025 := p#moverPath(moverPath22025);                                                         
-  assume Node._state22025 == Node._state && Node.item22025 == Node.item && Node.next22025 == Node.next && Node._lock22025 == Node._lock && TreiberStack._state22025 == TreiberStack._state && TreiberStack.head22025 == TreiberStack.head && TreiberStack._lock22025 == TreiberStack._lock && TreiberStack.head_nextThread22025 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22025 == TreiberStack.head_nextValue && oldHead22025 == oldHead && newHead22025 == newHead && tmp122025 == tmp1 && item22025 == item && this22025 == this && tid22025 == tid && $pc22025 == $pc && $spec$pc.0$22025 == $spec$pc.0$ && $spec$pc.1$22025 == $spec$pc.1$;
+  assume Node._state22025 == Node._state && Node.item22025 == Node.item && Node.next22025 == Node.next && Node._lock22025 == Node._lock && TreiberStack._state22025 == TreiberStack._state && TreiberStack.head22025 == TreiberStack.head && TreiberStack._lock22025 == TreiberStack._lock && TreiberStack.head_nextThread22025 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22025 == TreiberStack.head_nextValue && oldHead22025 == oldHead && newHead22025 == newHead && tmp122025 == tmp1 && item22025 == item && this22025 == this && tid22025 == tid && $pc22025 == $pc;
   assume $recorded.state22025 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume newHead != Node.null;                                                                     
@@ -2463,7 +2257,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22085 := WriteEval.TreiberStack.head_nextThread(tid: Tid,this: TreiberStack,tmpTid: Tid,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22085 := m#moverPath(moverPath22085);                                                      
     path22085 := p#moverPath(moverPath22085);                                                       
-    assume Node._state22085 == Node._state && Node.item22085 == Node.item && Node.next22085 == Node.next && Node._lock22085 == Node._lock && TreiberStack._state22085 == TreiberStack._state && TreiberStack.head22085 == TreiberStack.head && TreiberStack._lock22085 == TreiberStack._lock && TreiberStack.head_nextThread22085 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22085 == TreiberStack.head_nextValue && _m22085 == _m && tmpValue22085 == tmpValue && tmpTid22085 == tmpTid && ctmp358222085 == ctmp3582 && tmp222085 == tmp2 && oldHead22085 == oldHead && newHead22085 == newHead && tmp122085 == tmp1 && item22085 == item && this22085 == this && tid22085 == tid && $pc22085 == $pc && $spec$pc.0$22085 == $spec$pc.0$ && $spec$pc.1$22085 == $spec$pc.1$;
+    assume Node._state22085 == Node._state && Node.item22085 == Node.item && Node.next22085 == Node.next && Node._lock22085 == Node._lock && TreiberStack._state22085 == TreiberStack._state && TreiberStack.head22085 == TreiberStack.head && TreiberStack._lock22085 == TreiberStack._lock && TreiberStack.head_nextThread22085 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22085 == TreiberStack.head_nextValue && _m22085 == _m && tmpValue22085 == tmpValue && tmpTid22085 == tmpTid && ctmp358222085 == ctmp3582 && tmp222085 == tmp2 && oldHead22085 == oldHead && newHead22085 == newHead && tmp122085 == tmp1 && item22085 == item && this22085 == this && tid22085 == tid && $pc22085 == $pc;
     assume $recorded.state22085 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2481,7 +2275,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22088 := WriteEval.TreiberStack.head_nextValue(tid: Tid,this: TreiberStack,tmpValue: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22088 := m#moverPath(moverPath22088);                                                      
     path22088 := p#moverPath(moverPath22088);                                                       
-    assume Node._state22088 == Node._state && Node.item22088 == Node.item && Node.next22088 == Node.next && Node._lock22088 == Node._lock && TreiberStack._state22088 == TreiberStack._state && TreiberStack.head22088 == TreiberStack.head && TreiberStack._lock22088 == TreiberStack._lock && TreiberStack.head_nextThread22088 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22088 == TreiberStack.head_nextValue && _m22088 == _m && tmpValue22088 == tmpValue && tmpTid22088 == tmpTid && ctmp358222088 == ctmp3582 && tmp222088 == tmp2 && oldHead22088 == oldHead && newHead22088 == newHead && tmp122088 == tmp1 && item22088 == item && this22088 == this && tid22088 == tid && $pc22088 == $pc && $spec$pc.0$22088 == $spec$pc.0$ && $spec$pc.1$22088 == $spec$pc.1$;
+    assume Node._state22088 == Node._state && Node.item22088 == Node.item && Node.next22088 == Node.next && Node._lock22088 == Node._lock && TreiberStack._state22088 == TreiberStack._state && TreiberStack.head22088 == TreiberStack.head && TreiberStack._lock22088 == TreiberStack._lock && TreiberStack.head_nextThread22088 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22088 == TreiberStack.head_nextValue && _m22088 == _m && tmpValue22088 == tmpValue && tmpTid22088 == tmpTid && ctmp358222088 == ctmp3582 && tmp222088 == tmp2 && oldHead22088 == oldHead && newHead22088 == newHead && tmp122088 == tmp1 && item22088 == item && this22088 == this && tid22088 == tid && $pc22088 == $pc;
     assume $recorded.state22088 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2500,7 +2294,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22092 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,newHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22092 := m#moverPath(moverPath22092);                                                      
     path22092 := p#moverPath(moverPath22092);                                                       
-    assume Node._state22092 == Node._state && Node.item22092 == Node.item && Node.next22092 == Node.next && Node._lock22092 == Node._lock && TreiberStack._state22092 == TreiberStack._state && TreiberStack.head22092 == TreiberStack.head && TreiberStack._lock22092 == TreiberStack._lock && TreiberStack.head_nextThread22092 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22092 == TreiberStack.head_nextValue && _m22092 == _m && tmpValue22092 == tmpValue && tmpTid22092 == tmpTid && ctmp358222092 == ctmp3582 && tmp222092 == tmp2 && oldHead22092 == oldHead && newHead22092 == newHead && tmp122092 == tmp1 && item22092 == item && this22092 == this && tid22092 == tid && $pc22092 == $pc && $spec$pc.0$22092 == $spec$pc.0$ && $spec$pc.1$22092 == $spec$pc.1$;
+    assume Node._state22092 == Node._state && Node.item22092 == Node.item && Node.next22092 == Node.next && Node._lock22092 == Node._lock && TreiberStack._state22092 == TreiberStack._state && TreiberStack.head22092 == TreiberStack.head && TreiberStack._lock22092 == TreiberStack._lock && TreiberStack.head_nextThread22092 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22092 == TreiberStack.head_nextValue && _m22092 == _m && tmpValue22092 == tmpValue && tmpTid22092 == tmpTid && ctmp358222092 == ctmp3582 && tmp222092 == tmp2 && oldHead22092 == oldHead && newHead22092 == newHead && tmp122092 == tmp1 && item22092 == item && this22092 == this && tid22092 == tid && $pc22092 == $pc;
     assume $recorded.state22092 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2538,7 +2332,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22115 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22115 := m#moverPath(moverPath22115);                                                      
     path22115 := p#moverPath(moverPath22115);                                                       
-    assume Node._state22115 == Node._state && Node.item22115 == Node.item && Node.next22115 == Node.next && Node._lock22115 == Node._lock && TreiberStack._state22115 == TreiberStack._state && TreiberStack.head22115 == TreiberStack.head && TreiberStack._lock22115 == TreiberStack._lock && TreiberStack.head_nextThread22115 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22115 == TreiberStack.head_nextValue && _currentValue22115 == _currentValue && ctmp358222115 == ctmp3582 && tmp222115 == tmp2 && oldHead22115 == oldHead && newHead22115 == newHead && tmp122115 == tmp1 && item22115 == item && this22115 == this && tid22115 == tid && $pc22115 == $pc && $spec$pc.0$22115 == $spec$pc.0$ && $spec$pc.1$22115 == $spec$pc.1$;
+    assume Node._state22115 == Node._state && Node.item22115 == Node.item && Node.next22115 == Node.next && Node._lock22115 == Node._lock && TreiberStack._state22115 == TreiberStack._state && TreiberStack.head22115 == TreiberStack.head && TreiberStack._lock22115 == TreiberStack._lock && TreiberStack.head_nextThread22115 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22115 == TreiberStack.head_nextValue && _currentValue22115 == _currentValue && ctmp358222115 == ctmp3582 && tmp222115 == tmp2 && oldHead22115 == oldHead && newHead22115 == newHead && tmp122115 == tmp1 && item22115 == item && this22115 == this && tid22115 == tid && $pc22115 == $pc;
     assume $recorded.state22115 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2557,7 +2351,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22118 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,oldHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22118 := m#moverPath(moverPath22118);                                                      
     path22118 := p#moverPath(moverPath22118);                                                       
-    assume Node._state22118 == Node._state && Node.item22118 == Node.item && Node.next22118 == Node.next && Node._lock22118 == Node._lock && TreiberStack._state22118 == TreiberStack._state && TreiberStack.head22118 == TreiberStack.head && TreiberStack._lock22118 == TreiberStack._lock && TreiberStack.head_nextThread22118 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22118 == TreiberStack.head_nextValue && _currentValue22118 == _currentValue && ctmp358222118 == ctmp3582 && tmp222118 == tmp2 && oldHead22118 == oldHead && newHead22118 == newHead && tmp122118 == tmp1 && item22118 == item && this22118 == this && tid22118 == tid && $pc22118 == $pc && $spec$pc.0$22118 == $spec$pc.0$ && $spec$pc.1$22118 == $spec$pc.1$;
+    assume Node._state22118 == Node._state && Node.item22118 == Node.item && Node.next22118 == Node.next && Node._lock22118 == Node._lock && TreiberStack._state22118 == TreiberStack._state && TreiberStack.head22118 == TreiberStack.head && TreiberStack._lock22118 == TreiberStack._lock && TreiberStack.head_nextThread22118 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22118 == TreiberStack.head_nextValue && _currentValue22118 == _currentValue && ctmp358222118 == ctmp3582 && tmp222118 == tmp2 && oldHead22118 == oldHead && newHead22118 == newHead && tmp122118 == tmp1 && item22118 == item && this22118 == this && tid22118 == tid && $pc22118 == $pc;
     assume $recorded.state22118 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2587,7 +2381,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22130 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,_currentValue: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22130 := m#moverPath(moverPath22130);                                                      
     path22130 := p#moverPath(moverPath22130);                                                       
-    assume Node._state22130 == Node._state && Node.item22130 == Node.item && Node.next22130 == Node.next && Node._lock22130 == Node._lock && TreiberStack._state22130 == TreiberStack._state && TreiberStack.head22130 == TreiberStack.head && TreiberStack._lock22130 == TreiberStack._lock && TreiberStack.head_nextThread22130 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22130 == TreiberStack.head_nextValue && _m22130 == _m && _currentValue22130 == _currentValue && ctmp358222130 == ctmp3582 && tmp222130 == tmp2 && oldHead22130 == oldHead && newHead22130 == newHead && tmp122130 == tmp1 && item22130 == item && this22130 == this && tid22130 == tid && $pc22130 == $pc && $spec$pc.0$22130 == $spec$pc.0$ && $spec$pc.1$22130 == $spec$pc.1$;
+    assume Node._state22130 == Node._state && Node.item22130 == Node.item && Node.next22130 == Node.next && Node._lock22130 == Node._lock && TreiberStack._state22130 == TreiberStack._state && TreiberStack.head22130 == TreiberStack.head && TreiberStack._lock22130 == TreiberStack._lock && TreiberStack.head_nextThread22130 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22130 == TreiberStack.head_nextValue && _m22130 == _m && _currentValue22130 == _currentValue && ctmp358222130 == ctmp3582 && tmp222130 == tmp2 && oldHead22130 == oldHead && newHead22130 == newHead && tmp122130 == tmp1 && item22130 == item && this22130 == this && tid22130 == tid && $pc22130 == $pc;
     assume $recorded.state22130 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2615,7 +2409,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22137 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,newHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22137 := m#moverPath(moverPath22137);                                                      
     path22137 := p#moverPath(moverPath22137);                                                       
-    assume Node._state22137 == Node._state && Node.item22137 == Node.item && Node.next22137 == Node.next && Node._lock22137 == Node._lock && TreiberStack._state22137 == TreiberStack._state && TreiberStack.head22137 == TreiberStack.head && TreiberStack._lock22137 == TreiberStack._lock && TreiberStack.head_nextThread22137 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22137 == TreiberStack.head_nextValue && _m22137 == _m && _currentValue22137 == _currentValue && ctmp358222137 == ctmp3582 && tmp222137 == tmp2 && oldHead22137 == oldHead && newHead22137 == newHead && tmp122137 == tmp1 && item22137 == item && this22137 == this && tid22137 == tid && $pc22137 == $pc && $spec$pc.0$22137 == $spec$pc.0$ && $spec$pc.1$22137 == $spec$pc.1$;
+    assume Node._state22137 == Node._state && Node.item22137 == Node.item && Node.next22137 == Node.next && Node._lock22137 == Node._lock && TreiberStack._state22137 == TreiberStack._state && TreiberStack.head22137 == TreiberStack.head && TreiberStack._lock22137 == TreiberStack._lock && TreiberStack.head_nextThread22137 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22137 == TreiberStack.head_nextValue && _m22137 == _m && _currentValue22137 == _currentValue && ctmp358222137 == ctmp3582 && tmp222137 == tmp2 && oldHead22137 == oldHead && newHead22137 == newHead && tmp122137 == tmp1 && item22137 == item && this22137 == this && tid22137 == tid && $pc22137 == $pc;
     assume $recorded.state22137 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -2640,76 +2434,22 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
    // 45.17:  return;                                                                               
                                                                                                     
-   assume Node._state22147 == Node._state && Node.item22147 == Node.item && Node.next22147 == Node.next && Node._lock22147 == Node._lock && TreiberStack._state22147 == TreiberStack._state && TreiberStack.head22147 == TreiberStack.head && TreiberStack._lock22147 == TreiberStack._lock && TreiberStack.head_nextThread22147 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22147 == TreiberStack.head_nextValue && tmp222147 == tmp2 && oldHead22147 == oldHead && newHead22147 == newHead && tmp122147 == tmp1 && item22147 == item && this22147 == this && tid22147 == tid && $spec$pc.0$22147 == $spec$pc.0$ && $spec$pc.1$22147 == $spec$pc.1$;
+   assume Node._state22147 == Node._state && Node.item22147 == Node.item && Node.next22147 == Node.next && Node._lock22147 == Node._lock && TreiberStack._state22147 == TreiberStack._state && TreiberStack.head22147 == TreiberStack.head && TreiberStack._lock22147 == TreiberStack._lock && TreiberStack.head_nextThread22147 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22147 == TreiberStack.head_nextValue && tmp222147 == tmp2 && oldHead22147 == oldHead && newHead22147 == newHead && tmp122147 == tmp1 && item22147 == item && this22147 == this && tid22147 == tid;
    assume $recorded.state22147 == 1;                                                                
-                                                                                                    
-   call $spec$pc.0$, $spec$pc.1$ :=                                                                 
-   TreiberStack.push.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,item, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
-   assume Node._state22147_post == Node._state && Node.item22147_post == Node.item && Node.next22147_post == Node.next && Node._lock22147_post == Node._lock && TreiberStack._state22147_post == TreiberStack._state && TreiberStack.head22147_post == TreiberStack.head && TreiberStack._lock22147_post == TreiberStack._lock && TreiberStack.head_nextThread22147_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22147_post == TreiberStack.head_nextValue && tmp222147_post == tmp2 && oldHead22147_post == oldHead && newHead22147_post == newHead && tmp122147_post == tmp1 && item22147_post == item && this22147_post == this && tid22147_post == tid && $spec$pc.0$22147_post == $spec$pc.0$ && $spec$pc.1$22147_post == $spec$pc.1$;
-   assume $recorded.state22147_post == 1;                                                           
-   assert $spec$pc.1$;                                                                                     // (45.17): Method returns before completing actions in spec
    return;                                                                                          
   } else {                                                                                          
   }                                                                                                 
-  assume Node._state22154_bottom == Node._state && Node.item22154_bottom == Node.item && Node.next22154_bottom == Node.next && Node._lock22154_bottom == Node._lock && TreiberStack._state22154_bottom == TreiberStack._state && TreiberStack.head22154_bottom == TreiberStack.head && TreiberStack._lock22154_bottom == TreiberStack._lock && TreiberStack.head_nextThread22154_bottom == TreiberStack.head_nextThread && TreiberStack.head_nextValue22154_bottom == TreiberStack.head_nextValue && item22154_bottom == item && this22154_bottom == this && tid22154_bottom == tid && $spec$pc.0$22154_bottom == $spec$pc.0$ && $spec$pc.1$22154_bottom == $spec$pc.1$;
+  assume Node._state22154_bottom == Node._state && Node.item22154_bottom == Node.item && Node.next22154_bottom == Node.next && Node._lock22154_bottom == Node._lock && TreiberStack._state22154_bottom == TreiberStack._state && TreiberStack.head22154_bottom == TreiberStack.head && TreiberStack._lock22154_bottom == TreiberStack._lock && TreiberStack.head_nextThread22154_bottom == TreiberStack.head_nextThread && TreiberStack.head_nextValue22154_bottom == TreiberStack.head_nextValue && item22154_bottom == item && this22154_bottom == this && tid22154_bottom == tid;
   assume $recorded.state22154_bottom == 1;                                                          
   assert phase22154 == $pc;                                                                                // (39.9): Phase must be invariant at loop head
-  $spec$Node._state := Node._state;                                                                 
-  $spec$Node.item := Node.item;                                                                     
-  $spec$Node.next := Node.next;                                                                     
-  $spec$Node._lock := Node._lock;                                                                   
-  $spec$TreiberStack._state := TreiberStack._state;                                                 
-  $spec$TreiberStack.head := TreiberStack.head;                                                     
-  $spec$TreiberStack._lock := TreiberStack._lock;                                                   
-  $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                               
-  $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                 
  }                                                                                                  
                                                                                                     
  // 25.32: // return;                                                                               
                                                                                                     
- assume Node._state22155 == Node._state && Node.item22155 == Node.item && Node.next22155 == Node.next && Node._lock22155 == Node._lock && TreiberStack._state22155 == TreiberStack._state && TreiberStack.head22155 == TreiberStack.head && TreiberStack._lock22155 == TreiberStack._lock && TreiberStack.head_nextThread22155 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22155 == TreiberStack.head_nextValue && item22155 == item && this22155 == this && tid22155 == tid && $spec$pc.0$22155 == $spec$pc.0$ && $spec$pc.1$22155 == $spec$pc.1$;
+ assume Node._state22155 == Node._state && Node.item22155 == Node.item && Node.next22155 == Node.next && Node._lock22155 == Node._lock && TreiberStack._state22155 == TreiberStack._state && TreiberStack.head22155 == TreiberStack.head && TreiberStack._lock22155 == TreiberStack._lock && TreiberStack.head_nextThread22155 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22155 == TreiberStack.head_nextValue && item22155 == item && this22155 == this && tid22155 == tid;
  assume $recorded.state22155 == 1;                                                                  
-                                                                                                    
- call $spec$pc.0$, $spec$pc.1$ :=                                                                   
- TreiberStack.push.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,item, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
- assume Node._state22155_post == Node._state && Node.item22155_post == Node.item && Node.next22155_post == Node.next && Node._lock22155_post == Node._lock && TreiberStack._state22155_post == TreiberStack._state && TreiberStack.head22155_post == TreiberStack.head && TreiberStack._lock22155_post == TreiberStack._lock && TreiberStack.head_nextThread22155_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22155_post == TreiberStack.head_nextValue && item22155_post == item && this22155_post == this && tid22155_post == tid && $spec$pc.0$22155_post == $spec$pc.0$ && $spec$pc.1$22155_post == $spec$pc.1$;
- assume $recorded.state22155_post == 1;                                                             
- assert $spec$pc.1$;                                                                                       // (25.32): Method returns before completing actions in spec
  return;                                                                                            
 }                                                                                                   
-                                                                                                    
-                                                                                                    
-function {:inline} $spec$.TreiberStack.pop.IsValidTransition.isSkip(tid:Tid,this : TreiberStack,$result : int,$result$old : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node): bool {
- (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> isShared(Node._state[$this])))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.item$old[$this] == Node.item[$this]))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.next$old[$this] == Node.next[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> isShared(TreiberStack._state[$this])))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head$old[$this] == TreiberStack.head[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextThread$old[$this] == TreiberStack.head_nextThread[$this]))
-&& (forall $this : TreiberStack :: true ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextValue$old[$this] == TreiberStack.head_nextValue[$this]))
-}                                                                                                   
-                                                                                                    
-function {:inline} $spec$.TreiberStack.pop.IsValidTransition.0(tid:Tid,this : TreiberStack,$result : int,$result$old : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node): bool {
- ((Node.next$old[TreiberStack.head$old[this]]==TreiberStack.head[this]))                            
-&& (($result==Node.item$old[TreiberStack.head$old[this]]))                                          
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> isShared(Node._state[$this])))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.item$old[$this] == Node.item[$this]))
-&& (forall $this : Node :: true ==> (isShared(Node._state$old[$this]) ==> Node.next$old[$this] == Node.next[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> isShared(TreiberStack._state[$this])))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head$old[$this] == TreiberStack.head[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextThread$old[$this] == TreiberStack.head_nextThread[$this]))
-&& (forall $this : TreiberStack :: $this != this ==> (isShared(TreiberStack._state$old[$this]) ==> TreiberStack.head_nextValue$old[$this] == TreiberStack.head_nextValue[$this]))
-}                                                                                                   
-                                                                                                    
-procedure TreiberStack.pop.specTransition($spec$pc.0$ : bool,$spec$pc.1$ : bool, tid:Tid,this : TreiberStack,$result : int,$result$old : int, Node._state$old: [Node]State,Node.item$old: [Node]int,Node.next$old: [Node]Node,Node._lock$old: [Node]Tid,TreiberStack._state$old: [TreiberStack]State,TreiberStack.head$old: [TreiberStack]Node,TreiberStack._lock$old: [TreiberStack]Tid,TreiberStack.head_nextThread$old: [TreiberStack]Tid,TreiberStack.head_nextValue$old: [TreiberStack]Node,Node._state: [Node]State,Node.item: [Node]int,Node.next: [Node]Node,Node._lock: [Node]Tid,TreiberStack._state: [TreiberStack]State,TreiberStack.head: [TreiberStack]Node,TreiberStack._lock: [TreiberStack]Tid,TreiberStack.head_nextThread: [TreiberStack]Tid,TreiberStack.head_nextValue: [TreiberStack]Node) returns ($spec$pc.0$$new : bool, $spec$pc.1$$new : bool);
- ensures (var skips,a0 :=                                                                           
-  $spec$.TreiberStack.pop.IsValidTransition.isSkip(tid:Tid,this : TreiberStack,$result : int,$result$old : int, Node._state$old,Node.item$old,Node.next$old,Node._lock$old,TreiberStack._state$old,TreiberStack.head$old,TreiberStack._lock$old,TreiberStack.head_nextThread$old,TreiberStack.head_nextValue$old,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue)
-,                                                                                                   
-  $spec$.TreiberStack.pop.IsValidTransition.0(tid:Tid,this : TreiberStack,$result : int,$result$old : int, Node._state$old,Node.item$old,Node.next$old,Node._lock$old,TreiberStack._state$old,TreiberStack.head$old,TreiberStack._lock$old,TreiberStack.head_nextThread$old,TreiberStack.head_nextValue$old,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue)
-  ;                                                                                                 
- ($spec$pc.0$$new == (($spec$pc.0$ && skips)))                                                      
-&& ($spec$pc.1$$new == (($spec$pc.1$ && skips) || ($spec$pc.0$ && a0)))                             
-);                                                                                                  
                                                                                                     
                                                                                                     
 procedure  TreiberStack.pop(tid:Tid, this : TreiberStack)                                           
@@ -2738,9 +2478,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head22238_post: [TreiberStack]Node;                                               
  var $recorded.state22311: int;                                                                     
  var tmp422307: bool;                                                                               
- var $spec$pc.0$22229: bool;                                                                        
- var TreiberStack._lock22373_post: [TreiberStack]Tid;                                               
- var $spec$$result22337: int;                                                                       
  var path22234: int;                                                                                
  var TreiberStack._lock22238: [TreiberStack]Tid;                                                    
  var tmp322371: bool;                                                                               
@@ -2750,12 +2487,10 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head22383: [TreiberStack]Node;                                                    
  var tid22238: Tid;                                                                                 
  var this22371: TreiberStack;                                                                       
- var tmp422373_post: bool;                                                                          
  var TreiberStack._state22311: [TreiberStack]State;                                                 
  var mover22185: Mover;                                                                             
  var Node._state22383: [Node]State;                                                                 
  var path22349: int;                                                                                
- var $spec$pc.0$22371: bool;                                                                        
  var $pc22238_post: Phase;                                                                          
  var Node.next22304: [Node]Node;                                                                    
  var TreiberStack.head_nextValue22311: [TreiberStack]Node;                                          
@@ -2764,25 +2499,20 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._lock22380_bottom: [Node]Tid;                                                             
  var Node._lock22229: [Node]Tid;                                                                    
  var $result22349: int;                                                                             
- var $spec$$result22238_post: int;                                                                  
  var newHead22244: Node;                                                                            
  var TreiberStack.head_nextValue22229: [TreiberStack]Node;                                          
  var tmp422337: bool;                                                                               
  var tmp322179: bool;                                                                               
  var tmp322311: bool;                                                                               
- var $spec$pc.0$22380: bool;                                                                        
  var tmp322307: bool;                                                                               
  var $pc22383: Phase;                                                                               
  var Node.item22244: [Node]int;                                                                     
- var $spec$pc.1$22337: bool;                                                                        
  var moverPath22356: MoverPath;                                                                     
- var TreiberStack.head_nextThread22373_post: [TreiberStack]Tid;                                     
  var Node._lock22191: [Node]Tid;                                                                    
  var $recorded.state22304: int;                                                                     
  var Node._state22337: [Node]State;                                                                 
  var TreiberStack._lock22238_post: [TreiberStack]Tid;                                               
  var _C_t: Tid;                                                                                     
- var $spec$$result22229: int;                                                                       
  var $result22356: int;                                                                             
  var _m22356: Mover;                                                                                
  var TreiberStack.head_nextValue22191: [TreiberStack]Node;                                          
@@ -2793,7 +2523,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var tid22373: Tid;                                                                                 
  var Node.item22349: [Node]int;                                                                     
  var TreiberStack.head22356: [TreiberStack]Node;                                                    
- var Node._lock22373_post: [Node]Tid;                                                               
  var TreiberStack._lock22349: [TreiberStack]Tid;                                                    
  var _currentValue22356: Node;                                                                      
  var TreiberStack._lock22311: [TreiberStack]Tid;                                                    
@@ -2801,11 +2530,9 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.item22238_post: [Node]int;                                                                
  var newHead22304: Node;                                                                            
  var tmp322191: bool;                                                                               
- var $spec$pc.0$22380_bottom: bool;                                                                 
  var oldHead22356: Node;                                                                            
  var tmp5: int;                                                                                     
  var TreiberStack._lock22234: [TreiberStack]Tid;                                                    
- var $spec$pc.1$22311: bool;                                                                        
  var TreiberStack.head22373: [TreiberStack]Node;                                                    
  var $pc22380: Phase;                                                                               
  var tmpValue22311: Node;                                                                           
@@ -2818,36 +2545,26 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var mover22349: Mover;                                                                             
  var TreiberStack._state22349: [TreiberStack]State;                                                 
  var TreiberStack._state22380_bottom: [TreiberStack]State;                                          
- var Node._state22373_post: [Node]State;                                                            
  var TreiberStack.head_nextValue22179: [TreiberStack]Node;                                          
  var _C_t22179: Tid;                                                                                
  var TreiberStack.head_nextThread22238: [TreiberStack]Tid;                                          
  var TreiberStack.head_nextValue22337: [TreiberStack]Node;                                          
  var moverPath22234: MoverPath;                                                                     
- var newHead22373_post: Node;                                                                       
  var oldHead22244: Node;                                                                            
  var this22337: TreiberStack;                                                                       
  var $result22238: int;                                                                             
  var $pc22337: Phase;                                                                               
- var $spec$pc.0$22244: bool;                                                                        
- var $spec$pc.0$22383: bool;                                                                        
  var mover22179: Mover;                                                                             
  var $recorded.state22356: int;                                                                     
- var this22383_post: TreiberStack;                                                                  
  var $recorded.state22238_post: int;                                                                
  var Node.item22371: [Node]int;                                                                     
  var tid22371: Tid;                                                                                 
- var Node.next22373_post: [Node]Node;                                                               
  var tid22307: Tid;                                                                                 
- var $spec$pc.0$22334: bool;                                                                        
  var Node._state22380_bottom: [Node]State;                                                          
  var tmp322356: bool;                                                                               
  var mover22311: Mover;                                                                             
  var this22234: TreiberStack;                                                                       
- var Node._lock22383_post: [Node]Tid;                                                               
  var $pc22244: Phase;                                                                               
- var $spec$pc.1$22380_bottom: bool;                                                                 
- var $spec$$result22356: int;                                                                       
  var _C_v22191: Node;                                                                               
  var Node.item22307: [Node]int;                                                                     
  var this22304: TreiberStack;                                                                       
@@ -2855,17 +2572,13 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head_nextValue22383: [TreiberStack]Node;                                          
  var TreiberStack._lock22380_bottom: [TreiberStack]Tid;                                             
  var tmp422334: bool;                                                                               
- var $spec$$result22383: int;                                                                       
  var tmp322373: bool;                                                                               
- var $spec$$result22373: int;                                                                       
  var TreiberStack.head_nextThread22191: [TreiberStack]Tid;                                          
  var Node._lock22238: [Node]Tid;                                                                    
- var TreiberStack.head_nextThread22383_post: [TreiberStack]Tid;                                     
  var TreiberStack.head_nextValue22356: [TreiberStack]Node;                                          
  var tid22337: Tid;                                                                                 
  var oldHead22238: Node;                                                                            
  var _currentValue22349: Node;                                                                      
- var $spec$pc.0$22356: bool;                                                                        
  var _currentValue22191: Node;                                                                      
  var tmpTid22307: Tid;                                                                              
  var _C_t22185: Tid;                                                                                
@@ -2886,14 +2599,10 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node._lock22238_post: [Node]Tid;                                                               
  var TreiberStack.head_nextThread22238_post: [TreiberStack]Tid;                                     
  var oldHead22337: Node;                                                                            
- var $spec$pc.1$22185: bool;                                                                        
  var Node.next22349: [Node]Node;                                                                    
  var $result22229: int;                                                                             
  var Node._state22244: [Node]State;                                                                 
  var this22179: TreiberStack;                                                                       
- var TreiberStack.head_nextValue22383_post: [TreiberStack]Node;                                     
- var $result22373_post: int;                                                                        
- var $spec$pc.1$22356: bool;                                                                        
  var Node.next22383: [Node]Node;                                                                    
  var path22304: int;                                                                                
  var this22191: TreiberStack;                                                                       
@@ -2902,7 +2611,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $recorded.state22373: int;                                                                     
  var TreiberStack.head_nextValue22334: [TreiberStack]Node;                                          
  var this22380: TreiberStack;                                                                       
- var $spec$pc.1$22179: bool;                                                                        
  var Node._lock22373: [Node]Tid;                                                                    
  var $pc22229: Phase;                                                                               
  var Node._lock22307: [Node]Tid;                                                                    
@@ -2913,49 +2621,38 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next22191: [Node]Node;                                                                    
  var tid22334: Tid;                                                                                 
  var Node.item22238: [Node]int;                                                                     
- var $spec$pc.0$22307: bool;                                                                        
  var $recorded.state22185: int;                                                                     
  var tmp322304: bool;                                                                               
  var $result22380: int;                                                                             
- var tmp522373_post: int;                                                                           
  var ctmp3649: bool;                                                                                
  var Node._state22238_post: [Node]State;                                                            
  var Node._state22373: [Node]State;                                                                 
- var $spec$pc.0$22185: bool;                                                                        
  var tid22304: Tid;                                                                                 
- var $spec$pc.0$22311: bool;                                                                        
  var TreiberStack.head_nextThread22229: [TreiberStack]Tid;                                          
  var TreiberStack.head_nextValue22380: [TreiberStack]Node;                                          
  var Node.item22304: [Node]int;                                                                     
  var moverPath22304: MoverPath;                                                                     
- var $spec$pc.1$22191: bool;                                                                        
  var TreiberStack.head22234: [TreiberStack]Node;                                                    
  var this22334: TreiberStack;                                                                       
  var TreiberStack.head_nextThread22337: [TreiberStack]Tid;                                          
- var $spec$pc.1$22238_post: bool;                                                                   
  var TreiberStack.head22380_bottom: [TreiberStack]Node;                                             
  var Node._state22307: [Node]State;                                                                 
- var TreiberStack._lock22383_post: [TreiberStack]Tid;                                               
  var newHead22373: Node;                                                                            
  var Node._state22349: [Node]State;                                                                 
  var tmpTid22304: Tid;                                                                              
  var Node.next22337: [Node]Node;                                                                    
  var tmp322185: bool;                                                                               
- var $spec$pc.1$22380: bool;                                                                        
  var moverPath22371: MoverPath;                                                                     
  var $result22238_post: int;                                                                        
  var TreiberStack.head22334: [TreiberStack]Node;                                                    
- var $spec$$result22373_post: int;                                                                  
  var Node._lock22185: [Node]Tid;                                                                    
  var _currentValue22234: Node;                                                                      
- var $spec$pc.0$22304: bool;                                                                        
  var this22244: TreiberStack;                                                                       
  var _m22304: Mover;                                                                                
  var $pc22179: Phase;                                                                               
  var TreiberStack._lock22337: [TreiberStack]Tid;                                                    
  var TreiberStack.head_nextThread22311: [TreiberStack]Tid;                                          
  var _C_v: Node;                                                                                    
- var $spec$$result22244: int;                                                                       
  var TreiberStack._state22380: [TreiberStack]State;                                                 
  var TreiberStack.head_nextThread22371: [TreiberStack]Tid;                                          
  var moverPath22337: MoverPath;                                                                     
@@ -2966,11 +2663,8 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $pc22373: Phase;                                                                               
  var _R_t22229: Mover;                                                                              
  var moverPath22311: MoverPath;                                                                     
- var $spec$pc.1$22234: bool;                                                                        
  var TreiberStack.head_nextValue22371: [TreiberStack]Node;                                          
- var $spec$pc.1$22334: bool;                                                                        
  var TreiberStack.head22191: [TreiberStack]Node;                                                    
- var TreiberStack._state22383_post: [TreiberStack]State;                                            
  var TreiberStack._state22191: [TreiberStack]State;                                                 
  var $result22191: int;                                                                             
  var Node._state22229: [Node]State;                                                                 
@@ -2981,19 +2675,14 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var mover22371: Mover;                                                                             
  var Node._state22311: [Node]State;                                                                 
  var Node.item22380_bottom: [Node]int;                                                              
- var $spec$pc.1$22383: bool;                                                                        
  var path22311: int;                                                                                
- var $spec$pc.1$22349: bool;                                                                        
  var TreiberStack.head_nextThread22383: [TreiberStack]Tid;                                          
  var Node._state22238: [Node]State;                                                                 
  var TreiberStack._lock22371: [TreiberStack]Tid;                                                    
  var tid22311: Tid;                                                                                 
- var $spec$pc.1$$loopHead22380: bool;                                                               
- var $spec$pc.0$22383_post: bool;                                                                   
  var Node.next22307: [Node]Node;                                                                    
  var oldHead22179: Node;                                                                            
  var Node._lock22244: [Node]Tid;                                                                    
- var $spec$pc.0$22179: bool;                                                                        
  var this22373: TreiberStack;                                                                       
  var $recorded.state22307: int;                                                                     
  var TreiberStack._state22244: [TreiberStack]State;                                                 
@@ -3004,7 +2693,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.item22191: [Node]int;                                                                     
  var TreiberStack._lock22334: [TreiberStack]Tid;                                                    
  var TreiberStack._state22238_post: [TreiberStack]State;                                            
- var $spec$$result22185: int;                                                                       
  var tmp422349: bool;                                                                               
  var TreiberStack.head_nextValue22234: [TreiberStack]Node;                                          
  var Node.item22337: [Node]int;                                                                     
@@ -3013,7 +2701,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $pc22191: Phase;                                                                               
  var TreiberStack.head_nextThread22179: [TreiberStack]Tid;                                          
  var oldHead22185: Node;                                                                            
- var $result22383_post: int;                                                                        
  var Node._state22185: [Node]State;                                                                 
  var this22311: TreiberStack;                                                                       
  var ctmp364922337: bool;                                                                           
@@ -3021,24 +2708,16 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var path22244: int;                                                                                
  var TreiberStack.head22371: [TreiberStack]Node;                                                    
  var tmp322334: bool;                                                                               
- var TreiberStack.head_nextValue22373_post: [TreiberStack]Node;                                     
- var $spec$pc.0$22238: bool;                                                                        
  var mover22337: Mover;                                                                             
  var ctmp364922356: bool;                                                                           
  var TreiberStack.head22304: [TreiberStack]Node;                                                    
  var TreiberStack._state22337: [TreiberStack]State;                                                 
- var tid22373_post: Tid;                                                                            
  var Node._lock22311: [Node]Tid;                                                                    
- var TreiberStack.head22373_post: [TreiberStack]Node;                                               
- var $spec$$result22334: int;                                                                       
  var TreiberStack._state22179: [TreiberStack]State;                                                 
  var TreiberStack.head_nextValue22185: [TreiberStack]Node;                                          
  var Node._lock22356: [Node]Tid;                                                                    
- var $spec$pc.0$22349: bool;                                                                        
- var TreiberStack.head22383_post: [TreiberStack]Node;                                               
  var Node.item22234: [Node]int;                                                                     
  var mover22307: Mover;                                                                             
- var Node.item22373_post: [Node]int;                                                                
  var TreiberStack.head_nextThread22304: [TreiberStack]Tid;                                          
  var this22238_post: TreiberStack;                                                                  
  var this22380_bottom: TreiberStack;                                                                
@@ -3064,11 +2743,9 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next22234: [Node]Node;                                                                    
  var TreiberStack._state22356: [TreiberStack]State;                                                 
  var $recorded.state22380: int;                                                                     
- var $spec$pc.1$22244: bool;                                                                        
  var $recorded.state22371: int;                                                                     
  var $pc22380_bottom: Phase;                                                                        
  var Node.next22238: [Node]Node;                                                                    
- var $spec$pc.1$22373: bool;                                                                        
  var TreiberStack._lock22185: [TreiberStack]Tid;                                                    
  var tid22185: Tid;                                                                                 
  var newHead22371: Node;                                                                            
@@ -3079,7 +2756,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var moverPath22229: MoverPath;                                                                     
  var TreiberStack._state22229: [TreiberStack]State;                                                 
  var this22349: TreiberStack;                                                                       
- var $spec$pc.1$22238: bool;                                                                        
  var _m: Mover;                                                                                     
  var tmp322244: bool;                                                                               
  var TreiberStack._lock22244: [TreiberStack]Tid;                                                    
@@ -3087,25 +2763,18 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack._lock22373: [TreiberStack]Tid;                                                    
  var TreiberStack._state22371: [TreiberStack]State;                                                 
  var Node._state22304: [Node]State;                                                                 
- var $spec$pc.0$22191: bool;                                                                        
  var tmp322337: bool;                                                                               
  var TreiberStack._lock22179: [TreiberStack]Tid;                                                    
- var $pc22383_post: Phase;                                                                          
- var $spec$$result22380_bottom: int;                                                                
  var $pc22185: Phase;                                                                               
  var TreiberStack.head22337: [TreiberStack]Node;                                                    
- var tid22383_post: Tid;                                                                            
  var Node.item22334: [Node]int;                                                                     
  var tmpValue22307: Node;                                                                           
  var TreiberStack.head_nextThread22244: [TreiberStack]Tid;                                          
  var TreiberStack.head22185: [TreiberStack]Node;                                                    
  var newHead22307: Node;                                                                            
- var Node._state22383_post: [Node]State;                                                            
  var $recorded.state22337: int;                                                                     
- var tmp322373_post: bool;                                                                          
  var mover22191: Mover;                                                                             
  var TreiberStack.head22244: [TreiberStack]Node;                                                    
- var $recorded.state22383_post: int;                                                                
  var $result22311: int;                                                                             
  var tmp322349: bool;                                                                               
  var _C_v22229: Node;                                                                               
@@ -3115,7 +2784,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next22380_bottom: [Node]Node;                                                             
  var this22185: TreiberStack;                                                                       
  var mover22229: Mover;                                                                             
- var $recorded.state22373_post: int;                                                                
  var path22185: int;                                                                                
  var $pc22304: Phase;                                                                               
  var _C_t22191: Tid;                                                                                
@@ -3126,34 +2794,24 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack.head_nextValue22349: [TreiberStack]Node;                                          
  var oldHead22238_post: Node;                                                                       
  var $result22337: int;                                                                             
- var $spec$$result22383_post: int;                                                                  
  var newHead22356: Node;                                                                            
  var oldHead22334: Node;                                                                            
  var $result22304: int;                                                                             
  var Node._lock22179: [Node]Tid;                                                                    
  var TreiberStack.head_nextThread22307: [TreiberStack]Tid;                                          
  var tid22229: Tid;                                                                                 
- var $spec$pc.1$22304: bool;                                                                        
- var $pc22373_post: Phase;                                                                          
- var $spec$pc.1$22371: bool;                                                                        
  var Node._state22234: [Node]State;                                                                 
  var mover22304: Mover;                                                                             
  var _C_v22185: Node;                                                                               
  var Node._state22179: [Node]State;                                                                 
- var $spec$pc.0$22337: bool;                                                                        
  var tmp322234: bool;                                                                               
  var Node.next22238_post: [Node]Node;                                                               
- var $spec$$result22371: int;                                                                       
- var Node.item22383_post: [Node]int;                                                                
  var tmp3: bool;                                                                                    
  var TreiberStack.head_nextThread22373: [TreiberStack]Tid;                                          
  var tmpTid: Tid;                                                                                   
- var $spec$pc.1$22229: bool;                                                                        
  var path22371: int;                                                                                
  var _C_t22229: Tid;                                                                                
- var $spec$$result22191: int;                                                                       
  var $result22185: int;                                                                             
- var $spec$pc.0$$loopHead22380: bool;                                                               
  var tmp4: bool;                                                                                    
  var Node._lock22304: [Node]Tid;                                                                    
  var path22307: int;                                                                                
@@ -3169,12 +2827,9 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var oldHead22311: Node;                                                                            
  var oldHead22191: Node;                                                                            
  var Node._lock22349: [Node]Tid;                                                                    
- var $spec$$result22349: int;                                                                       
- var $spec$pc.0$22234: bool;                                                                        
  var _C_v22234: Node;                                                                               
  var _casable22234: bool;                                                                           
  var _C_t22234: Tid;                                                                                
- var Node.next22383_post: [Node]Node;                                                               
  var Node.next22244: [Node]Node;                                                                    
  var $recorded.state22349: int;                                                                     
  var TreiberStack.head_nextValue22238_post: [TreiberStack]Node;                                     
@@ -3183,18 +2838,14 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var Node.next22185: [Node]Node;                                                                    
  var $recorded.state22179: int;                                                                     
  var $result22234: int;                                                                             
- var $spec$pc.0$22373_post: bool;                                                                   
  var Node.next22179: [Node]Node;                                                                    
  var mover22334: Mover;                                                                             
  var Node._state22191: [Node]State;                                                                 
- var $spec$pc.1$22373_post: bool;                                                                   
- var $spec$$result22380: int;                                                                       
  var $recorded.state22380_bottom: int;                                                              
  var this22356: TreiberStack;                                                                       
  var TreiberStack.head22307: [TreiberStack]Node;                                                    
  var moverPath22244: MoverPath;                                                                     
  var $pc22234: Phase;                                                                               
- var $spec$pc.0$22373: bool;                                                                        
  var oldHead22349: Node;                                                                            
  var Node.next22311: [Node]Node;                                                                    
  var moverPath22191: MoverPath;                                                                     
@@ -3204,7 +2855,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var TreiberStack._state22238: [TreiberStack]State;                                                 
  var Node.item22383: [Node]int;                                                                     
  var mover22244: Mover;                                                                             
- var $spec$$result22179: int;                                                                       
  var oldHead22304: Node;                                                                            
  var tid22179: Tid;                                                                                 
  var path22356: int;                                                                                
@@ -3219,14 +2869,10 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var phase22380: Phase;                                                                             
  var tid22234: Tid;                                                                                 
  var Node.next22373: [Node]Node;                                                                    
- var $spec$$result22304: int;                                                                       
- var $spec$$result22307: int;                                                                       
  var oldHead22234: Node;                                                                            
  var TreiberStack.head22380: [TreiberStack]Node;                                                    
  var Node.next22229: [Node]Node;                                                                    
- var $spec$$result22238: int;                                                                       
  var TreiberStack.head_nextThread22356: [TreiberStack]Tid;                                          
- var $spec$pc.1$22307: bool;                                                                        
  var tid22244: Tid;                                                                                 
  var tmp322238_post: bool;                                                                          
  var TreiberStack.head22179: [TreiberStack]Node;                                                    
@@ -3240,77 +2886,32 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
  var $pc22238: Phase;                                                                               
  var newHead22349: Node;                                                                            
  var TreiberStack.head_nextThread22380: [TreiberStack]Tid;                                          
- var TreiberStack._state22373_post: [TreiberStack]State;                                            
- var $spec$pc.0$22238_post: bool;                                                                   
  var $result22383: int;                                                                             
  var tid22380: Tid;                                                                                 
  var this22307: TreiberStack;                                                                       
  var path22179: int;                                                                                
- var $spec$$result22311: int;                                                                       
  var $recorded.state22229: int;                                                                     
  var TreiberStack.head_nextValue22238: [TreiberStack]Node;                                          
- var this22373_post: TreiberStack;                                                                  
  var tid22356: Tid;                                                                                 
  var $pc22356: Phase;                                                                               
- var oldHead22373_post: Node;                                                                       
- var $spec$pc.1$22383_post: bool;                                                                   
  var moverPath22334: MoverPath;                                                                     
  var TreiberStack._state22234: [TreiberStack]State;                                                 
  var tmp522373: int;                                                                                
  var TreiberStack._lock22307: [TreiberStack]Tid;                                                    
  var mover22356: Mover;                                                                             
- var $spec$$result22234: int;                                                                       
  var mover22234: Mover;                                                                             
  var TreiberStack._state22185: [TreiberStack]State;                                                 
                                                                                                     
- var $spec$Node._state: [Node]State;                                                                
- var $spec$Node.item: [Node]int;                                                                    
- var $spec$Node.next: [Node]Node;                                                                   
- var $spec$Node._lock: [Node]Tid;                                                                   
- var $spec$TreiberStack._state: [TreiberStack]State;                                                
- var $spec$TreiberStack.head: [TreiberStack]Node;                                                   
- var $spec$TreiberStack._lock: [TreiberStack]Tid;                                                   
- var $spec$TreiberStack.head_nextThread: [TreiberStack]Tid;                                         
- var $spec$TreiberStack.head_nextValue: [TreiberStack]Node;                                         
- var $spec$pc.0$ : bool; var $spec$pc.1$ : bool;                                                    
- var $spec$$result : int;                                                                           
-                                                                                                    
-                                                                                                    
  var $pc : Phase;                                                                                   
-                                                                                                    
- $spec$Node._state := Node._state;                                                                  
- $spec$Node.item := Node.item;                                                                      
- $spec$Node.next := Node.next;                                                                      
- $spec$Node._lock := Node._lock;                                                                    
- $spec$TreiberStack._state := TreiberStack._state;                                                  
- $spec$TreiberStack.head := TreiberStack.head;                                                      
- $spec$TreiberStack._lock := TreiberStack._lock;                                                    
- $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                                
- $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                  
- $spec$pc.0$ := true; $spec$pc.1$ := false;                                                         
-                                                                                                    
  $pc := PreCommit;                                                                                  
                                                                                                     
                                                                                                     
- assume Node._state22380 == Node._state && Node.item22380 == Node.item && Node.next22380 == Node.next && Node._lock22380 == Node._lock && TreiberStack._state22380 == TreiberStack._state && TreiberStack.head22380 == TreiberStack.head && TreiberStack._lock22380 == TreiberStack._lock && TreiberStack.head_nextThread22380 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22380 == TreiberStack.head_nextValue && $result22380 == $result && this22380 == this && tid22380 == tid && $spec$pc.0$22380 == $spec$pc.0$ && $spec$pc.1$22380 == $spec$pc.1$ && $spec$$result22380 == $spec$$result;
+ assume Node._state22380 == Node._state && Node.item22380 == Node.item && Node.next22380 == Node.next && Node._lock22380 == Node._lock && TreiberStack._state22380 == TreiberStack._state && TreiberStack.head22380 == TreiberStack.head && TreiberStack._lock22380 == TreiberStack._lock && TreiberStack.head_nextThread22380 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22380 == TreiberStack.head_nextValue && $result22380 == $result && this22380 == this && tid22380 == tid;
  assume $recorded.state22380 == 1;                                                                  
                                                                                                     
  // 54.9: while (true)   {                                                                          
                                                                                                     
  phase22380 := $pc;                                                                                 
- $spec$Node._state := Node._state;                                                                  
- $spec$Node.item := Node.item;                                                                      
- $spec$Node.next := Node.next;                                                                      
- $spec$Node._lock := Node._lock;                                                                    
- $spec$TreiberStack._state := TreiberStack._state;                                                  
- $spec$TreiberStack.head := TreiberStack.head;                                                      
- $spec$TreiberStack._lock := TreiberStack._lock;                                                    
- $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                                
- $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                  
- $spec$$result := $result;                                                                          
- $spec$pc.0$$loopHead22380 := $spec$pc.0$;                                                          
- $spec$pc.1$$loopHead22380 := $spec$pc.1$;                                                          
- assert $spec$pc.0$ || $spec$pc.1$;                                                                        // (54.9): Cannot construct possible Spec States for loop head.
  while (true)                                                                                       
                                                                                                     
   invariant ValidTid(tid);                                                                                 // (50.5): Bad tid
@@ -3322,17 +2923,6 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   invariant (forall _this : TreiberStack :: Invariant.Y_TreiberStack.head(tid : Tid, _this, TreiberStack.head[_this] ,Node._state22380,Node.item22380,Node.next22380,Node._lock22380,TreiberStack._state22380,TreiberStack.head22380,TreiberStack._lock22380,TreiberStack.head_nextThread22380,TreiberStack.head_nextValue22380));       // (54.9): Loop does not preserve yields_as annotation for field head
   invariant phase22380 == $pc;                                                                             // (54.9): Phase must be invariant at loop head
   invariant $pc == PreCommit;                                                                              // (54.9): Potentially infinite loop cannot be in post-commit phase.
-  invariant $spec$Node._state == Node._state;                                                       
-  invariant $spec$Node.item == Node.item;                                                           
-  invariant $spec$Node.next == Node.next;                                                           
-  invariant $spec$Node._lock == Node._lock;                                                         
-  invariant $spec$TreiberStack._state == TreiberStack._state;                                       
-  invariant $spec$TreiberStack.head == TreiberStack.head;                                           
-  invariant $spec$TreiberStack._lock == TreiberStack._lock;                                         
-  invariant $spec$TreiberStack.head_nextThread == TreiberStack.head_nextThread;                     
-  invariant $spec$TreiberStack.head_nextValue == TreiberStack.head_nextValue;                       
-  invariant $spec$$result == $result;                                                               
-  invariant $spec$pc.0$;                                                                            
  {                                                                                                  
                                                                                                     
   // 54.16: boolean tmp3;                                                                           
@@ -3362,7 +2952,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath22179 := ReadEval.TreiberStack.head_nextThread(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover22179 := m#moverPath(moverPath22179);                                                        
   path22179 := p#moverPath(moverPath22179);                                                         
-  assume Node._state22179 == Node._state && Node.item22179 == Node.item && Node.next22179 == Node.next && Node._lock22179 == Node._lock && TreiberStack._state22179 == TreiberStack._state && TreiberStack.head22179 == TreiberStack.head && TreiberStack._lock22179 == TreiberStack._lock && TreiberStack.head_nextThread22179 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22179 == TreiberStack.head_nextValue && _C_t22179 == _C_t && oldHead22179 == oldHead && tmp322179 == tmp3 && $result22179 == $result && this22179 == this && tid22179 == tid && $pc22179 == $pc && $spec$pc.0$22179 == $spec$pc.0$ && $spec$pc.1$22179 == $spec$pc.1$ && $spec$$result22179 == $spec$$result;
+  assume Node._state22179 == Node._state && Node.item22179 == Node.item && Node.next22179 == Node.next && Node._lock22179 == Node._lock && TreiberStack._state22179 == TreiberStack._state && TreiberStack.head22179 == TreiberStack.head && TreiberStack._lock22179 == TreiberStack._lock && TreiberStack.head_nextThread22179 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22179 == TreiberStack.head_nextValue && _C_t22179 == _C_t && oldHead22179 == oldHead && tmp322179 == tmp3 && $result22179 == $result && this22179 == this && tid22179 == tid && $pc22179 == $pc;
   assume $recorded.state22179 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -3383,7 +2973,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath22185 := ReadEval.TreiberStack.head_nextValue(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover22185 := m#moverPath(moverPath22185);                                                        
   path22185 := p#moverPath(moverPath22185);                                                         
-  assume Node._state22185 == Node._state && Node.item22185 == Node.item && Node.next22185 == Node.next && Node._lock22185 == Node._lock && TreiberStack._state22185 == TreiberStack._state && TreiberStack.head22185 == TreiberStack.head && TreiberStack._lock22185 == TreiberStack._lock && TreiberStack.head_nextThread22185 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22185 == TreiberStack.head_nextValue && _C_v22185 == _C_v && _C_t22185 == _C_t && oldHead22185 == oldHead && tmp322185 == tmp3 && $result22185 == $result && this22185 == this && tid22185 == tid && $pc22185 == $pc && $spec$pc.0$22185 == $spec$pc.0$ && $spec$pc.1$22185 == $spec$pc.1$ && $spec$$result22185 == $spec$$result;
+  assume Node._state22185 == Node._state && Node.item22185 == Node.item && Node.next22185 == Node.next && Node._lock22185 == Node._lock && TreiberStack._state22185 == TreiberStack._state && TreiberStack.head22185 == TreiberStack.head && TreiberStack._lock22185 == TreiberStack._lock && TreiberStack.head_nextThread22185 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22185 == TreiberStack.head_nextValue && _C_v22185 == _C_v && _C_t22185 == _C_t && oldHead22185 == oldHead && tmp322185 == tmp3 && $result22185 == $result && this22185 == this && tid22185 == tid && $pc22185 == $pc;
   assume $recorded.state22185 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -3404,7 +2994,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath22191 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover22191 := m#moverPath(moverPath22191);                                                        
   path22191 := p#moverPath(moverPath22191);                                                         
-  assume Node._state22191 == Node._state && Node.item22191 == Node.item && Node.next22191 == Node.next && Node._lock22191 == Node._lock && TreiberStack._state22191 == TreiberStack._state && TreiberStack.head22191 == TreiberStack.head && TreiberStack._lock22191 == TreiberStack._lock && TreiberStack.head_nextThread22191 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22191 == TreiberStack.head_nextValue && _currentValue22191 == _currentValue && _C_v22191 == _C_v && _C_t22191 == _C_t && oldHead22191 == oldHead && tmp322191 == tmp3 && $result22191 == $result && this22191 == this && tid22191 == tid && $pc22191 == $pc && $spec$pc.0$22191 == $spec$pc.0$ && $spec$pc.1$22191 == $spec$pc.1$ && $spec$$result22191 == $spec$$result;
+  assume Node._state22191 == Node._state && Node.item22191 == Node.item && Node.next22191 == Node.next && Node._lock22191 == Node._lock && TreiberStack._state22191 == TreiberStack._state && TreiberStack.head22191 == TreiberStack.head && TreiberStack._lock22191 == TreiberStack._lock && TreiberStack.head_nextThread22191 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22191 == TreiberStack.head_nextValue && _currentValue22191 == _currentValue && _C_v22191 == _C_v && _C_t22191 == _C_t && oldHead22191 == oldHead && tmp322191 == tmp3 && $result22191 == $result && this22191 == this && tid22191 == tid && $pc22191 == $pc;
   assume $recorded.state22191 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume this != TreiberStack.null;                                                                
@@ -3438,7 +3028,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
    moverPath22229 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
    mover22229 := m#moverPath(moverPath22229);                                                       
    path22229 := p#moverPath(moverPath22229);                                                        
-   assume Node._state22229 == Node._state && Node.item22229 == Node.item && Node.next22229 == Node.next && Node._lock22229 == Node._lock && TreiberStack._state22229 == TreiberStack._state && TreiberStack.head22229 == TreiberStack.head && TreiberStack._lock22229 == TreiberStack._lock && TreiberStack.head_nextThread22229 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22229 == TreiberStack.head_nextValue && _casable22229 == _casable && _R_t22229 == _R_t && _currentValue22229 == _currentValue && _C_v22229 == _C_v && _C_t22229 == _C_t && oldHead22229 == oldHead && tmp322229 == tmp3 && $result22229 == $result && this22229 == this && tid22229 == tid && $pc22229 == $pc && $spec$pc.0$22229 == $spec$pc.0$ && $spec$pc.1$22229 == $spec$pc.1$ && $spec$$result22229 == $spec$$result;
+   assume Node._state22229 == Node._state && Node.item22229 == Node.item && Node.next22229 == Node.next && Node._lock22229 == Node._lock && TreiberStack._state22229 == TreiberStack._state && TreiberStack.head22229 == TreiberStack.head && TreiberStack._lock22229 == TreiberStack._lock && TreiberStack.head_nextThread22229 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22229 == TreiberStack.head_nextValue && _casable22229 == _casable && _R_t22229 == _R_t && _currentValue22229 == _currentValue && _C_v22229 == _C_v && _C_t22229 == _C_t && oldHead22229 == oldHead && tmp322229 == tmp3 && $result22229 == $result && this22229 == this && tid22229 == tid && $pc22229 == $pc;
    assume $recorded.state22229 == 1;                                                                
    if ($pc == PreCommit) {                                                                          
     assume this != TreiberStack.null;                                                               
@@ -3458,7 +3048,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
    moverPath22234 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
    mover22234 := m#moverPath(moverPath22234);                                                       
    path22234 := p#moverPath(moverPath22234);                                                        
-   assume Node._state22234 == Node._state && Node.item22234 == Node.item && Node.next22234 == Node.next && Node._lock22234 == Node._lock && TreiberStack._state22234 == TreiberStack._state && TreiberStack.head22234 == TreiberStack.head && TreiberStack._lock22234 == TreiberStack._lock && TreiberStack.head_nextThread22234 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22234 == TreiberStack.head_nextValue && _casable22234 == _casable && _R_t22234 == _R_t && _currentValue22234 == _currentValue && _C_v22234 == _C_v && _C_t22234 == _C_t && oldHead22234 == oldHead && tmp322234 == tmp3 && $result22234 == $result && this22234 == this && tid22234 == tid && $pc22234 == $pc && $spec$pc.0$22234 == $spec$pc.0$ && $spec$pc.1$22234 == $spec$pc.1$ && $spec$$result22234 == $spec$$result;
+   assume Node._state22234 == Node._state && Node.item22234 == Node.item && Node.next22234 == Node.next && Node._lock22234 == Node._lock && TreiberStack._state22234 == TreiberStack._state && TreiberStack.head22234 == TreiberStack.head && TreiberStack._lock22234 == TreiberStack._lock && TreiberStack.head_nextThread22234 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22234 == TreiberStack.head_nextValue && _casable22234 == _casable && _R_t22234 == _R_t && _currentValue22234 == _currentValue && _C_v22234 == _C_v && _C_t22234 == _C_t && oldHead22234 == oldHead && tmp322234 == tmp3 && $result22234 == $result && this22234 == this && tid22234 == tid && $pc22234 == $pc;
    assume $recorded.state22234 == 1;                                                                
    if ($pc == PreCommit) {                                                                          
     assume this != TreiberStack.null;                                                               
@@ -3473,18 +3063,12 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
   // 56.13: yield;                                                                                  
                                                                                                     
-  assume Node._state22238 == Node._state && Node.item22238 == Node.item && Node.next22238 == Node.next && Node._lock22238 == Node._lock && TreiberStack._state22238 == TreiberStack._state && TreiberStack.head22238 == TreiberStack.head && TreiberStack._lock22238 == TreiberStack._lock && TreiberStack.head_nextThread22238 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22238 == TreiberStack.head_nextValue && oldHead22238 == oldHead && tmp322238 == tmp3 && $result22238 == $result && this22238 == this && tid22238 == tid && $spec$pc.0$22238 == $spec$pc.0$ && $spec$pc.1$22238 == $spec$pc.1$ && $spec$$result22238 == $spec$$result;
+  assume Node._state22238 == Node._state && Node.item22238 == Node.item && Node.next22238 == Node.next && Node._lock22238 == Node._lock && TreiberStack._state22238 == TreiberStack._state && TreiberStack.head22238 == TreiberStack.head && TreiberStack._lock22238 == TreiberStack._lock && TreiberStack.head_nextThread22238 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22238 == TreiberStack.head_nextValue && oldHead22238 == oldHead && tmp322238 == tmp3 && $result22238 == $result && this22238 == this && tid22238 == tid;
   assume $recorded.state22238 == 1;                                                                 
-                                                                                                    
-  call $spec$pc.0$, $spec$pc.1$ :=                                                                  
-  TreiberStack.pop.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,$result : int,$spec$$result : int, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   call Yield(tid);                                                                                  
-  $spec$Node._state := Node._state;$spec$Node.item := Node.item;$spec$Node.next := Node.next;$spec$Node._lock := Node._lock;$spec$TreiberStack._state := TreiberStack._state;$spec$TreiberStack.head := TreiberStack.head;$spec$TreiberStack._lock := TreiberStack._lock;$spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;$spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;
-  $spec$$result := $result;                                                                         
   $pc := PreCommit;                                                                                 
-  assume Node._state22238_post == Node._state && Node.item22238_post == Node.item && Node.next22238_post == Node.next && Node._lock22238_post == Node._lock && TreiberStack._state22238_post == TreiberStack._state && TreiberStack.head22238_post == TreiberStack.head && TreiberStack._lock22238_post == TreiberStack._lock && TreiberStack.head_nextThread22238_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22238_post == TreiberStack.head_nextValue && oldHead22238_post == oldHead && tmp322238_post == tmp3 && $result22238_post == $result && this22238_post == this && tid22238_post == tid && $spec$pc.0$22238_post == $spec$pc.0$ && $spec$pc.1$22238_post == $spec$pc.1$ && $spec$$result22238_post == $spec$$result;
+  assume Node._state22238_post == Node._state && Node.item22238_post == Node.item && Node.next22238_post == Node.next && Node._lock22238_post == Node._lock && TreiberStack._state22238_post == TreiberStack._state && TreiberStack.head22238_post == TreiberStack.head && TreiberStack._lock22238_post == TreiberStack._lock && TreiberStack.head_nextThread22238_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22238_post == TreiberStack.head_nextValue && oldHead22238_post == oldHead && tmp322238_post == tmp3 && $result22238_post == $result && this22238_post == this && tid22238_post == tid;
   assume $recorded.state22238_post == 1;                                                            
-  assert $spec$pc.0$ || $spec$pc.1$;                                                                       // (56.13): Atomic block is not pure and does not conform to spec
                                                                                                     
   // 57.13: Node newHead;                                                                           
                                                                                                     
@@ -3495,7 +3079,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
   moverPath22244 := ReadEval.Node.next(tid: Tid,oldHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
   mover22244 := m#moverPath(moverPath22244);                                                        
   path22244 := p#moverPath(moverPath22244);                                                         
-  assume Node._state22244 == Node._state && Node.item22244 == Node.item && Node.next22244 == Node.next && Node._lock22244 == Node._lock && TreiberStack._state22244 == TreiberStack._state && TreiberStack.head22244 == TreiberStack.head && TreiberStack._lock22244 == TreiberStack._lock && TreiberStack.head_nextThread22244 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22244 == TreiberStack.head_nextValue && newHead22244 == newHead && oldHead22244 == oldHead && tmp322244 == tmp3 && $result22244 == $result && this22244 == this && tid22244 == tid && $pc22244 == $pc && $spec$pc.0$22244 == $spec$pc.0$ && $spec$pc.1$22244 == $spec$pc.1$ && $spec$$result22244 == $spec$$result;
+  assume Node._state22244 == Node._state && Node.item22244 == Node.item && Node.next22244 == Node.next && Node._lock22244 == Node._lock && TreiberStack._state22244 == TreiberStack._state && TreiberStack.head22244 == TreiberStack.head && TreiberStack._lock22244 == TreiberStack._lock && TreiberStack.head_nextThread22244 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22244 == TreiberStack.head_nextValue && newHead22244 == newHead && oldHead22244 == oldHead && tmp322244 == tmp3 && $result22244 == $result && this22244 == this && tid22244 == tid && $pc22244 == $pc;
   assume $recorded.state22244 == 1;                                                                 
   if ($pc == PreCommit) {                                                                           
    assume oldHead != Node.null;                                                                     
@@ -3566,7 +3150,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22304 := WriteEval.TreiberStack.head_nextThread(tid: Tid,this: TreiberStack,tmpTid: Tid,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22304 := m#moverPath(moverPath22304);                                                      
     path22304 := p#moverPath(moverPath22304);                                                       
-    assume Node._state22304 == Node._state && Node.item22304 == Node.item && Node.next22304 == Node.next && Node._lock22304 == Node._lock && TreiberStack._state22304 == TreiberStack._state && TreiberStack.head22304 == TreiberStack.head && TreiberStack._lock22304 == TreiberStack._lock && TreiberStack.head_nextThread22304 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22304 == TreiberStack.head_nextValue && _m22304 == _m && tmpValue22304 == tmpValue && tmpTid22304 == tmpTid && ctmp364922304 == ctmp3649 && tmp422304 == tmp4 && newHead22304 == newHead && oldHead22304 == oldHead && tmp322304 == tmp3 && $result22304 == $result && this22304 == this && tid22304 == tid && $pc22304 == $pc && $spec$pc.0$22304 == $spec$pc.0$ && $spec$pc.1$22304 == $spec$pc.1$ && $spec$$result22304 == $spec$$result;
+    assume Node._state22304 == Node._state && Node.item22304 == Node.item && Node.next22304 == Node.next && Node._lock22304 == Node._lock && TreiberStack._state22304 == TreiberStack._state && TreiberStack.head22304 == TreiberStack.head && TreiberStack._lock22304 == TreiberStack._lock && TreiberStack.head_nextThread22304 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22304 == TreiberStack.head_nextValue && _m22304 == _m && tmpValue22304 == tmpValue && tmpTid22304 == tmpTid && ctmp364922304 == ctmp3649 && tmp422304 == tmp4 && newHead22304 == newHead && oldHead22304 == oldHead && tmp322304 == tmp3 && $result22304 == $result && this22304 == this && tid22304 == tid && $pc22304 == $pc;
     assume $recorded.state22304 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3584,7 +3168,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22307 := WriteEval.TreiberStack.head_nextValue(tid: Tid,this: TreiberStack,tmpValue: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22307 := m#moverPath(moverPath22307);                                                      
     path22307 := p#moverPath(moverPath22307);                                                       
-    assume Node._state22307 == Node._state && Node.item22307 == Node.item && Node.next22307 == Node.next && Node._lock22307 == Node._lock && TreiberStack._state22307 == TreiberStack._state && TreiberStack.head22307 == TreiberStack.head && TreiberStack._lock22307 == TreiberStack._lock && TreiberStack.head_nextThread22307 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22307 == TreiberStack.head_nextValue && _m22307 == _m && tmpValue22307 == tmpValue && tmpTid22307 == tmpTid && ctmp364922307 == ctmp3649 && tmp422307 == tmp4 && newHead22307 == newHead && oldHead22307 == oldHead && tmp322307 == tmp3 && $result22307 == $result && this22307 == this && tid22307 == tid && $pc22307 == $pc && $spec$pc.0$22307 == $spec$pc.0$ && $spec$pc.1$22307 == $spec$pc.1$ && $spec$$result22307 == $spec$$result;
+    assume Node._state22307 == Node._state && Node.item22307 == Node.item && Node.next22307 == Node.next && Node._lock22307 == Node._lock && TreiberStack._state22307 == TreiberStack._state && TreiberStack.head22307 == TreiberStack.head && TreiberStack._lock22307 == TreiberStack._lock && TreiberStack.head_nextThread22307 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22307 == TreiberStack.head_nextValue && _m22307 == _m && tmpValue22307 == tmpValue && tmpTid22307 == tmpTid && ctmp364922307 == ctmp3649 && tmp422307 == tmp4 && newHead22307 == newHead && oldHead22307 == oldHead && tmp322307 == tmp3 && $result22307 == $result && this22307 == this && tid22307 == tid && $pc22307 == $pc;
     assume $recorded.state22307 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3603,7 +3187,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22311 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,newHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22311 := m#moverPath(moverPath22311);                                                      
     path22311 := p#moverPath(moverPath22311);                                                       
-    assume Node._state22311 == Node._state && Node.item22311 == Node.item && Node.next22311 == Node.next && Node._lock22311 == Node._lock && TreiberStack._state22311 == TreiberStack._state && TreiberStack.head22311 == TreiberStack.head && TreiberStack._lock22311 == TreiberStack._lock && TreiberStack.head_nextThread22311 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22311 == TreiberStack.head_nextValue && _m22311 == _m && tmpValue22311 == tmpValue && tmpTid22311 == tmpTid && ctmp364922311 == ctmp3649 && tmp422311 == tmp4 && newHead22311 == newHead && oldHead22311 == oldHead && tmp322311 == tmp3 && $result22311 == $result && this22311 == this && tid22311 == tid && $pc22311 == $pc && $spec$pc.0$22311 == $spec$pc.0$ && $spec$pc.1$22311 == $spec$pc.1$ && $spec$$result22311 == $spec$$result;
+    assume Node._state22311 == Node._state && Node.item22311 == Node.item && Node.next22311 == Node.next && Node._lock22311 == Node._lock && TreiberStack._state22311 == TreiberStack._state && TreiberStack.head22311 == TreiberStack.head && TreiberStack._lock22311 == TreiberStack._lock && TreiberStack.head_nextThread22311 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22311 == TreiberStack.head_nextValue && _m22311 == _m && tmpValue22311 == tmpValue && tmpTid22311 == tmpTid && ctmp364922311 == ctmp3649 && tmp422311 == tmp4 && newHead22311 == newHead && oldHead22311 == oldHead && tmp322311 == tmp3 && $result22311 == $result && this22311 == this && tid22311 == tid && $pc22311 == $pc;
     assume $recorded.state22311 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3641,7 +3225,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22334 := ReadEval.TreiberStack.head(tid: Tid,this: TreiberStack,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22334 := m#moverPath(moverPath22334);                                                      
     path22334 := p#moverPath(moverPath22334);                                                       
-    assume Node._state22334 == Node._state && Node.item22334 == Node.item && Node.next22334 == Node.next && Node._lock22334 == Node._lock && TreiberStack._state22334 == TreiberStack._state && TreiberStack.head22334 == TreiberStack.head && TreiberStack._lock22334 == TreiberStack._lock && TreiberStack.head_nextThread22334 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22334 == TreiberStack.head_nextValue && _currentValue22334 == _currentValue && ctmp364922334 == ctmp3649 && tmp422334 == tmp4 && newHead22334 == newHead && oldHead22334 == oldHead && tmp322334 == tmp3 && $result22334 == $result && this22334 == this && tid22334 == tid && $pc22334 == $pc && $spec$pc.0$22334 == $spec$pc.0$ && $spec$pc.1$22334 == $spec$pc.1$ && $spec$$result22334 == $spec$$result;
+    assume Node._state22334 == Node._state && Node.item22334 == Node.item && Node.next22334 == Node.next && Node._lock22334 == Node._lock && TreiberStack._state22334 == TreiberStack._state && TreiberStack.head22334 == TreiberStack.head && TreiberStack._lock22334 == TreiberStack._lock && TreiberStack.head_nextThread22334 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22334 == TreiberStack.head_nextValue && _currentValue22334 == _currentValue && ctmp364922334 == ctmp3649 && tmp422334 == tmp4 && newHead22334 == newHead && oldHead22334 == oldHead && tmp322334 == tmp3 && $result22334 == $result && this22334 == this && tid22334 == tid && $pc22334 == $pc;
     assume $recorded.state22334 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3660,7 +3244,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22337 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,oldHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22337 := m#moverPath(moverPath22337);                                                      
     path22337 := p#moverPath(moverPath22337);                                                       
-    assume Node._state22337 == Node._state && Node.item22337 == Node.item && Node.next22337 == Node.next && Node._lock22337 == Node._lock && TreiberStack._state22337 == TreiberStack._state && TreiberStack.head22337 == TreiberStack.head && TreiberStack._lock22337 == TreiberStack._lock && TreiberStack.head_nextThread22337 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22337 == TreiberStack.head_nextValue && _currentValue22337 == _currentValue && ctmp364922337 == ctmp3649 && tmp422337 == tmp4 && newHead22337 == newHead && oldHead22337 == oldHead && tmp322337 == tmp3 && $result22337 == $result && this22337 == this && tid22337 == tid && $pc22337 == $pc && $spec$pc.0$22337 == $spec$pc.0$ && $spec$pc.1$22337 == $spec$pc.1$ && $spec$$result22337 == $spec$$result;
+    assume Node._state22337 == Node._state && Node.item22337 == Node.item && Node.next22337 == Node.next && Node._lock22337 == Node._lock && TreiberStack._state22337 == TreiberStack._state && TreiberStack.head22337 == TreiberStack.head && TreiberStack._lock22337 == TreiberStack._lock && TreiberStack.head_nextThread22337 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22337 == TreiberStack.head_nextValue && _currentValue22337 == _currentValue && ctmp364922337 == ctmp3649 && tmp422337 == tmp4 && newHead22337 == newHead && oldHead22337 == oldHead && tmp322337 == tmp3 && $result22337 == $result && this22337 == this && tid22337 == tid && $pc22337 == $pc;
     assume $recorded.state22337 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3690,7 +3274,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22349 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,_currentValue: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22349 := m#moverPath(moverPath22349);                                                      
     path22349 := p#moverPath(moverPath22349);                                                       
-    assume Node._state22349 == Node._state && Node.item22349 == Node.item && Node.next22349 == Node.next && Node._lock22349 == Node._lock && TreiberStack._state22349 == TreiberStack._state && TreiberStack.head22349 == TreiberStack.head && TreiberStack._lock22349 == TreiberStack._lock && TreiberStack.head_nextThread22349 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22349 == TreiberStack.head_nextValue && _m22349 == _m && _currentValue22349 == _currentValue && ctmp364922349 == ctmp3649 && tmp422349 == tmp4 && newHead22349 == newHead && oldHead22349 == oldHead && tmp322349 == tmp3 && $result22349 == $result && this22349 == this && tid22349 == tid && $pc22349 == $pc && $spec$pc.0$22349 == $spec$pc.0$ && $spec$pc.1$22349 == $spec$pc.1$ && $spec$$result22349 == $spec$$result;
+    assume Node._state22349 == Node._state && Node.item22349 == Node.item && Node.next22349 == Node.next && Node._lock22349 == Node._lock && TreiberStack._state22349 == TreiberStack._state && TreiberStack.head22349 == TreiberStack.head && TreiberStack._lock22349 == TreiberStack._lock && TreiberStack.head_nextThread22349 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22349 == TreiberStack.head_nextValue && _m22349 == _m && _currentValue22349 == _currentValue && ctmp364922349 == ctmp3649 && tmp422349 == tmp4 && newHead22349 == newHead && oldHead22349 == oldHead && tmp322349 == tmp3 && $result22349 == $result && this22349 == this && tid22349 == tid && $pc22349 == $pc;
     assume $recorded.state22349 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3718,7 +3302,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
     moverPath22356 := WriteEval.TreiberStack.head(tid: Tid,this: TreiberStack,newHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
     mover22356 := m#moverPath(moverPath22356);                                                      
     path22356 := p#moverPath(moverPath22356);                                                       
-    assume Node._state22356 == Node._state && Node.item22356 == Node.item && Node.next22356 == Node.next && Node._lock22356 == Node._lock && TreiberStack._state22356 == TreiberStack._state && TreiberStack.head22356 == TreiberStack.head && TreiberStack._lock22356 == TreiberStack._lock && TreiberStack.head_nextThread22356 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22356 == TreiberStack.head_nextValue && _m22356 == _m && _currentValue22356 == _currentValue && ctmp364922356 == ctmp3649 && tmp422356 == tmp4 && newHead22356 == newHead && oldHead22356 == oldHead && tmp322356 == tmp3 && $result22356 == $result && this22356 == this && tid22356 == tid && $pc22356 == $pc && $spec$pc.0$22356 == $spec$pc.0$ && $spec$pc.1$22356 == $spec$pc.1$ && $spec$$result22356 == $spec$$result;
+    assume Node._state22356 == Node._state && Node.item22356 == Node.item && Node.next22356 == Node.next && Node._lock22356 == Node._lock && TreiberStack._state22356 == TreiberStack._state && TreiberStack.head22356 == TreiberStack.head && TreiberStack._lock22356 == TreiberStack._lock && TreiberStack.head_nextThread22356 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22356 == TreiberStack.head_nextValue && _m22356 == _m && _currentValue22356 == _currentValue && ctmp364922356 == ctmp3649 && tmp422356 == tmp4 && newHead22356 == newHead && oldHead22356 == oldHead && tmp322356 == tmp3 && $result22356 == $result && this22356 == this && tid22356 == tid && $pc22356 == $pc;
     assume $recorded.state22356 == 1;                                                               
     if ($pc == PreCommit) {                                                                         
      assume this != TreiberStack.null;                                                              
@@ -3750,7 +3334,7 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
    moverPath22371 := ReadEval.Node.item(tid: Tid,oldHead: Node,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
    mover22371 := m#moverPath(moverPath22371);                                                       
    path22371 := p#moverPath(moverPath22371);                                                        
-   assume Node._state22371 == Node._state && Node.item22371 == Node.item && Node.next22371 == Node.next && Node._lock22371 == Node._lock && TreiberStack._state22371 == TreiberStack._state && TreiberStack.head22371 == TreiberStack.head && TreiberStack._lock22371 == TreiberStack._lock && TreiberStack.head_nextThread22371 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22371 == TreiberStack.head_nextValue && tmp522371 == tmp5 && tmp422371 == tmp4 && newHead22371 == newHead && oldHead22371 == oldHead && tmp322371 == tmp3 && $result22371 == $result && this22371 == this && tid22371 == tid && $pc22371 == $pc && $spec$pc.0$22371 == $spec$pc.0$ && $spec$pc.1$22371 == $spec$pc.1$ && $spec$$result22371 == $spec$$result;
+   assume Node._state22371 == Node._state && Node.item22371 == Node.item && Node.next22371 == Node.next && Node._lock22371 == Node._lock && TreiberStack._state22371 == TreiberStack._state && TreiberStack.head22371 == TreiberStack.head && TreiberStack._lock22371 == TreiberStack._lock && TreiberStack.head_nextThread22371 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22371 == TreiberStack.head_nextValue && tmp522371 == tmp5 && tmp422371 == tmp4 && newHead22371 == newHead && oldHead22371 == oldHead && tmp322371 == tmp3 && $result22371 == $result && this22371 == this && tid22371 == tid && $pc22371 == $pc;
    assume $recorded.state22371 == 1;                                                                
    if ($pc == PreCommit) {                                                                          
     assume oldHead != Node.null;                                                                    
@@ -3764,44 +3348,22 @@ ensures StateInvariant(Node._state, Node.item, Node.next, Node._lock, TreiberSta
                                                                                                     
    // 59.17:  return tmp5;                                                                          
                                                                                                     
-   assume Node._state22373 == Node._state && Node.item22373 == Node.item && Node.next22373 == Node.next && Node._lock22373 == Node._lock && TreiberStack._state22373 == TreiberStack._state && TreiberStack.head22373 == TreiberStack.head && TreiberStack._lock22373 == TreiberStack._lock && TreiberStack.head_nextThread22373 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22373 == TreiberStack.head_nextValue && tmp522373 == tmp5 && tmp422373 == tmp4 && newHead22373 == newHead && oldHead22373 == oldHead && tmp322373 == tmp3 && $result22373 == $result && this22373 == this && tid22373 == tid && $spec$pc.0$22373 == $spec$pc.0$ && $spec$pc.1$22373 == $spec$pc.1$ && $spec$$result22373 == $spec$$result;
+   assume Node._state22373 == Node._state && Node.item22373 == Node.item && Node.next22373 == Node.next && Node._lock22373 == Node._lock && TreiberStack._state22373 == TreiberStack._state && TreiberStack.head22373 == TreiberStack.head && TreiberStack._lock22373 == TreiberStack._lock && TreiberStack.head_nextThread22373 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22373 == TreiberStack.head_nextValue && tmp522373 == tmp5 && tmp422373 == tmp4 && newHead22373 == newHead && oldHead22373 == oldHead && tmp322373 == tmp3 && $result22373 == $result && this22373 == this && tid22373 == tid;
    assume $recorded.state22373 == 1;                                                                
    $result := tmp5;                                                                                 
-                                                                                                    
-   call $spec$pc.0$, $spec$pc.1$ :=                                                                 
-   TreiberStack.pop.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,$result : int,$spec$$result : int, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
-   assume Node._state22373_post == Node._state && Node.item22373_post == Node.item && Node.next22373_post == Node.next && Node._lock22373_post == Node._lock && TreiberStack._state22373_post == TreiberStack._state && TreiberStack.head22373_post == TreiberStack.head && TreiberStack._lock22373_post == TreiberStack._lock && TreiberStack.head_nextThread22373_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22373_post == TreiberStack.head_nextValue && tmp522373_post == tmp5 && tmp422373_post == tmp4 && newHead22373_post == newHead && oldHead22373_post == oldHead && tmp322373_post == tmp3 && $result22373_post == $result && this22373_post == this && tid22373_post == tid && $spec$pc.0$22373_post == $spec$pc.0$ && $spec$pc.1$22373_post == $spec$pc.1$ && $spec$$result22373_post == $spec$$result;
-   assume $recorded.state22373_post == 1;                                                           
-   assert $spec$pc.1$;                                                                                     // (59.17): Method returns before completing actions in spec
    return;                                                                                          
   } else {                                                                                          
   }                                                                                                 
-  assume Node._state22380_bottom == Node._state && Node.item22380_bottom == Node.item && Node.next22380_bottom == Node.next && Node._lock22380_bottom == Node._lock && TreiberStack._state22380_bottom == TreiberStack._state && TreiberStack.head22380_bottom == TreiberStack.head && TreiberStack._lock22380_bottom == TreiberStack._lock && TreiberStack.head_nextThread22380_bottom == TreiberStack.head_nextThread && TreiberStack.head_nextValue22380_bottom == TreiberStack.head_nextValue && $result22380_bottom == $result && this22380_bottom == this && tid22380_bottom == tid && $spec$pc.0$22380_bottom == $spec$pc.0$ && $spec$pc.1$22380_bottom == $spec$pc.1$ && $spec$$result22380_bottom == $spec$$result;
+  assume Node._state22380_bottom == Node._state && Node.item22380_bottom == Node.item && Node.next22380_bottom == Node.next && Node._lock22380_bottom == Node._lock && TreiberStack._state22380_bottom == TreiberStack._state && TreiberStack.head22380_bottom == TreiberStack.head && TreiberStack._lock22380_bottom == TreiberStack._lock && TreiberStack.head_nextThread22380_bottom == TreiberStack.head_nextThread && TreiberStack.head_nextValue22380_bottom == TreiberStack.head_nextValue && $result22380_bottom == $result && this22380_bottom == this && tid22380_bottom == tid;
   assume $recorded.state22380_bottom == 1;                                                          
   assert phase22380 == $pc;                                                                                // (54.9): Phase must be invariant at loop head
-  $spec$Node._state := Node._state;                                                                 
-  $spec$Node.item := Node.item;                                                                     
-  $spec$Node.next := Node.next;                                                                     
-  $spec$Node._lock := Node._lock;                                                                   
-  $spec$TreiberStack._state := TreiberStack._state;                                                 
-  $spec$TreiberStack.head := TreiberStack.head;                                                     
-  $spec$TreiberStack._lock := TreiberStack._lock;                                                   
-  $spec$TreiberStack.head_nextThread := TreiberStack.head_nextThread;                               
-  $spec$TreiberStack.head_nextValue := TreiberStack.head_nextValue;                                 
-  $spec$$result := $result;                                                                         
  }                                                                                                  
                                                                                                     
  // 53.22: // return -1;                                                                            
                                                                                                     
- assume Node._state22383 == Node._state && Node.item22383 == Node.item && Node.next22383 == Node.next && Node._lock22383 == Node._lock && TreiberStack._state22383 == TreiberStack._state && TreiberStack.head22383 == TreiberStack.head && TreiberStack._lock22383 == TreiberStack._lock && TreiberStack.head_nextThread22383 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22383 == TreiberStack.head_nextValue && $result22383 == $result && this22383 == this && tid22383 == tid && $spec$pc.0$22383 == $spec$pc.0$ && $spec$pc.1$22383 == $spec$pc.1$ && $spec$$result22383 == $spec$$result;
+ assume Node._state22383 == Node._state && Node.item22383 == Node.item && Node.next22383 == Node.next && Node._lock22383 == Node._lock && TreiberStack._state22383 == TreiberStack._state && TreiberStack.head22383 == TreiberStack.head && TreiberStack._lock22383 == TreiberStack._lock && TreiberStack.head_nextThread22383 == TreiberStack.head_nextThread && TreiberStack.head_nextValue22383 == TreiberStack.head_nextValue && $result22383 == $result && this22383 == this && tid22383 == tid;
  assume $recorded.state22383 == 1;                                                                  
  $result := -1;                                                                                     
-                                                                                                    
- call $spec$pc.0$, $spec$pc.1$ :=                                                                   
- TreiberStack.pop.specTransition($spec$pc.0$, $spec$pc.1$, tid,this,$result : int,$spec$$result : int, $spec$Node._state,$spec$Node.item,$spec$Node.next,$spec$Node._lock,$spec$TreiberStack._state,$spec$TreiberStack.head,$spec$TreiberStack._lock,$spec$TreiberStack.head_nextThread,$spec$TreiberStack.head_nextValue,Node._state,Node.item,Node.next,Node._lock,TreiberStack._state,TreiberStack.head,TreiberStack._lock,TreiberStack.head_nextThread,TreiberStack.head_nextValue);
- assume Node._state22383_post == Node._state && Node.item22383_post == Node.item && Node.next22383_post == Node.next && Node._lock22383_post == Node._lock && TreiberStack._state22383_post == TreiberStack._state && TreiberStack.head22383_post == TreiberStack.head && TreiberStack._lock22383_post == TreiberStack._lock && TreiberStack.head_nextThread22383_post == TreiberStack.head_nextThread && TreiberStack.head_nextValue22383_post == TreiberStack.head_nextValue && $result22383_post == $result && this22383_post == this && tid22383_post == tid && $spec$pc.0$22383_post == $spec$pc.0$ && $spec$pc.1$22383_post == $spec$pc.1$ && $spec$$result22383_post == $spec$$result;
- assume $recorded.state22383_post == 1;                                                             
- assert $spec$pc.1$;                                                                                       // (53.22): Method returns before completing actions in spec
  return;                                                                                            
 }                                                                                                   
                                                                                                     
@@ -10737,365 +10299,357 @@ function {:inline} Y(tid : Tid , Node._state: [Node]State, Node.item: [Node]int,
 }                                                                                                   
                                                                                                     
                                                                                                     
-// 1240.1-1373.2: (Method:13.5)
+// 1240.1-1332.2: (Method:13.5)
 // 1253.1-1253.24: (13.5): Bad tid
-// 1337.1-1337.235: (13.5): Can only have right-mover memory accesses in requires clause
-// 1339.2-1342.30: (class anchor.sink.Assume:13.5)
-// 1343.2-1346.38: (class anchor.sink.Assume:13.5)
-// 1348.2-1364.26: (class anchor.sink.Write:14.9)
-// 1360.1-1360.28: (14.9): Cannot have potential null deference in left-mover part.
-// 1363.1-1363.27: (14.9): Reduction failure
-// 1365.2-1372.9: (class anchor.sink.Return:13.27)
-// 1535.1-2679.2: (Method:21.5)
-// 1582.1-1582.24: (21.5): Bad tid
-// 1583.1-1583.46: (21.5): this is not global
-// 2135.2-2151.14: (class anchor.sink.While:39.9)
-// 2150.1-2150.36: (39.9): Cannot construct possible Spec States for loop head.
-// 2153.1-2153.27: (21.5): Bad tid
-// 2154.1-2154.49: (21.5): this is not global
-// 2157.1-2157.299: (39.9): Loop does not preserve yields_as annotation for field item
-// 2158.1-2158.299: (39.9): Loop does not preserve yields_as annotation for field next
-// 2159.1-2159.323: (39.9): Loop does not preserve yields_as annotation for field head
-// 2160.1-2160.31: (39.9): Phase must be invariant at loop head
-// 2161.1-2161.30: (39.9): Potentially infinite loop cannot be in post-commit phase.
-// 2173.3-2175.3: (class anchor.sink.VarDeclStmt:39.16)
-// 2176.3-2179.16: (class anchor.sink.Assign:39.16)
-// 2181.4-2184.10: (class anchor.sink.Break:39.9)
-// 2187.3-2189.3: (class anchor.sink.VarDeclStmt:40.13)
-// 2190.3-2199.43: (class anchor.sink.Alloc:40.13)
-// 2202.3-2204.3: (class anchor.sink.VarDeclStmt:40.13)
-// 2205.3-2207.3: (class anchor.sink.VarDeclStmt:40.13)
-// 2208.3-2211.18: (class anchor.sink.Assign:40.13)
-// 2212.3-2215.21: (class anchor.sink.Assign:40.13)
-// 2216.3-2219.33: (class anchor.sink.Assume:13.5)
-// 2220.3-2223.41: (class anchor.sink.Assume:13.5)
-// 2225.3-2241.31: (class anchor.sink.Write:14.9)
-// 2237.1-2237.31: (14.9): Cannot have potential null deference in left-mover part.
-// 2240.1-2240.28: (14.9): Reduction failure
-// 2242.3-2245.22: (class anchor.sink.Break:13.27)
-// 2247.3-2249.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2251.3-2253.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2254.3-2271.46: (class anchor.sink.Read:41.13)
-// 2266.1-2266.37: (41.13): Cannot have potential null deference in left-mover part.
-// 2270.1-2270.28: (41.13): Reduction failure
-// 2272.3-2274.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2275.3-2292.45: (class anchor.sink.Read:41.13)
-// 2287.1-2287.37: (41.13): Cannot have potential null deference in left-mover part.
-// 2291.1-2291.28: (41.13): Reduction failure
-// 2293.3-2295.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2296.3-2313.44: (class anchor.sink.Read:41.13)
-// 2308.1-2308.37: (41.13): Cannot have potential null deference in left-mover part.
-// 2312.1-2312.28: (41.13): Reduction failure
-// 2314.3-2316.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2317.3-2320.237: (class anchor.sink.Assign:41.13)
-// 2321.3-2323.3: (class anchor.sink.VarDeclStmt:41.13)
-// 2324.3-2327.75: (class anchor.sink.Assign:41.13)
-// 2330.4-2347.39: (class anchor.sink.Read:41.13)
-// 2342.1-2342.38: (41.13): Cannot have potential null deference in left-mover part.
-// 2346.1-2346.29: (41.13): Reduction failure
-// 2350.4-2367.39: (class anchor.sink.Read:41.13)
-// 2362.1-2362.38: (41.13): Cannot have potential null deference in left-mover part.
-// 2366.1-2366.29: (41.13): Reduction failure
-// 2369.3-2382.37: (class anchor.sink.Yield:42.13)
-// 2382.1-2382.37: (42.13): Atomic block is not pure and does not conform to spec
-// 2384.3-2405.3: (class anchor.sink.Write:43.13)
-// 2396.1-2396.32: (43.13): Cannot have potential null deference in left-mover part.
-// 2399.1-2399.28: (43.13): Reduction failure
-// 2403.1-2403.63: (43.13): oldHead became shared, but oldHead.next may not be shared.
-// 2406.3-2408.3: (class anchor.sink.VarDeclStmt:44.13)
-// 2410.3-2412.3: (class anchor.sink.VarDeclStmt:44.13)
-// 2413.3-2416.18: (class anchor.sink.Assign:44.13)
-// 2419.4-2422.18: (class anchor.sink.Assign:44.13)
-// 2424.4-2427.19: (class anchor.sink.Assign:44.13)
-// 2429.5-2431.5: (class anchor.sink.VarDeclStmt:44.13)
-// 2432.5-2434.5: (class anchor.sink.VarDeclStmt:44.13)
-// 2435.5-2437.5: (class anchor.sink.VarDeclStmt:44.13)
-// 2438.5-2441.252: (class anchor.sink.Assign:44.13)
-// 2442.5-2445.47: (class anchor.sink.Assume:44.13)
-// 2446.5-2449.49: (class anchor.sink.Assume:44.13)
-// 2450.5-2453.54: (class anchor.sink.Assume:44.13)
-// 2454.5-2457.57: (class anchor.sink.Assume:44.13)
-// 2459.5-2475.50: (class anchor.sink.Write:44.13)
-// 2471.1-2471.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2474.1-2474.30: (44.13): Reduction failure
-// 2477.5-2493.51: (class anchor.sink.Write:44.13)
-// 2489.1-2489.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2492.1-2492.30: (44.13): Reduction failure
-// 2496.5-2517.5: (class anchor.sink.Write:44.13)
-// 2508.1-2508.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2511.1-2511.30: (44.13): Reduction failure
-// 2515.1-2515.65: (44.13): newHead became shared, but newHead.next may not be shared.
-// 2518.5-2521.18: (class anchor.sink.Assign:44.13)
-// 2523.5-2526.54: (class anchor.sink.Assume:44.13)
-// 2527.5-2530.57: (class anchor.sink.Assume:44.13)
-// 2531.5-2533.5: (class anchor.sink.VarDeclStmt:44.13)
-// 2534.5-2551.46: (class anchor.sink.Read:44.13)
-// 2546.1-2546.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2550.1-2550.30: (44.13): Reduction failure
-// 2553.5-2574.5: (class anchor.sink.Write:44.13)
-// 2565.1-2565.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2568.1-2568.30: (44.13): Reduction failure
-// 2572.1-2572.65: (44.13): oldHead became shared, but oldHead.next may not be shared.
-// 2575.5-2577.5: (class anchor.sink.VarDeclStmt:44.13)
-// 2578.5-2581.252: (class anchor.sink.Assign:44.13)
-// 2583.5-2604.5: (class anchor.sink.Write:44.13)
-// 2595.1-2595.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2598.1-2598.30: (44.13): Reduction failure
-// 2602.1-2602.71: (44.13): _currentValue became shared, but _currentValue.next may not be shared.
-// 2605.5-2608.46: (class anchor.sink.Assume:44.13)
-// 2611.5-2632.5: (class anchor.sink.Write:44.13)
-// 2623.1-2623.39: (44.13): Cannot have potential null deference in left-mover part.
-// 2626.1-2626.30: (44.13): Reduction failure
-// 2630.1-2630.65: (44.13): newHead became shared, but newHead.next may not be shared.
-// 2633.5-2636.19: (class anchor.sink.Assign:44.13)
-// 2640.4-2651.11: (class anchor.sink.Return:45.17)
-// 2650.1-2650.23: (45.17): Method returns before completing actions in spec
-// 2656.1-2656.28: (39.9): Phase must be invariant at loop head
-// 2667.2-2678.9: (class anchor.sink.Return:25.32)
-// 2677.1-2677.21: (25.32): Method returns before completing actions in spec
-// 2680.1-3806.2: (Method:50.5)
-// 2727.1-2727.24: (50.5): Bad tid
-// 2728.1-2728.46: (50.5): this is not global
-// 3297.2-3314.14: (class anchor.sink.While:54.9)
-// 3313.1-3313.36: (54.9): Cannot construct possible Spec States for loop head.
-// 3316.1-3316.27: (50.5): Bad tid
-// 3317.1-3317.49: (50.5): this is not global
-// 3320.1-3320.299: (54.9): Loop does not preserve yields_as annotation for field item
-// 3321.1-3321.299: (54.9): Loop does not preserve yields_as annotation for field next
-// 3322.1-3322.323: (54.9): Loop does not preserve yields_as annotation for field head
-// 3323.1-3323.31: (54.9): Phase must be invariant at loop head
-// 3324.1-3324.30: (54.9): Potentially infinite loop cannot be in post-commit phase.
-// 3337.3-3339.3: (class anchor.sink.VarDeclStmt:54.16)
-// 3340.3-3343.16: (class anchor.sink.Assign:54.16)
-// 3345.4-3348.10: (class anchor.sink.Break:54.9)
-// 3351.3-3353.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3355.3-3357.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3358.3-3375.46: (class anchor.sink.Read:55.13)
-// 3370.1-3370.37: (55.13): Cannot have potential null deference in left-mover part.
-// 3374.1-3374.28: (55.13): Reduction failure
-// 3376.3-3378.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3379.3-3396.45: (class anchor.sink.Read:55.13)
-// 3391.1-3391.37: (55.13): Cannot have potential null deference in left-mover part.
-// 3395.1-3395.28: (55.13): Reduction failure
-// 3397.3-3399.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3400.3-3417.44: (class anchor.sink.Read:55.13)
-// 3412.1-3412.37: (55.13): Cannot have potential null deference in left-mover part.
-// 3416.1-3416.28: (55.13): Reduction failure
-// 3418.3-3420.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3421.3-3424.237: (class anchor.sink.Assign:55.13)
-// 3425.3-3427.3: (class anchor.sink.VarDeclStmt:55.13)
-// 3428.3-3431.75: (class anchor.sink.Assign:55.13)
-// 3434.4-3451.39: (class anchor.sink.Read:55.13)
-// 3446.1-3446.38: (55.13): Cannot have potential null deference in left-mover part.
-// 3450.1-3450.29: (55.13): Reduction failure
-// 3454.4-3471.39: (class anchor.sink.Read:55.13)
-// 3466.1-3466.38: (55.13): Cannot have potential null deference in left-mover part.
-// 3470.1-3470.29: (55.13): Reduction failure
-// 3473.3-3487.37: (class anchor.sink.Yield:56.13)
-// 3487.1-3487.37: (56.13): Atomic block is not pure and does not conform to spec
-// 3488.3-3490.3: (class anchor.sink.VarDeclStmt:57.13)
-// 3491.3-3508.33: (class anchor.sink.Read:57.13)
-// 3503.1-3503.32: (57.13): Cannot have potential null deference in left-mover part.
-// 3507.1-3507.28: (57.13): Reduction failure
-// 3509.3-3511.3: (class anchor.sink.VarDeclStmt:58.13)
-// 3513.3-3515.3: (class anchor.sink.VarDeclStmt:58.13)
-// 3516.3-3519.18: (class anchor.sink.Assign:58.13)
-// 3522.4-3525.18: (class anchor.sink.Assign:58.13)
-// 3527.4-3530.19: (class anchor.sink.Assign:58.13)
-// 3532.5-3534.5: (class anchor.sink.VarDeclStmt:58.13)
-// 3535.5-3537.5: (class anchor.sink.VarDeclStmt:58.13)
-// 3538.5-3540.5: (class anchor.sink.VarDeclStmt:58.13)
-// 3541.5-3544.252: (class anchor.sink.Assign:58.13)
-// 3545.5-3548.47: (class anchor.sink.Assume:58.13)
-// 3549.5-3552.49: (class anchor.sink.Assume:58.13)
-// 3553.5-3556.54: (class anchor.sink.Assume:58.13)
-// 3557.5-3560.57: (class anchor.sink.Assume:58.13)
-// 3562.5-3578.50: (class anchor.sink.Write:58.13)
-// 3574.1-3574.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3577.1-3577.30: (58.13): Reduction failure
-// 3580.5-3596.51: (class anchor.sink.Write:58.13)
-// 3592.1-3592.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3595.1-3595.30: (58.13): Reduction failure
-// 3599.5-3620.5: (class anchor.sink.Write:58.13)
-// 3611.1-3611.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3614.1-3614.30: (58.13): Reduction failure
-// 3618.1-3618.65: (58.13): newHead became shared, but newHead.next may not be shared.
-// 3621.5-3624.18: (class anchor.sink.Assign:58.13)
-// 3626.5-3629.54: (class anchor.sink.Assume:58.13)
-// 3630.5-3633.57: (class anchor.sink.Assume:58.13)
-// 3634.5-3636.5: (class anchor.sink.VarDeclStmt:58.13)
-// 3637.5-3654.46: (class anchor.sink.Read:58.13)
-// 3649.1-3649.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3653.1-3653.30: (58.13): Reduction failure
-// 3656.5-3677.5: (class anchor.sink.Write:58.13)
-// 3668.1-3668.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3671.1-3671.30: (58.13): Reduction failure
-// 3675.1-3675.65: (58.13): oldHead became shared, but oldHead.next may not be shared.
-// 3678.5-3680.5: (class anchor.sink.VarDeclStmt:58.13)
-// 3681.5-3684.252: (class anchor.sink.Assign:58.13)
-// 3686.5-3707.5: (class anchor.sink.Write:58.13)
-// 3698.1-3698.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3701.1-3701.30: (58.13): Reduction failure
-// 3705.1-3705.71: (58.13): _currentValue became shared, but _currentValue.next may not be shared.
-// 3708.5-3711.46: (class anchor.sink.Assume:58.13)
-// 3714.5-3735.5: (class anchor.sink.Write:58.13)
-// 3726.1-3726.39: (58.13): Cannot have potential null deference in left-mover part.
-// 3729.1-3729.30: (58.13): Reduction failure
-// 3733.1-3733.65: (58.13): newHead became shared, but newHead.next may not be shared.
-// 3736.5-3739.19: (class anchor.sink.Assign:58.13)
-// 3743.4-3745.4: (class anchor.sink.VarDeclStmt:59.17)
-// 3746.4-3763.31: (class anchor.sink.Read:59.17)
-// 3758.1-3758.33: (59.17): Cannot have potential null deference in left-mover part.
-// 3762.1-3762.29: (59.17): Reduction failure
-// 3764.4-3776.11: (class anchor.sink.Return:59.17)
-// 3775.1-3775.23: (59.17): Method returns before completing actions in spec
-// 3781.1-3781.28: (54.9): Phase must be invariant at loop head
-// 3793.2-3805.9: (class anchor.sink.Return:53.22)
-// 3804.1-3804.21: (53.22): Method returns before completing actions in spec
-// 3897.1-3897.34: (10.5): Node.item failed Write-Write Right-Mover Check
-// 3966.1-3966.30: (10.5): Node.item failed Write-Read Right-Mover Check
-// 4039.1-4039.34: (10.5): Node.item failed Write-Write Left-Mover Check
-// 4109.1-4109.30: (10.5): Node.item failed Write-Read Left-Mover Check
-// 4176.1-4176.34: (10.5): Node.item failed Read-Write Right-Mover Check
-// 4246.1-4246.34: (10.5): Node.item failed Read-Write Left-Mover Check
-// 4315.1-4315.34: (11.5): Node.next failed Write-Write Right-Mover Check
-// 4384.1-4384.30: (11.5): Node.next failed Write-Read Right-Mover Check
-// 4457.1-4457.34: (11.5): Node.next failed Write-Write Left-Mover Check
-// 4527.1-4527.30: (11.5): Node.next failed Write-Read Left-Mover Check
-// 4594.1-4594.34: (11.5): Node.next failed Read-Write Right-Mover Check
-// 4664.1-4664.34: (11.5): Node.next failed Read-Write Left-Mover Check
-// 4733.1-4733.34: (19.5): TreiberStack.head failed Write-Write Right-Mover Check
-// 4802.1-4802.30: (19.5): TreiberStack.head failed Write-Read Right-Mover Check
-// 4875.1-4875.34: (19.5): TreiberStack.head failed Write-Write Left-Mover Check
-// 4945.1-4945.30: (19.5): TreiberStack.head failed Write-Read Left-Mover Check
-// 5012.1-5012.34: (19.5): TreiberStack.head failed Read-Write Right-Mover Check
-// 5082.1-5082.34: (19.5): TreiberStack.head failed Read-Write Left-Mover Check
-// 5163.1-5163.140: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.1)
-// 5164.1-5164.101: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.2)
-// 5165.1-5165.158: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.3)
-// 5276.1-5276.140: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case C)
-// 5392.1-5392.144: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case D)
-// 5393.1-5393.144: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case R)
-// 5474.1-5474.136: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case F)
-// 5475.1-5475.136: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case H)
-// 5476.1-5476.146: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case I)
-// 5556.1-5556.136: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case J)
-// 5557.1-5557.136: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case K)
-// 5558.1-5558.99: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case L)
-// 5640.1-5640.140: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.1)
-// 5641.1-5641.101: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.2)
-// 5642.1-5642.158: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.3)
-// 5753.1-5753.140: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case C)
-// 5869.1-5869.144: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case D)
-// 5870.1-5870.144: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case R)
-// 5951.1-5951.136: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case F)
-// 5952.1-5952.136: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case H)
-// 5953.1-5953.146: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case I)
-// 6033.1-6033.136: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case J)
-// 6034.1-6034.136: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case K)
-// 6035.1-6035.99: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case L)
-// 6117.1-6117.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.1)
-// 6118.1-6118.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.2)
-// 6119.1-6119.156: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.3)
-// 6230.1-6230.140: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case C)
-// 6346.1-6346.144: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case D)
-// 6347.1-6347.144: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case R)
-// 6428.1-6428.136: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case F)
-// 6429.1-6429.136: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case H)
-// 6430.1-6430.144: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case I)
-// 6510.1-6510.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case J)
-// 6511.1-6511.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case K)
-// 6512.1-6512.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case L)
-// 6594.1-6594.140: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.1)
-// 6595.1-6595.101: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.2)
-// 6596.1-6596.158: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.3)
-// 6707.1-6707.140: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case C)
-// 6823.1-6823.144: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case D)
-// 6824.1-6824.144: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case R)
-// 6905.1-6905.136: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case F)
-// 6906.1-6906.136: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case H)
-// 6907.1-6907.146: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case I)
-// 6987.1-6987.136: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case J)
-// 6988.1-6988.136: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case K)
-// 6989.1-6989.99: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case L)
-// 7071.1-7071.140: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.1)
-// 7072.1-7072.101: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.2)
-// 7073.1-7073.158: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.3)
-// 7184.1-7184.140: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case C)
-// 7300.1-7300.144: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case D)
-// 7301.1-7301.144: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case R)
-// 7382.1-7382.136: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case F)
-// 7383.1-7383.136: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case H)
-// 7384.1-7384.146: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case I)
-// 7464.1-7464.136: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case J)
-// 7465.1-7465.136: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case K)
-// 7466.1-7466.99: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case L)
-// 7548.1-7548.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.1)
-// 7549.1-7549.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.2)
-// 7550.1-7550.156: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.3)
-// 7661.1-7661.140: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case C)
-// 7777.1-7777.144: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case D)
-// 7778.1-7778.144: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case R)
-// 7859.1-7859.136: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case F)
-// 7860.1-7860.136: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case H)
-// 7861.1-7861.144: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case I)
-// 7941.1-7941.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case J)
-// 7942.1-7942.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case K)
-// 7943.1-7943.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case L)
-// 8025.1-8025.140: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.1)
-// 8026.1-8026.101: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.2)
-// 8027.1-8027.156: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.3)
-// 8138.1-8138.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case C)
-// 8254.1-8254.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case D)
-// 8255.1-8255.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case R)
-// 8336.1-8336.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case F)
-// 8337.1-8337.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case H)
-// 8338.1-8338.144: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case I)
-// 8418.1-8418.136: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case J)
-// 8419.1-8419.136: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case K)
-// 8420.1-8420.99: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case L)
-// 8541.1-8541.142: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case M)
-// 8660.1-8660.130: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case N)
-// 8743.1-8743.140: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.1)
-// 8744.1-8744.101: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.2)
-// 8745.1-8745.156: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.3)
-// 8856.1-8856.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case C)
-// 8972.1-8972.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case D)
-// 8973.1-8973.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case R)
-// 9054.1-9054.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case F)
-// 9055.1-9055.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case H)
-// 9056.1-9056.144: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case I)
-// 9136.1-9136.136: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case J)
-// 9137.1-9137.136: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case K)
-// 9138.1-9138.99: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case L)
-// 9259.1-9259.142: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case M)
-// 9378.1-9378.130: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case N)
-// 9461.1-9461.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.1)
-// 9462.1-9462.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.2)
-// 9463.1-9463.158: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.3)
-// 9574.1-9574.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case C)
-// 9690.1-9690.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case D)
-// 9691.1-9691.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case R)
-// 9772.1-9772.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case F)
-// 9773.1-9773.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case H)
-// 9774.1-9774.146: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case I)
-// 9854.1-9854.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case J)
-// 9855.1-9855.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case K)
-// 9856.1-9856.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case L)
-// 9977.1-9977.142: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case M)
-// 10096.1-10096.130: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case N)
-// 10134.1-10159.2: (10.5): yields_as clause for Node.item is not valid
-// 10164.1-10184.2: (10.5): yields_as clause for Node.item is not reflexive
-// 10190.1-10230.2: (10.5): yields_as clause for Node.item is not transitive
-// 10249.1-10274.2: (11.5): yields_as clause for Node.next is not valid
-// 10279.1-10299.2: (11.5): yields_as clause for Node.next is not reflexive
-// 10305.1-10345.2: (11.5): yields_as clause for Node.next is not transitive
-// 10365.1-10390.2: (7.32): yields_as clause for Node._lock is not valid
-// 10395.1-10415.2: (7.32): yields_as clause for Node._lock is not reflexive
-// 10421.1-10461.2: (7.32): yields_as clause for Node._lock is not transitive
-// 10480.1-10505.2: (19.5): yields_as clause for TreiberStack.head is not valid
-// 10510.1-10530.2: (19.5): yields_as clause for TreiberStack.head is not reflexive
-// 10536.1-10576.2: (19.5): yields_as clause for TreiberStack.head is not transitive
-// 10596.1-10621.2: (7.32): yields_as clause for TreiberStack._lock is not valid
-// 10626.1-10646.2: (7.32): yields_as clause for TreiberStack._lock is not reflexive
-// 10652.1-10692.2: (7.32): yields_as clause for TreiberStack._lock is not transitive
+// 1298.1-1298.235: (13.5): Can only have right-mover memory accesses in requires clause
+// 1300.2-1303.30: (class anchor.sink.Assume:13.5)
+// 1304.2-1307.38: (class anchor.sink.Assume:13.5)
+// 1309.2-1325.26: (class anchor.sink.Write:14.9)
+// 1321.1-1321.28: (14.9): Cannot have potential null deference in left-mover part.
+// 1324.1-1324.27: (14.9): Reduction failure
+// 1326.2-1331.9: (class anchor.sink.Return:13.27)
+// 1494.1-2452.2: (Method:21.5)
+// 1507.1-1507.24: (21.5): Bad tid
+// 1508.1-1508.46: (21.5): this is not global
+// 1957.2-1961.14: (class anchor.sink.While:39.9)
+// 1963.1-1963.27: (21.5): Bad tid
+// 1964.1-1964.49: (21.5): this is not global
+// 1967.1-1967.299: (39.9): Loop does not preserve yields_as annotation for field item
+// 1968.1-1968.299: (39.9): Loop does not preserve yields_as annotation for field next
+// 1969.1-1969.323: (39.9): Loop does not preserve yields_as annotation for field head
+// 1970.1-1970.31: (39.9): Phase must be invariant at loop head
+// 1971.1-1971.30: (39.9): Potentially infinite loop cannot be in post-commit phase.
+// 1973.3-1975.3: (class anchor.sink.VarDeclStmt:39.16)
+// 1976.3-1979.16: (class anchor.sink.Assign:39.16)
+// 1981.4-1984.10: (class anchor.sink.Break:39.9)
+// 1987.3-1989.3: (class anchor.sink.VarDeclStmt:40.13)
+// 1990.3-1998.43: (class anchor.sink.Alloc:40.13)
+// 2001.3-2003.3: (class anchor.sink.VarDeclStmt:40.13)
+// 2004.3-2006.3: (class anchor.sink.VarDeclStmt:40.13)
+// 2007.3-2010.18: (class anchor.sink.Assign:40.13)
+// 2011.3-2014.21: (class anchor.sink.Assign:40.13)
+// 2015.3-2018.33: (class anchor.sink.Assume:13.5)
+// 2019.3-2022.41: (class anchor.sink.Assume:13.5)
+// 2024.3-2040.31: (class anchor.sink.Write:14.9)
+// 2036.1-2036.31: (14.9): Cannot have potential null deference in left-mover part.
+// 2039.1-2039.28: (14.9): Reduction failure
+// 2041.3-2044.22: (class anchor.sink.Break:13.27)
+// 2046.3-2048.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2050.3-2052.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2053.3-2070.46: (class anchor.sink.Read:41.13)
+// 2065.1-2065.37: (41.13): Cannot have potential null deference in left-mover part.
+// 2069.1-2069.28: (41.13): Reduction failure
+// 2071.3-2073.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2074.3-2091.45: (class anchor.sink.Read:41.13)
+// 2086.1-2086.37: (41.13): Cannot have potential null deference in left-mover part.
+// 2090.1-2090.28: (41.13): Reduction failure
+// 2092.3-2094.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2095.3-2112.44: (class anchor.sink.Read:41.13)
+// 2107.1-2107.37: (41.13): Cannot have potential null deference in left-mover part.
+// 2111.1-2111.28: (41.13): Reduction failure
+// 2113.3-2115.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2116.3-2119.237: (class anchor.sink.Assign:41.13)
+// 2120.3-2122.3: (class anchor.sink.VarDeclStmt:41.13)
+// 2123.3-2126.75: (class anchor.sink.Assign:41.13)
+// 2129.4-2146.39: (class anchor.sink.Read:41.13)
+// 2141.1-2141.38: (41.13): Cannot have potential null deference in left-mover part.
+// 2145.1-2145.29: (41.13): Reduction failure
+// 2149.4-2166.39: (class anchor.sink.Read:41.13)
+// 2161.1-2161.38: (41.13): Cannot have potential null deference in left-mover part.
+// 2165.1-2165.29: (41.13): Reduction failure
+// 2168.3-2176.41: (class anchor.sink.Yield:42.13)
+// 2178.3-2199.3: (class anchor.sink.Write:43.13)
+// 2190.1-2190.32: (43.13): Cannot have potential null deference in left-mover part.
+// 2193.1-2193.28: (43.13): Reduction failure
+// 2197.1-2197.63: (43.13): oldHead became shared, but oldHead.next may not be shared.
+// 2200.3-2202.3: (class anchor.sink.VarDeclStmt:44.13)
+// 2204.3-2206.3: (class anchor.sink.VarDeclStmt:44.13)
+// 2207.3-2210.18: (class anchor.sink.Assign:44.13)
+// 2213.4-2216.18: (class anchor.sink.Assign:44.13)
+// 2218.4-2221.19: (class anchor.sink.Assign:44.13)
+// 2223.5-2225.5: (class anchor.sink.VarDeclStmt:44.13)
+// 2226.5-2228.5: (class anchor.sink.VarDeclStmt:44.13)
+// 2229.5-2231.5: (class anchor.sink.VarDeclStmt:44.13)
+// 2232.5-2235.252: (class anchor.sink.Assign:44.13)
+// 2236.5-2239.47: (class anchor.sink.Assume:44.13)
+// 2240.5-2243.49: (class anchor.sink.Assume:44.13)
+// 2244.5-2247.54: (class anchor.sink.Assume:44.13)
+// 2248.5-2251.57: (class anchor.sink.Assume:44.13)
+// 2253.5-2269.50: (class anchor.sink.Write:44.13)
+// 2265.1-2265.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2268.1-2268.30: (44.13): Reduction failure
+// 2271.5-2287.51: (class anchor.sink.Write:44.13)
+// 2283.1-2283.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2286.1-2286.30: (44.13): Reduction failure
+// 2290.5-2311.5: (class anchor.sink.Write:44.13)
+// 2302.1-2302.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2305.1-2305.30: (44.13): Reduction failure
+// 2309.1-2309.65: (44.13): newHead became shared, but newHead.next may not be shared.
+// 2312.5-2315.18: (class anchor.sink.Assign:44.13)
+// 2317.5-2320.54: (class anchor.sink.Assume:44.13)
+// 2321.5-2324.57: (class anchor.sink.Assume:44.13)
+// 2325.5-2327.5: (class anchor.sink.VarDeclStmt:44.13)
+// 2328.5-2345.46: (class anchor.sink.Read:44.13)
+// 2340.1-2340.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2344.1-2344.30: (44.13): Reduction failure
+// 2347.5-2368.5: (class anchor.sink.Write:44.13)
+// 2359.1-2359.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2362.1-2362.30: (44.13): Reduction failure
+// 2366.1-2366.65: (44.13): oldHead became shared, but oldHead.next may not be shared.
+// 2369.5-2371.5: (class anchor.sink.VarDeclStmt:44.13)
+// 2372.5-2375.252: (class anchor.sink.Assign:44.13)
+// 2377.5-2398.5: (class anchor.sink.Write:44.13)
+// 2389.1-2389.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2392.1-2392.30: (44.13): Reduction failure
+// 2396.1-2396.71: (44.13): _currentValue became shared, but _currentValue.next may not be shared.
+// 2399.5-2402.46: (class anchor.sink.Assume:44.13)
+// 2405.5-2426.5: (class anchor.sink.Write:44.13)
+// 2417.1-2417.39: (44.13): Cannot have potential null deference in left-mover part.
+// 2420.1-2420.30: (44.13): Reduction failure
+// 2424.1-2424.65: (44.13): newHead became shared, but newHead.next may not be shared.
+// 2427.5-2430.19: (class anchor.sink.Assign:44.13)
+// 2434.4-2439.11: (class anchor.sink.Return:45.17)
+// 2444.1-2444.28: (39.9): Phase must be invariant at loop head
+// 2446.2-2451.9: (class anchor.sink.Return:25.32)
+// 2453.1-3368.2: (Method:50.5)
+// 2467.1-2467.24: (50.5): Bad tid
+// 2468.1-2468.46: (50.5): this is not global
+// 2911.2-2915.14: (class anchor.sink.While:54.9)
+// 2917.1-2917.27: (50.5): Bad tid
+// 2918.1-2918.49: (50.5): this is not global
+// 2921.1-2921.299: (54.9): Loop does not preserve yields_as annotation for field item
+// 2922.1-2922.299: (54.9): Loop does not preserve yields_as annotation for field next
+// 2923.1-2923.323: (54.9): Loop does not preserve yields_as annotation for field head
+// 2924.1-2924.31: (54.9): Phase must be invariant at loop head
+// 2925.1-2925.30: (54.9): Potentially infinite loop cannot be in post-commit phase.
+// 2927.3-2929.3: (class anchor.sink.VarDeclStmt:54.16)
+// 2930.3-2933.16: (class anchor.sink.Assign:54.16)
+// 2935.4-2938.10: (class anchor.sink.Break:54.9)
+// 2941.3-2943.3: (class anchor.sink.VarDeclStmt:55.13)
+// 2945.3-2947.3: (class anchor.sink.VarDeclStmt:55.13)
+// 2948.3-2965.46: (class anchor.sink.Read:55.13)
+// 2960.1-2960.37: (55.13): Cannot have potential null deference in left-mover part.
+// 2964.1-2964.28: (55.13): Reduction failure
+// 2966.3-2968.3: (class anchor.sink.VarDeclStmt:55.13)
+// 2969.3-2986.45: (class anchor.sink.Read:55.13)
+// 2981.1-2981.37: (55.13): Cannot have potential null deference in left-mover part.
+// 2985.1-2985.28: (55.13): Reduction failure
+// 2987.3-2989.3: (class anchor.sink.VarDeclStmt:55.13)
+// 2990.3-3007.44: (class anchor.sink.Read:55.13)
+// 3002.1-3002.37: (55.13): Cannot have potential null deference in left-mover part.
+// 3006.1-3006.28: (55.13): Reduction failure
+// 3008.3-3010.3: (class anchor.sink.VarDeclStmt:55.13)
+// 3011.3-3014.237: (class anchor.sink.Assign:55.13)
+// 3015.3-3017.3: (class anchor.sink.VarDeclStmt:55.13)
+// 3018.3-3021.75: (class anchor.sink.Assign:55.13)
+// 3024.4-3041.39: (class anchor.sink.Read:55.13)
+// 3036.1-3036.38: (55.13): Cannot have potential null deference in left-mover part.
+// 3040.1-3040.29: (55.13): Reduction failure
+// 3044.4-3061.39: (class anchor.sink.Read:55.13)
+// 3056.1-3056.38: (55.13): Cannot have potential null deference in left-mover part.
+// 3060.1-3060.29: (55.13): Reduction failure
+// 3063.3-3071.41: (class anchor.sink.Yield:56.13)
+// 3072.3-3074.3: (class anchor.sink.VarDeclStmt:57.13)
+// 3075.3-3092.33: (class anchor.sink.Read:57.13)
+// 3087.1-3087.32: (57.13): Cannot have potential null deference in left-mover part.
+// 3091.1-3091.28: (57.13): Reduction failure
+// 3093.3-3095.3: (class anchor.sink.VarDeclStmt:58.13)
+// 3097.3-3099.3: (class anchor.sink.VarDeclStmt:58.13)
+// 3100.3-3103.18: (class anchor.sink.Assign:58.13)
+// 3106.4-3109.18: (class anchor.sink.Assign:58.13)
+// 3111.4-3114.19: (class anchor.sink.Assign:58.13)
+// 3116.5-3118.5: (class anchor.sink.VarDeclStmt:58.13)
+// 3119.5-3121.5: (class anchor.sink.VarDeclStmt:58.13)
+// 3122.5-3124.5: (class anchor.sink.VarDeclStmt:58.13)
+// 3125.5-3128.252: (class anchor.sink.Assign:58.13)
+// 3129.5-3132.47: (class anchor.sink.Assume:58.13)
+// 3133.5-3136.49: (class anchor.sink.Assume:58.13)
+// 3137.5-3140.54: (class anchor.sink.Assume:58.13)
+// 3141.5-3144.57: (class anchor.sink.Assume:58.13)
+// 3146.5-3162.50: (class anchor.sink.Write:58.13)
+// 3158.1-3158.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3161.1-3161.30: (58.13): Reduction failure
+// 3164.5-3180.51: (class anchor.sink.Write:58.13)
+// 3176.1-3176.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3179.1-3179.30: (58.13): Reduction failure
+// 3183.5-3204.5: (class anchor.sink.Write:58.13)
+// 3195.1-3195.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3198.1-3198.30: (58.13): Reduction failure
+// 3202.1-3202.65: (58.13): newHead became shared, but newHead.next may not be shared.
+// 3205.5-3208.18: (class anchor.sink.Assign:58.13)
+// 3210.5-3213.54: (class anchor.sink.Assume:58.13)
+// 3214.5-3217.57: (class anchor.sink.Assume:58.13)
+// 3218.5-3220.5: (class anchor.sink.VarDeclStmt:58.13)
+// 3221.5-3238.46: (class anchor.sink.Read:58.13)
+// 3233.1-3233.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3237.1-3237.30: (58.13): Reduction failure
+// 3240.5-3261.5: (class anchor.sink.Write:58.13)
+// 3252.1-3252.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3255.1-3255.30: (58.13): Reduction failure
+// 3259.1-3259.65: (58.13): oldHead became shared, but oldHead.next may not be shared.
+// 3262.5-3264.5: (class anchor.sink.VarDeclStmt:58.13)
+// 3265.5-3268.252: (class anchor.sink.Assign:58.13)
+// 3270.5-3291.5: (class anchor.sink.Write:58.13)
+// 3282.1-3282.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3285.1-3285.30: (58.13): Reduction failure
+// 3289.1-3289.71: (58.13): _currentValue became shared, but _currentValue.next may not be shared.
+// 3292.5-3295.46: (class anchor.sink.Assume:58.13)
+// 3298.5-3319.5: (class anchor.sink.Write:58.13)
+// 3310.1-3310.39: (58.13): Cannot have potential null deference in left-mover part.
+// 3313.1-3313.30: (58.13): Reduction failure
+// 3317.1-3317.65: (58.13): newHead became shared, but newHead.next may not be shared.
+// 3320.5-3323.19: (class anchor.sink.Assign:58.13)
+// 3327.4-3329.4: (class anchor.sink.VarDeclStmt:59.17)
+// 3330.4-3347.31: (class anchor.sink.Read:59.17)
+// 3342.1-3342.33: (59.17): Cannot have potential null deference in left-mover part.
+// 3346.1-3346.29: (59.17): Reduction failure
+// 3348.4-3354.11: (class anchor.sink.Return:59.17)
+// 3359.1-3359.28: (54.9): Phase must be invariant at loop head
+// 3361.2-3367.9: (class anchor.sink.Return:53.22)
+// 3459.1-3459.34: (10.5): Node.item failed Write-Write Right-Mover Check
+// 3528.1-3528.30: (10.5): Node.item failed Write-Read Right-Mover Check
+// 3601.1-3601.34: (10.5): Node.item failed Write-Write Left-Mover Check
+// 3671.1-3671.30: (10.5): Node.item failed Write-Read Left-Mover Check
+// 3738.1-3738.34: (10.5): Node.item failed Read-Write Right-Mover Check
+// 3808.1-3808.34: (10.5): Node.item failed Read-Write Left-Mover Check
+// 3877.1-3877.34: (11.5): Node.next failed Write-Write Right-Mover Check
+// 3946.1-3946.30: (11.5): Node.next failed Write-Read Right-Mover Check
+// 4019.1-4019.34: (11.5): Node.next failed Write-Write Left-Mover Check
+// 4089.1-4089.30: (11.5): Node.next failed Write-Read Left-Mover Check
+// 4156.1-4156.34: (11.5): Node.next failed Read-Write Right-Mover Check
+// 4226.1-4226.34: (11.5): Node.next failed Read-Write Left-Mover Check
+// 4295.1-4295.34: (19.5): TreiberStack.head failed Write-Write Right-Mover Check
+// 4364.1-4364.30: (19.5): TreiberStack.head failed Write-Read Right-Mover Check
+// 4437.1-4437.34: (19.5): TreiberStack.head failed Write-Write Left-Mover Check
+// 4507.1-4507.30: (19.5): TreiberStack.head failed Write-Read Left-Mover Check
+// 4574.1-4574.34: (19.5): TreiberStack.head failed Read-Write Right-Mover Check
+// 4644.1-4644.34: (19.5): TreiberStack.head failed Read-Write Left-Mover Check
+// 4725.1-4725.140: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.1)
+// 4726.1-4726.101: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.2)
+// 4727.1-4727.158: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case A.3)
+// 4838.1-4838.140: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case C)
+// 4954.1-4954.144: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case D)
+// 4955.1-4955.144: (10.5): Node.item is not Write-Write Stable with respect to Node.item (case R)
+// 5036.1-5036.136: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case F)
+// 5037.1-5037.136: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case H)
+// 5038.1-5038.146: (10.5): Node.item is not Read-Write Stable with respect to Node.item (case I)
+// 5118.1-5118.136: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case J)
+// 5119.1-5119.136: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case K)
+// 5120.1-5120.99: (10.5): Node.item is not Write-Read Stable with respect to Node.item (case L)
+// 5202.1-5202.140: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.1)
+// 5203.1-5203.101: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.2)
+// 5204.1-5204.158: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case A.3)
+// 5315.1-5315.140: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case C)
+// 5431.1-5431.144: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case D)
+// 5432.1-5432.144: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case R)
+// 5513.1-5513.136: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case F)
+// 5514.1-5514.136: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case H)
+// 5515.1-5515.146: (10.5): Node.item is not Read-Write Stable with respect to Node.next (case I)
+// 5595.1-5595.136: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case J)
+// 5596.1-5596.136: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case K)
+// 5597.1-5597.99: (11.5): Node.next is not Write-Read Stable with respect to Node.item (case L)
+// 5679.1-5679.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.1)
+// 5680.1-5680.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.2)
+// 5681.1-5681.156: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case A.3)
+// 5792.1-5792.140: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case C)
+// 5908.1-5908.144: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case D)
+// 5909.1-5909.144: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case R)
+// 5990.1-5990.136: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case F)
+// 5991.1-5991.136: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case H)
+// 5992.1-5992.144: (10.5): Node.item is not Read-Write Stable with respect to TreiberStack.head (case I)
+// 6072.1-6072.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case J)
+// 6073.1-6073.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case K)
+// 6074.1-6074.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.item (case L)
+// 6156.1-6156.140: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.1)
+// 6157.1-6157.101: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.2)
+// 6158.1-6158.158: (10.5): Node.item is not Write-Write Stable with respect to Node.next (case A.3)
+// 6269.1-6269.140: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case C)
+// 6385.1-6385.144: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case D)
+// 6386.1-6386.144: (11.5): Node.next is not Write-Write Stable with respect to Node.item (case R)
+// 6467.1-6467.136: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case F)
+// 6468.1-6468.136: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case H)
+// 6469.1-6469.146: (11.5): Node.next is not Read-Write Stable with respect to Node.item (case I)
+// 6549.1-6549.136: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case J)
+// 6550.1-6550.136: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case K)
+// 6551.1-6551.99: (10.5): Node.item is not Write-Read Stable with respect to Node.next (case L)
+// 6633.1-6633.140: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.1)
+// 6634.1-6634.101: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.2)
+// 6635.1-6635.158: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case A.3)
+// 6746.1-6746.140: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case C)
+// 6862.1-6862.144: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case D)
+// 6863.1-6863.144: (11.5): Node.next is not Write-Write Stable with respect to Node.next (case R)
+// 6944.1-6944.136: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case F)
+// 6945.1-6945.136: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case H)
+// 6946.1-6946.146: (11.5): Node.next is not Read-Write Stable with respect to Node.next (case I)
+// 7026.1-7026.136: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case J)
+// 7027.1-7027.136: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case K)
+// 7028.1-7028.99: (11.5): Node.next is not Write-Read Stable with respect to Node.next (case L)
+// 7110.1-7110.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.1)
+// 7111.1-7111.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.2)
+// 7112.1-7112.156: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case A.3)
+// 7223.1-7223.140: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case C)
+// 7339.1-7339.144: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case D)
+// 7340.1-7340.144: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case R)
+// 7421.1-7421.136: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case F)
+// 7422.1-7422.136: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case H)
+// 7423.1-7423.144: (11.5): Node.next is not Read-Write Stable with respect to TreiberStack.head (case I)
+// 7503.1-7503.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case J)
+// 7504.1-7504.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case K)
+// 7505.1-7505.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to Node.next (case L)
+// 7587.1-7587.140: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.1)
+// 7588.1-7588.101: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.2)
+// 7589.1-7589.156: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case A.3)
+// 7700.1-7700.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case C)
+// 7816.1-7816.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case D)
+// 7817.1-7817.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.item (case R)
+// 7898.1-7898.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case F)
+// 7899.1-7899.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case H)
+// 7900.1-7900.144: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.item (case I)
+// 7980.1-7980.136: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case J)
+// 7981.1-7981.136: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case K)
+// 7982.1-7982.99: (10.5): Node.item is not Write-Read Stable with respect to TreiberStack.head (case L)
+// 8103.1-8103.142: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case M)
+// 8222.1-8222.130: (10.5): Node.item is not Write-Write Stable with respect to TreiberStack.head (case N)
+// 8305.1-8305.140: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.1)
+// 8306.1-8306.101: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.2)
+// 8307.1-8307.156: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case A.3)
+// 8418.1-8418.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case C)
+// 8534.1-8534.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case D)
+// 8535.1-8535.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to Node.next (case R)
+// 8616.1-8616.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case F)
+// 8617.1-8617.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case H)
+// 8618.1-8618.144: (19.5): TreiberStack.head is not Read-Write Stable with respect to Node.next (case I)
+// 8698.1-8698.136: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case J)
+// 8699.1-8699.136: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case K)
+// 8700.1-8700.99: (11.5): Node.next is not Write-Read Stable with respect to TreiberStack.head (case L)
+// 8821.1-8821.142: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case M)
+// 8940.1-8940.130: (11.5): Node.next is not Write-Write Stable with respect to TreiberStack.head (case N)
+// 9023.1-9023.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.1)
+// 9024.1-9024.101: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.2)
+// 9025.1-9025.158: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case A.3)
+// 9136.1-9136.140: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case C)
+// 9252.1-9252.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case D)
+// 9253.1-9253.144: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case R)
+// 9334.1-9334.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case F)
+// 9335.1-9335.136: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case H)
+// 9336.1-9336.146: (19.5): TreiberStack.head is not Read-Write Stable with respect to TreiberStack.head (case I)
+// 9416.1-9416.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case J)
+// 9417.1-9417.136: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case K)
+// 9418.1-9418.99: (19.5): TreiberStack.head is not Write-Read Stable with respect to TreiberStack.head (case L)
+// 9539.1-9539.142: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case M)
+// 9658.1-9658.130: (19.5): TreiberStack.head is not Write-Write Stable with respect to TreiberStack.head (case N)
+// 9696.1-9721.2: (10.5): yields_as clause for Node.item is not valid
+// 9726.1-9746.2: (10.5): yields_as clause for Node.item is not reflexive
+// 9752.1-9792.2: (10.5): yields_as clause for Node.item is not transitive
+// 9811.1-9836.2: (11.5): yields_as clause for Node.next is not valid
+// 9841.1-9861.2: (11.5): yields_as clause for Node.next is not reflexive
+// 9867.1-9907.2: (11.5): yields_as clause for Node.next is not transitive
+// 9927.1-9952.2: (7.32): yields_as clause for Node._lock is not valid
+// 9957.1-9977.2: (7.32): yields_as clause for Node._lock is not reflexive
+// 9983.1-10023.2: (7.32): yields_as clause for Node._lock is not transitive
+// 10042.1-10067.2: (19.5): yields_as clause for TreiberStack.head is not valid
+// 10072.1-10092.2: (19.5): yields_as clause for TreiberStack.head is not reflexive
+// 10098.1-10138.2: (19.5): yields_as clause for TreiberStack.head is not transitive
+// 10158.1-10183.2: (7.32): yields_as clause for TreiberStack._lock is not valid
+// 10188.1-10208.2: (7.32): yields_as clause for TreiberStack._lock is not reflexive
+// 10214.1-10254.2: (7.32): yields_as clause for TreiberStack._lock is not transitive

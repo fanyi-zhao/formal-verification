@@ -39,7 +39,7 @@ ensures Some(x) == heap[ref];
 
 
 atomic action {:layer 1, 2} SpecNodeEq(n1: Node(int), n2: Node(int)) returns (eq: bool) {
-    eq := (n1->val == n2->val && n1->next == n2->next);
+    eq := n1 == n2;
 }
 yield procedure {:layer 0} NodeEq(n1: Node(int), n2: Node(int)) returns (eq: bool)
 refines SpecNodeEq;
@@ -50,7 +50,9 @@ refines SpecNodeEq;
 atomic action {:layer 1, 2} SpecCAS_Head(expectedNode: Node(int), desiredNode: Node(int)) returns (success: bool) 
 modifies heap;
 {
-    if (heap[head] == Some(expectedNode)) {
+    var eq: bool;
+    call eq := SpecNodeEq(heap[head]->t, expectedNode);
+    if (eq) {
         call SpecSetRefVal(head, Some(desiredNode));
     }
 }
