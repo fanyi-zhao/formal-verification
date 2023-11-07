@@ -13,19 +13,6 @@ yield procedure {:layer 0} SetRefVal(ref: RefNode(int), x: Option(Node(int)));
 refines SpecSetRefVal;
 ensures heap[ref]->t == x->t;
 
-// atomic action {:layer 1, 2} SpecSetRefValRef(ref: RefNode(int), x: RefNode(int))
-// modifies heap;
-// {
-//     var _heap: Heap;
-//     var _x: Option(Node(int));
-//     _heap := old(heap);
-//     _x := _heap[x];
-//     _heap[ref] := _x;
-// }
-// yield procedure {:layer 0} SetRefValRef(ref: RefNode(int), x: RefNode(int));
-// refines SpecSetRefValRef;
-// ensures heap[ref]->t == heap[x]->t;
-
 atomic action {:layer 1, 2} SpecGetRefVal(ref: RefNode(int)) returns (x: Node(int)) 
 modifies heap;
 {
@@ -51,34 +38,24 @@ atomic action {:layer 1, 2} SpecCAS_Head(expectedNode: Node(int), desiredNode: N
 modifies heap;
 {
     var eq: bool;
-    call eq := SpecNodeEq(heap[head]->t, expectedNode);
-    if (eq) {
-        call SpecSetRefVal(head, Some(desiredNode));
-    }
-}
-yield procedure {:layer 0} CAS_Head(expectedNode: Node(int), desiredNode: Node(int)) returns (success: bool)
-refines SpecCAS_Head;
-ensures success == (
-    (old(heap[head]->t->val) == expectedNode->val)
-    && (old(heap[head]->t->next) == expectedNode->next)
-);
-{
-    var eq: bool;
     var headNode: Node(int);
-    var _head: RefNode(int);
-    var _heap: Heap;
-    
-    _head := old(head);
-    call headNode := GetRefVal(_head);
-    call eq := NodeEq(headNode, expectedNode);
+
+    call headNode := SpecGetRefVal(head);
+    call eq := SpecNodeEq(headNode, expectedNode);
 
     if (eq) {
-        call SetRefVal(_head, Some(desiredNode));
+        call SpecSetRefVal(head, Some(desiredNode));
         success := true;
     } else {
         success := false;
     }
 }
+yield procedure {:layer 0} CAS_Head(expectedNode: Node(int), desiredNode: Node(int)) returns (success: bool);
+refines SpecCAS_Head;
+ensures success == (
+    (old(heap[head]->t->val) == expectedNode->val)
+    && (old(heap[head]->t->next) == expectedNode->next)
+);
 
 atomic action {:layer 1, 2} SpecAllocNodeRef() returns (k: Lval (RefNode(int)))
 modifies heap;
@@ -90,20 +67,22 @@ yield procedure {:layer 0} AllocNodeRef() returns (k: Lval (RefNode(int)));
 refines SpecAllocNodeRef;
 
 // pop
-// atomic action {:layer 2} SpecPop() returns (item: int) 
-// modifies heap;
-// modifies head;
-// {
-//     var oldHead: Node(int);
-//     call oldHead := SpecGetRefVal(head);
-//     call SpecSetRefValRef(head, oldHead->next);
-//     item := oldHead->val;
-// }
-yield atomic procedure {:layer 1} Pop() returns (item: int)
+atomic action {:layer 2} SpecPop() returns (item: int) 
 modifies heap;
+modifies head;
+{
+    var oldHead: Node(int);
+    var newHead: Node(int);
+
+    call oldHead := SpecGetRefVal(head);
+    call newHead := SpecGetRefVal(oldHead->next);
+    call SpecSetRefVal(head, Some(newHead));
+    item := oldHead->val;
+}
+yield procedure {:layer 1} Pop() returns (item: int)
 ensures item == old(heap[head]->t->val);
 ensures head == old(heap[head]->t->next);
-// refines SpecPop;
+refines SpecPop;
 {
     var oldHead: Node(int);
     var newHead: Node(int);
